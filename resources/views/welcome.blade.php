@@ -1,102 +1,93 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.app')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Admission</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {
-            background-color: #FFFBDA;
-        }
+@section('title', 'Student Admission')
 
-        .sidebar {
-            background-color: #EEE7AD;
-            height: 100vh;
-            padding: 20px;
-            width: 250px;
-            position: fixed;
-        }
+@section('head')
+<style>
+    body {
+        background-color: #FFFBDA;
+    }
 
-        .sidebar a {
-            display: block;
-            padding: 10px;
-            text-decoration: none;
-            color: black;
-        }
+    .sidebar {
+        background-color: #EEE7AD;
+        height: 100vh;
+        padding: 20px;
+        width: 250px;
+        position: fixed;
+    }
 
-        .sidebar a:hover {
-            background-color: #FFFBDA;
-            border-radius: 5px;
-        }
+    .sidebar a {
+        display: block;
+        padding: 10px;
+        text-decoration: none;
+        color: black;
+    }
 
-        .main-content {
-            margin-left: 270px;
-            padding: 20px;
-        }
+    .sidebar a:hover {
+        background-color: #FFFBDA;
+        border-radius: 5px;
+    }
 
-        .card {
-            text-align: center;
-            font-size: 24px;
-            padding: 10px;
-        }
+    .main-content {
+        margin-left: 270px;
+        padding: 20px;
+    }
 
-        .table-container {
-            background: white;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
+    .card {
+        text-align: center;
+        font-size: 24px;
+        padding: 10px;
+    }
 
-        .table th {
-            background-color: red;
-            color: white;
-        }
+    .table-container {
+        background: white;
+        padding: 15px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
 
-        .table td {
-            vertical-align: middle;
-        }
+    .table th {
+        background-color: #FF914D;
+        color: black;
+    }
 
-        .checkmark {
-            color: green;
-            font-weight: bold;
-        }
+    .table td {
+        vertical-align: middle;
+    }
 
-        .cross {
-            color: red;
-            font-weight: bold;
-        }
-    </style>
-</head>
+    .checkmark {
+        color: green;
+        font-weight: bold;
+    }
 
-<body>
+    .cross {
+        color: red;
+        font-weight: bold;
+    }
+</style>
+@endsection
 
-    <div class="sidebar">
-        <div class="justify-content-center align-items-center mb-4">
-            <img src="{{ asset('images/Premiere.png')}}" alt="Logo" class="img-fluid rounded-circle" width="180">
-        </div>
-        <a href='#'>Dashboard</a>
-        <a href="#">Manage</a>
-        <a href="#"> Student Admission</a>
-        <a href="#">Admitted Students</a>
-        <a href="#">Subjects</a>
-        <a href="#">Strands</a>
-        <a href="#">Tracks</a>
-    </div>
+@section('content')
+<div class="container-fluid">
+    <h1>Welcome</h1>
 
     <div class="main-content">
-        <h2 class="text-center">Student Admission</h2>
 
-        <div class="d-flex justify-content-center gap-3">
-            <div class="card bg-warning text-white" style="width: 200px;">
+        <div class="d-flex justify-content-center align-items-center mb-4">
+            <h2 class="text-center">Student Admission</h2>
+        </div>
+
+        <div class="d-flex justify-content-evenly  gap-3 ">
+
+            <div class="card text-black cardgrade11 " style="width: 300px; background: #FF914D;">
                 <p>Grade 11 Total:</p>
                 <h3>4</h3>
             </div>
-            <div class="card bg-danger text-white" style="width: 200px;">
+            <div class="card text-black " style="width: 300px; background: #FF3131;">
                 <p>Grade 12 Total:</p>
                 <h3>5</h3>
             </div>
+
         </div>
 
         <div class="table-container mt-4">
@@ -156,8 +147,5 @@
             </table>
         </div>
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-
-</html>
+</div>
+@endsection
