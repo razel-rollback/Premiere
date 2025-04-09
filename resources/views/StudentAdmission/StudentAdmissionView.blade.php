@@ -3,7 +3,7 @@
 @section('title', 'Student Admission')
 
 @section('head')
-<style>
+{{--<style>
     body {
         background-color: #FFFBDA;
     }
@@ -64,7 +64,7 @@
         color: red;
         font-weight: bold;
     }
-</style>
+</style>--}}
 @endsection
 
 @section('content')

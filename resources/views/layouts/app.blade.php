@@ -19,13 +19,14 @@
             <div class="justify-content-center align-items-center mb-4">
                 <img src="{{ asset('images/Premire.png') }}" alt="Logo" class="img-fluid rounded-circle" width="180">
             </div>
-            <a href='#'>Dashboard</a>
+            <a href="{{ route('route.dashboard') }}">Dashboard</a>
             <a href="#">Manage</a>
-            <a href="#"> Student Admission</a>
+            <a href="{{ route('route.student.admission') }}">Student Admission</a>
             <a href="#">Admitted Students</a>
-            <a href="#">Subjects</a>
-            <a href="#">Strands</a>
-            <a href="#">Tracks</a>
+            <a href="{{ route('route.subject') }}">Subjects</a>
+            <a href="{{ route('route.strand') }}">Strands</a>
+            <a href="{{ route('route.track') }}">Tracks</a>
+
         </div>
     </nav>
 
