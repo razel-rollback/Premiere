@@ -12,8 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('strands', function (Blueprint $table) {
-            $table->id();
+            $table->id('strandID');
+            $table->string('strandName');
+            $table->unsignedBigInteger('trackID');
             $table->timestamps();
+
+            $table->foreign('trackID')->references('trackID')->on('tracks')->onDelete('cascade');
         });
     }
 
