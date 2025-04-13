@@ -10,7 +10,7 @@ use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\TrackController;
 
 // Ensure the controller exists and is correctly referenced
-Route::get('/Student Admission', [StudentAdmissionController::class, 'index'])->name('route.student.admission');
+Route::get('/Student_Admission', [StudentAdmissionController::class, 'index'])->name('route.student.admission');
 
 Route::get('/Dashboard', [DashboardController::class, 'index'])->name('route.dashboard');
 

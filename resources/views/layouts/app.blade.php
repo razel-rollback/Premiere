@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-light bg-danger">
+    <nav class="navbar navbar-light">
         <div class="sidebar">
             <h2>Menu</h2>
             <div class="justify-content-center align-items-center mb-4">

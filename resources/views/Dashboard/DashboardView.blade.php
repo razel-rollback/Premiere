@@ -1,5 +1,3 @@
-@extends('layouts.app')
-
 @section('title', 'Dashboard')
 
 @section('head')
@@ -15,183 +13,104 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Premiere SHS</title>
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-    <style>
-        body {
-            margin: 0;
-            font-family: 'Segoe UI', sans-serif;
-        }
 
-        header {
-            background-color: #3e5e2e;
-            color: white;
-            padding: 20px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+    @include('Dashboard.css')
 
-        header .logo {
-            display: flex;
-            align-items: center;
-        }
-
-        header .logo img {
-            height: 40px;
-            margin-right: 10px;
-        }
-
-        header nav a {
-            color: white;
-            text-decoration: none;
-            margin: 0 15px;
-            font-weight: bold;
-        }
-
-        .hero {
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: space-around;
-            background: url('{{ asset("images/school-building.jpg") }}') no-repeat center center/cover;
-            color: white;
-            padding: 100px 40px;
-        }
-
-        .hero::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.4);
-            z-index: 1;
-        }
-
-        .hero-content,
-        .hero-image {
-            position: relative;
-            z-index: 2;
-        }
-
-        .hero-content {
-            max-width: 500px;
-        }
-
-        .hero-content h2 {
-            color: #f7df75;
-            margin-bottom: 10px;
-        }
-
-        .hero-content h1 {
-            font-size: 32px;
-            margin-bottom: 15px;
-        }
-
-        .hero-content p {
-            font-size: 15px;
-            line-height: 1.6;
-        }
-
-        .hero-content button {
-            margin-top: 20px;
-            padding: 10px 20px;
-            background-color: #f7df75;
-            border: none;
-            cursor: pointer;
-            font-weight: bold;
-            border-radius: 5px;
-        }
-
-        .hero-image img {
-            max-height: 400px;
-        }
-
-        .footer-block {
-            display: flex;
-            height: 100px;
-        }
-
-        .footer-block>div {
-            flex: 1;
-        }
-
-        .footer-block .left {
-            background-color: #c3cc4e;
-        }
-
-        .footer-block .right {
-            background-color: #cfdc67;
-        }
-
-        @keyframes fadeSlideUp {
-            0% {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .hero-content p,
-        .hero-content button {
-            animation: fadeSlideUp 1s ease-out;
-            animation-fill-mode: both;
-            animation-delay: 0.5s;
-            opacity: 0;
-        }
-
-        .hero-content button {
-            animation-delay: 1s;
-        }
-    </style>
 </head>
 
 <body>
-
+    <!-- Mao ni ang naa sa itaas, ang navbar -->
     <header>
-        <div class="logo">
-            <img src="{{ asset('images/book-icon.png') }}" alt="Logo">
-            <span>PREMIERE</span>
+        <div class="navbar"
+            style="
+        background-color: rgba(26, 26, 26, 0.8);
+        color: #D4AF37;
+        padding: 20px 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        backdrop-filter: blur(6px);
+        z-index: 1000;
+        display: flex; 
+        align-items: 
+        center; 
+        justify-content: 
+        space-between; 
+        padding: 10px 20px; 
+        position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;">
+
+            <div class="logo">
+                <img src="{{ asset('images/Premire.png') }}"
+                    alt="Logo" class="img-fluid rounded-circle"
+                    width="50" style="height: 50px; border-radius: 50%; object-fit: cover;">
+                <span>PREMIERE</span>
+            </div>
+            <nav>
+                <a href="#">About</a>
+                <a href="#">Programs</a>
+                <a href="#">Contact Us</a>
+            </nav>
         </div>
-        <nav>
-            <a href="#">About</a>
-            <a href="#">Programs</a>
-            <a href="#">Contact Us</a>
-        </nav>
     </header>
 
-    <div class="hero">
-        <div class="hero-image">
-            <img src="{{ asset('images/students.png') }}" alt="Students">
+    <div style="margin-top: 0px;">
+
+        <div class="hero">
+            <div class="hero-image">
+                <img src="{{ asset('images/students.png') }}" alt="Students"
+                    style="
+                        position: relative;
+                        z-index: 2;">
+            </div>
+
+            <div class="hero-content"
+                style="
+                    position: relative;
+                    z-index: 2;">
+                <h2>Welcome to Premiere SHS!</h2>
+                <h1>Top Grade School Nationwide!</h1>
+                <p>
+                    Premiere SHS offers a comprehensive and dynamic curriculum designed to prepare students for higher education and future careers.
+                    Our institution is committed to academic excellence, character development, and holistic growth.
+                    With experienced faculty, modern facilities, and a supportive learning environment, students are empowered to reach their full potential and become future leaders.
+                </p>
+                <p>
+                    Join us in shaping the future of education and nurturing the leaders of tomorrow.
+                    Premiere SHS is not just a school; it's a community dedicated to excellence and innovation.
+                    Enroll now and be part of our journey towards success!
+                </p>
+                <button>Register!</button>
+            </div>
         </div>
-        <div class="hero-content">
-            <h2>Welcome to Premiere SHS!</h2>
-            <h1>Top Grade School Nationwide!</h1>
-            <p>
-                Premiere SHS offers a comprehensive and dynamic curriculum designed to prepare students for higher education and future careers.
-                Our institution is committed to academic excellence, character development, and holistic growth.
-                With experienced faculty, modern facilities, and a supportive learning environment, students are empowered to reach their full potential and become future leaders.
-            </p>
-            <p>
-                Join us in shaping the future of education and nurturing the leaders of tomorrow.
-                Premiere SHS is not just a school; it's a community dedicated to excellence and innovation.
-                Enroll now and be part of our journey towards success!
-            </p>
-            <button>Register!</button>
+
+        <div class="footer-block">
+            <div class="left"
+                style="
+                    background-color: #1A1A1A;
+                    color: #D4AF37;
+                    justify-content: center;
+                    align-items: center;
+                    display: flex;">
+                <h3>Priemere Schedule</h3>
+            </div>
+            <div class="right"
+                style="
+                    background-color: #2E2E2E;
+                    color: #f7df75;
+                    justify-content: center;
+                    align-items: center;
+                    display: flex;">
+                <h3>Summer Class going on...</h3>
+            </div>
         </div>
+
     </div>
 
-    <div class="footer-block">
-        <div class="left"></div>
-        <div class="right"></div>
-    </div>
+
 
 </body>
 
 </html>
-
-@endsection
