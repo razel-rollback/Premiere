@@ -62,7 +62,11 @@
             <div class="hero-image">
                 <img src="{{ asset('images/students.png') }}" alt="Students"
                     style="
-                        position: relative;
+                        position: absolute;
+                        top: 67px;
+                        right: 790px;
+                        width: 700px;
+                        max-height: 700px;
                         z-index: 2;">
             </div>
 
