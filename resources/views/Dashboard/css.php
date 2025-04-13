@@ -26,7 +26,7 @@
         display: flex;
         align-items: center;
         justify-content: space-around;
-        background: url('/images/schoolbuilding.png') no-repeat center center / cover;
+        background: url('/images/school-building.png') no-repeat center center / cover;
         color: white;
         padding: 100px 40px;
         z-index: 1;

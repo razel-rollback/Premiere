@@ -2,14 +2,33 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Subject extends Model
 {
-    /* public function students(): BelongsToMany
+    use HasFactory;
+
+    protected $fillable = [
+        'subjectName',
+        'subjectType',
+        'gradeLevelID',
+        'teacherID',
+        'strandID',
+    ];
+
+    public function gradeLevel()
     {
-        return $this->belongsToMany(Student::class, 'student_subjects', 'subject_id', 'student_id')
-            ->withPivot('grade', 'status', 'remarks')  // match what's in the pivot
-            ->withTimestamps();
-    }*/
+        return $this->belongsTo(GradeLevel::class, 'gradeLevelID');
+    }
+
+    public function teacher()
+    {
+        return $this->belongsTo(Teacher::class, 'teacherID');
+    }
+
+    public function strand()
+    {
+        return $this->belongsTo(Strand::class, 'strandID');
+    }
 }

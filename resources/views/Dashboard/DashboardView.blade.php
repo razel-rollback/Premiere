@@ -1,10 +1,3 @@
-@section('title', 'Dashboard')
-
-@section('head')
-
-@endsection
-
-@section('content')
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,7 +8,6 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
     @include('Dashboard.css')
-
 </head>
 
 <body>
@@ -42,7 +34,7 @@
                 left: 0;
                 right: 0;">
 
-            <div class="logo">
+            <div class="logo" style="align-items: center;">
                 <img src="{{ asset('images/Premire.png') }}"
                     alt="Logo" class="img-fluid rounded-circle"
                     width="50" style="height: 50px; border-radius: 50%; object-fit: cover;">
@@ -112,8 +104,6 @@
         </div>
 
     </div>
-
-
 
 </body>
 
