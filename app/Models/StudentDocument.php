@@ -9,12 +9,19 @@ class StudentDocument extends Model
 {
     use HasFactory;
 
+
+    protected $primaryKey = 'studentDocumentID';
+
     protected $fillable = [
         'studentID',
         'documentType',
         'documentPath',
         'documentStatus',
         'UploadDate',
+    ];
+    protected $hidden = [
+        'created_at',
+        'updated_at',
     ];
 
     public function student()

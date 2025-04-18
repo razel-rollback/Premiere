@@ -9,12 +9,18 @@ class Student extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'studentID';
+
     protected $fillable = [
         'firstName',
         'middleName',
         'lastName',
         'address',
         'birthDate',
+    ];
+    protected $hidden = [
+        'created_at',
+        'updated_at',
     ];
 
     public function register()

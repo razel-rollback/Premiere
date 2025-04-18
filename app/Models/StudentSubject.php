@@ -9,9 +9,16 @@ class StudentSubject extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'studentID';
+
     protected $fillable = [
         'studentID',
         'subjectID',
+    ];
+
+    protected $hidden = [
+        'created_at',
+        'updated_at',
     ];
 
     public function student()

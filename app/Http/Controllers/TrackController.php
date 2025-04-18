@@ -7,59 +7,51 @@ use Illuminate\Http\Request;
 
 class TrackController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
-        return view('Track.TrackView');
+        $tracks = Track::all();
+        return view('Track.index', compact('tracks'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('Track.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'trackName' => 'required',
+        ]);
+
+        Track::create($request->all());
+        return redirect()->route('tracks.index')->with('success', 'Track created successfully.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Track $track)
+    public function show(Track $tracks)
     {
-        //
+        return view('Track.show', compact('tracks'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Track $track)
     {
-        //
+        return view('Track.edit', compact('track'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Track $track)
     {
-        //
+        $request->validate([
+            'trackName' => 'required',
+        ]);
+
+        $track->update($request->all());
+        return redirect()->route('tracks.index')->with('success', 'Track updated successfully.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Track $track)
     {
-        //
+        $track->delete();
+        return redirect()->route('tracks.index')->with('success', 'Track deleted successfully.');
     }
 }

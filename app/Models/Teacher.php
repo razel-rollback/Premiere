@@ -9,9 +9,16 @@ class Teacher extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'teacherID';
+
     protected $fillable = [
         'teacherName',
         'specialization',
+    ];
+
+    protected $hidden = [
+        'created_at',
+        'updated_at',
     ];
 
     public function subjects()

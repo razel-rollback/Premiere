@@ -9,12 +9,19 @@ class Subject extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'subjectID';
+
     protected $fillable = [
         'subjectName',
         'subjectType',
         'gradeLevelID',
         'teacherID',
         'strandID',
+    ];
+
+    protected $hidden = [
+        'created_at',
+        'updated_at',
     ];
 
     public function gradeLevel()

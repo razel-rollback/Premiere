@@ -19,3 +19,5 @@ Route::get('/Strand', [StrandController::class, 'index'])->name('route.strand');
 Route::get('/Subject', [SubjectController::class, 'index'])->name('route.subject');
 
 Route::get('/Track', [TrackController::class, 'index'])->name('route.track');
+
+Route::resource('tracks', TrackController::class);
