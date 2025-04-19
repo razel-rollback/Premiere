@@ -10,7 +10,10 @@
         @csrf
         <div class="mb-3">
             <label for="trackName" class="form-label">Track Name</label>
-            <input type="text" class="form-control" id="trackName" name="trackName" required>
+            <input type="text" class="form-control" id="trackName" name="trackName" value="{{ old('trackName') }}">
+            @error('trackName')
+            <div class="text-danger">{{ $message }}</div>
+            @enderror
         </div>
         <button type="submit" class="btn btn-primary">save</button>
     </form>
