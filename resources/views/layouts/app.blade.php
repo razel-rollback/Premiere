@@ -27,6 +27,7 @@
             <a href="{{ route('strands.index') }}">Strands</a>
             <a href="{{ route('tracks.index') }}">Tracks</a>
             <a href="{{ route('gradelevels.index') }}">Grade Level</a>
+            <a href="{{ route('teachers.index') }}">Teacher</a>
         </div>
     </nav>
 

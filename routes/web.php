@@ -10,12 +10,12 @@ use App\Http\Controllers\StrandController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\StudentAdmissionController;
+use App\Http\Controllers\TeacherController;
 
-// Ensure the controller exists and is correctly referenced
 
 //guest
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
-Route::get('/home', [HomeController::class, 'about'])->name('home.about');
+Route::get('/About-us', [HomeController::class, 'about'])->name('home.about');
 
 
 //idk
@@ -29,6 +29,8 @@ Route::get('/Subject', [SubjectController::class, 'index'])->name('route.subject
 //admin
 
 Route::resource('strands', StrandController::class);
+
+Route::resource('teachers', TeacherController::class);
 
 Route::resource('gradelevels', GradeController::class);
 
