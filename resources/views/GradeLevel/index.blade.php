@@ -5,6 +5,12 @@
 @section('content')
 <div class="container-fluid">
     <h1>Grade Levels</h1>
+    @if(session('success'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ session('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    @endif
     @error('trackID')
     <div class="alert alert-danger">{{ $message }}</div>
     @enderror

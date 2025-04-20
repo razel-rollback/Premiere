@@ -9,7 +9,12 @@
 @section('content')
 <div class="container-fluid">
     <h1>Strand</h1>
-
+    @if(session('success'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ session('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    @endif
     <a href="{{ route('strands.create') }}" class="btn btn-primary btn-md">Add track</a>
     <table class="table mt-4">
         <thead>
