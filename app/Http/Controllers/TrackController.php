@@ -52,7 +52,7 @@ class TrackController extends Controller
     public function destroy(Track $track)
     {
         // Check if the track has any associated strands
-        if ($track->strands()->exist()) {
+        if ($track->strands()->exists()) {
             return redirect()->route('tracks.index')->with('error', 'Cannot delete track with associated strands.');
         }
         // Delete the track
