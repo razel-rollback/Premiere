@@ -9,6 +9,8 @@ class Schedule extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'scheduleID';
+
     protected $fillable = [
         'subjectID',
         'sectionID',

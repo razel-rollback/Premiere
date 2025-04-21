@@ -22,10 +22,10 @@ class TrackController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'trackName' => 'required',
+            'trackName' => 'required|min:3', // Corrected field name
         ]);
 
-        Track::create($request->all());
+        Track::create($request->all()); // Save trackName
         return redirect()->route('tracks.index')->with('success', 'Track created successfully.');
     }
 
@@ -42,7 +42,7 @@ class TrackController extends Controller
     public function update(Request $request, Track $track)
     {
         $request->validate([
-            'trackName' => 'required',
+            'trackName' => 'required|min:3',
         ]);
 
         $track->update($request->all());

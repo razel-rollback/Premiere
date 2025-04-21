@@ -9,6 +9,9 @@ class GradeLevel extends Model
 {
     use HasFactory;
 
+
+    protected $primaryKey = 'gradeLevelID';
+
     protected $fillable = [
         'gradeLevelName',
     ];

@@ -9,6 +9,8 @@ class Strand extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'strandID'; // Specify the primary key columns
+
     protected $fillable = [
         'strandName',
         'trackID',

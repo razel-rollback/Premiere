@@ -24,9 +24,9 @@
             <a href="{{ route('route.student.admission') }}">Student Admission</a>
             <a href="#">Admitted Students</a>
             <a href="{{ route('route.subject') }}">Subjects</a>
-            <a href="{{ route('route.strand') }}">Strands</a>
-            <a href="{{ route('route.track') }}">Tracks</a>
-
+            <a href="{{ route('strands.index') }}">Strands</a>
+            <a href="{{ route('tracks.index') }}">Tracks</a>
+            <a href="{{ route('gradelevels.index') }}">Grade Level</a>
         </div>
     </nav>
 

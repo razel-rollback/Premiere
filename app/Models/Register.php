@@ -9,6 +9,7 @@ class Register extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'registerID';
     protected $fillable = [
         'studentID',
         'registerStatus',
