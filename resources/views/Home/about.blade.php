@@ -57,13 +57,12 @@
             <h1>About Us</h1>
             <p>Welcome to Premiere Senior High School, where excellence meets opportunity. Our school is dedicated to
                 providing a nurturing environment that fosters academic growth and personal development.</p>
-            <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus ad ipsam itaque ea iure at voluptates
-                corporis exercitationem voluptas? Culpa cumque voluptatum in nulla inventore. Ex fugit provident exercitationem
-                distinctio minima dolorum consequatur iste, praesentium incidunt facere unde illo
-                sapiente delectus nam quas assumenda non quam eaque quod laborum obcaecati?
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore reprehenderit eaque perspiciatis cum u
-                llam similique dolorum. Obcaecati nisi nulla dolorum alias nesciunt consequuntur officiis ut autem, sint
-                blanditiis dicta quam quis facere repudiandae corrupti similique. Laborum doloremque tenetur reprehenderit saepe similique harum! Voluptatem ratione eveniet voluptas eum, magnam ut, quia odio corporis iste iusto harum est excepturi? Quo quam, maiores consequatur perspiciatis tempore, autem facilis veniam aliquid tenetur et recusandae temporibus error deserunt doloribus nesciunt ducimus aliquam. Pariatur mollitia odio velit ab asperiores animi sed quia facere, nisi, fugit totam cupiditate aut libero id ullam quae! Quibusdam debitis itaque porro.
+            <p> Established in 2024, Premiere Senior High School was founded with a strong vision to make quality education accessible to all.
+                What started as a humble academic institution with only 60 students and a handful of passionate educators has now evolved into one of the most recognized senior high schools in the region.
+            </p>
+            <p> Premiere SHS offers a comprehensive and dynamic curriculum designed to prepare students for higher education and future careers.
+                Our institution is committed to academic excellence, character development, and holistic growth.
+                With experienced faculty, modern facilities, and a supportive learning environment, students are empowered to reach their full potential and become future leaders.
             </p>
         </div>
     </div>

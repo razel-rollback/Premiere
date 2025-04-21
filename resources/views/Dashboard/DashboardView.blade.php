@@ -55,10 +55,11 @@
                 <img src="{{ asset('images/students.png') }}" alt="Students"
                     style="
                         position: absolute;
-                        top: 67px;
+                        top: 145px;
                         right: 790px;
-                        width: 700px;
-                        max-height: 700px;
+                        width: 710px;
+                        max-height: 670px;
+                        left: -9px;
                         z-index: 2;">
             </div>
 
