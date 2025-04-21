@@ -110,4 +110,12 @@
     .hero-content button {
         animation-delay: 1s;
     }
+
+    #about {
+        position: relative;
+        background: url('../images/school-building.png') center center / cover no-repeat;
+        padding: 160px 20px 100px;
+        color: white;
+        overflow: hidden;
+    }
 </style>
