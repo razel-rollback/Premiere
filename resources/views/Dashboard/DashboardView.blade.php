@@ -80,8 +80,9 @@
                     Premiere SHS is not just a school; it's a community dedicated to excellence and innovation.
                     Enroll now and be part of our journey towards success!
                 </p>
-                <button title="Register as a Student.">Register!</button>
-                <br>
+                <a href="{{ route('route.register') }}" style="text-decoration: none;">
+                    <button style="cursor: pointer;">Register!</button>
+                </a> <br>
                 <button title="Log-in as Admin.">Log-in</button>
             </div>
         </div>
