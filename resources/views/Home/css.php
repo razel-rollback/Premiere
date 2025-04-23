@@ -1,7 +1,14 @@
 <style>
-    body {
-        margin: 0;
-        font-family: 'Segoe UI', sans-serif;
+    /* general */
+
+    .navbar .logo {
+        align-items: center;
+    }
+
+    .navbar .logo img {
+        height: 50px;
+        border-radius: 50%;
+        object-fit: cover;
     }
 
     header .logo {
@@ -21,6 +28,88 @@
         font-weight: bold;
     }
 
+    body {
+        margin: 0;
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    body .navbar {
+        background-color: rgba(26, 26, 26, 0.8);
+        color: #D4AF37;
+        padding: 20px 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        backdrop-filter: blur(6px);
+        z-index: 10000;
+        display: flex;
+        align-items:
+            center;
+        justify-content:
+            space-between;
+        padding: 10px 20px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        transition: background-color 0.3s ease;
+    }
+
+    .footer-block {
+        display: flex;
+        height: 100px;
+
+    }
+
+    .footer-block .left {
+        background-color: #1A1A1A;
+        color: #D4AF37;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+    }
+
+    .footer-block .right {
+        background-color: #2E2E2E;
+        color: #f7df75;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+    }
+
+    .footer-block>div {
+        flex: 1;
+    }
+
+
+    /* admin specified */
+    .admin {
+        position: absolute;
+        top: 85px;
+        right: 15px;
+        z-index: 1001;
+    }
+
+    .admin button {
+        padding: 6px 12px;
+        font-size: 14px;
+        background-color: #f7df75;
+        border: none;
+        cursor: pointer;
+        font-weight: bold;
+        border-radius: 5px;
+        max-height: 400px;
+        animation: fadeSlideUp 1s ease-out;
+        animation-fill-mode: both;
+        animation-delay: 0.5s;
+        /* Adjust delay to match the paragraphs */
+        opacity: 0;
+        /* Ensure it starts hidden */
+    }
+
+
+    /* Hero content */
     .hero {
         position: relative;
         display: flex;
@@ -30,6 +119,21 @@
         color: white;
         padding: 100px 40px;
         z-index: 1;
+    }
+
+    /* pic animation */
+    .hero-image img {
+        position: absolute;
+        top: 110px;
+        right: 800px;
+        width: 650px;
+        height: auto;
+        max-height: 750px;
+        z-index: 2;
+        animation: fadeSlideUp 1s ease-out;
+        animation-fill-mode: both;
+        animation-delay: 0.5s;
+        opacity: 0;
     }
 
     .hero::after {
@@ -45,16 +149,29 @@
 
     .hero-content {
         max-width: 500px;
+        position: relative;
+        z-index: 2;
+        text-align: center;
+        color: #FFFFFF;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
     }
 
     .hero-content h2 {
         color: #f7df75;
         margin-bottom: 10px;
+        max-height: 400px;
+        animation: fadeSlideUp 1s ease-out;
+        animation-fill-mode: both;
+        animation-delay: 0.5s;
     }
 
     .hero-content h1 {
         font-size: 32px;
         margin-bottom: 15px;
+        max-height: 400px;
+        animation: fadeSlideUp 1s ease-out;
+        animation-fill-mode: both;
+        animation-delay: 0.5s;
     }
 
     .hero-content p {
@@ -72,18 +189,16 @@
         border-radius: 5px;
     }
 
-
-    .hero-image img {
-        max-height: 400px;
+    .hero-content p,
+    .hero-content button {
+        animation: fadeSlideUp 1s ease-out;
+        animation-fill-mode: both;
+        animation-delay: 0.5s;
+        opacity: 0;
     }
 
-    .footer-block {
-        display: flex;
-        height: 100px;
-    }
-
-    .footer-block>div {
-        flex: 1;
+    .hero-content button {
+        animation-delay: 1s;
     }
 
 
@@ -99,17 +214,6 @@
         }
     }
 
-    .hero-content p,
-    .hero-content button {
-        animation: fadeSlideUp 1s ease-out;
-        animation-fill-mode: both;
-        animation-delay: 0.5s;
-        opacity: 0;
-    }
-
-    .hero-content button {
-        animation-delay: 1s;
-    }
 
     #about {
         position: relative;

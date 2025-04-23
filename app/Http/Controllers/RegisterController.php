@@ -8,6 +8,6 @@ class RegisterController extends Controller
 {
     public function index()
     {
-        return view('Register.RegisterView');
+        return view('Home.register');
     }
 }

@@ -15,17 +15,15 @@ use App\Http\Controllers\RegisterController;
 
 // Ensure the controller exists and is correctly referenced
 
-//guest
-Route::get('/', [HomeController::class, 'index'])->name('home.index');
-Route::get('/home', [HomeController::class, 'about'])->name('home.about');
+//tanan makita sa home
+Route::get('/', [HomeController::class, 'index']);
+Route::get('/home', [HomeController::class, 'index'])->name('home.index');
+Route::get('/about', [HomeController::class, 'about'])->name('home.about');
+Route::get('/register', [RegisterController::class, 'index'])->name('route.register');
 
 
-//idk
-Route::get('/Student_Admission', [StudentAdmissionController::class, 'index'])->name('route.student.admission');
-
-Route::get('/Dashboard', [DashboardController::class, 'index'])->name('route.dashboard');
-
-Route::get('/Register', [RegisterController::class, 'index'])->name('route.register');
+//
+Route::get('/Dashboard', [DashboardController::class, 'index'])->name('route.dashboard'); //walay pulos?
 
 Route::get('/Strand', [StrandController::class, 'index'])->name('route.strand');
 
@@ -39,3 +37,5 @@ Route::resource('strands', StrandController::class);
 Route::resource('gradelevels', GradeController::class);
 
 Route::resource('tracks', TrackController::class);
+
+Route::get('/Student_Admission', [StudentAdmissionController::class, 'index'])->name('route.student.admission');
