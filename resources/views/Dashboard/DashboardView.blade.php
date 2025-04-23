@@ -63,7 +63,7 @@
                 <img src="{{ asset('images/students.png') }}" alt="Students"
                     style="
                         position: absolute;
-                        top: 67px;
+                        top: 125px;
                         right: 790px;
                         width: 700px;
                         max-height: 700px;
@@ -73,7 +73,8 @@
             <div class="hero-content"
                 style="
                     position: relative;
-                    z-index: 2;">
+                    z-index: 2;
+                    text-align: center;">
                 <h2>Welcome to Premiere SHS!</h2>
                 <h1>Top Grade School Nationwide!</h1>
                 <p>
@@ -86,7 +87,9 @@
                     Premiere SHS is not just a school; it's a community dedicated to excellence and innovation.
                     Enroll now and be part of our journey towards success!
                 </p>
-                <button>Register!</button>
+                <button title="Register as a Student.">Register!</button>
+                <br>
+                <button title="Log-in as Admin.">Log-in</button>
             </div>
         </div>
 
