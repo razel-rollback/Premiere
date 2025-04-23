@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('enrollmentID');
             $table->integer('amountPaid');
             $table->string('paymentMethod');
-            $table->interger('totalFee');
+            $table->integer('totalFee');
             $table->string('paymentType');
             $table->date('paymentDate');
             $table->string('paymentStatus');

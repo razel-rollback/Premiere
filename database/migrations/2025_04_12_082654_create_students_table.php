@@ -16,17 +16,16 @@ return new class extends Migration
             $table->string('firstName');
             $table->string('middleName');
             $table->string('lastName');
-            $table->string('address');
             $table->string('birthDate');
             $table->string('gender');
-            $table->string('Address');
+            $table->string('address');
             $table->string('contactNumber');
             $table->string('guardianName');
             $table->string('guardianContactNumber');
             $table->string('status');
             $table->unsignedBigInteger('gradeLevelID');
             $table->unsignedBigInteger('roleID');
-            $table->unsignedBigInter('strandID');
+            $table->unsignedBigInteger('strandID');
             $table->timestamps();
 
             $table->foreign('gradeLevelID')->references('gradeLevelID')->on('grade_levels')->onDelete('cascade');
