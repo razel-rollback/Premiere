@@ -222,4 +222,54 @@
         color: white;
         overflow: hidden;
     }
+
+
+
+
+
+
+
+
+    /*register blade*/
+    .register-body {
+        margin: 0;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        /* Full viewport height */
+        overflow: hidden;
+    }
+
+    .register-body::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url('../images/school-building.png') center center / cover no-repeat;
+        filter: blur(6px);
+        /* Apply blur only to the background */
+        z-index: 0;
+        /* Ensure it stays behind the content */
+    }
+
+    .register-body .card {
+        position: relative;
+        z-index: 1;
+        /* Ensure the card is above the blurred background */
+        background: rgba(255, 255, 255, 0.9);
+        /* Add slight transparency for better contrast */
+        border-radius: 20px;
+    }
+
+    .register-body input {
+        border-radius: 20px;
+    }
+
+    .register-body .ddown {
+        border-radius: 20px;
+    }
 </style>
