@@ -20,7 +20,7 @@
                     <div class="row">
                         <div class="col-6">
                             <label for="firstname" class="form-label">Firstname: </label>
-                            <input type="text" id="firstname" class="form-control">
+                            <input type="text" id="firstname" class="form-control" placeholder="ex. Juan" required>
                         </div>
                         <div class="col-3">
                             <div class="dropdown" style="display: flex; flex-direction: column;">
@@ -62,7 +62,7 @@
                     <div class="row">
                         <div class="col-6">
                             <label for="middlename" class="form-label">Middle name:</label>
-                            <input type="text" id="middlename" class="form-control">
+                            <input type="text" id="middlename" class="form-control" placeholder="ex. Dela Cruz" required>
                         </div>
                         <div class="col-6" style="padding-right: 0px;">
                             <label for="dateofbirth" class="form-label">Date of Birth:</label>
@@ -74,11 +74,11 @@
                     <div class="row">
                         <div class="col-6">
                             <label for="lastname" class="form-label">Lastname:</label>
-                            <input type="text" id="lastname" class="form-control">
+                            <input type="text" id="lastname" class="form-control" placeholder="ex. Santos" required>
                         </div>
                         <div class="col-6" style="padding-right: 0px;">
                             <label for="contactnumber" class="form-label">Contact Number:</label>
-                            <input type="text" id="contactnumber" class="form-control" minlength="11" maxlength="11">
+                            <input type="text" id="contactnumber" class="form-control" minlength="11" maxlength="11" placeholder="09xxxxxxxxxx">
                         </div>
                     </div>
 
@@ -86,17 +86,18 @@
                     <div class="row" style="padding-bottom: 5px;">
                         <div class="col-12" style="padding-right: 0px;">
                             <label for="address" class="form-label">Address:</label>
-                            <input type="text" id="address" class="form-control">
+                            <input type="text" id="address" class="form-control" placeholder="ex. 1234 St. City" required>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="card">
+        <!-- <div class="card">
             <div class="card-body">
                 <h4>Guardian Information</h4>
+
             </div>
-        </div>
+        </div> -->
     </div>
 </body>
 

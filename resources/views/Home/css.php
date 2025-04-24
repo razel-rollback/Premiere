@@ -263,6 +263,9 @@
         background: rgba(255, 255, 255, 0.9);
         /* Add slight transparency for better contrast */
         border-radius: 20px;
+        animation: fadeSlideUp 1s ease-out;
+        animation-fill-mode: both;
+        animation-delay: 0.1s;
     }
 
     .register-body input {
