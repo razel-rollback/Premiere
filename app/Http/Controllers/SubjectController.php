@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Strand;
 use App\Models\Subject;
+use App\Models\GradeLevel;
 use Illuminate\Http\Request;
 
 class SubjectController extends Controller
@@ -12,7 +14,8 @@ class SubjectController extends Controller
      */
     public function index()
     {
-        return view('Subject.SubjectView');
+        $subjects = Subject::all();
+        return view('Subject.index', compact('subjects'));
     }
 
     /**
@@ -20,7 +23,9 @@ class SubjectController extends Controller
      */
     public function create()
     {
-        //
+        $strands = Strand::all();
+        $gradeLevels = GradeLevel::all();
+        return view('Subject.create', compact('strands', 'gradeLevels'));
     }
 
     /**
@@ -28,7 +33,19 @@ class SubjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validate the request
+        $request->validate([
+            'subjectName' => 'required|string|max:255',
+            'subjectType' => 'required|string|in:Core,Advance,Specialize',
+            'gradeLevelID' => 'required|exists:grade_levels,gradeLevelID',
+            'strandID' => 'required|exists:strands,strandID',
+        ]);
+
+        // Create the subject
+        Subject::create($request->only(['subjectName', 'subjectType', 'gradeLevelID', 'teacherID', 'strandID']));
+
+        // Redirect with success message
+        return redirect()->route('subjects.index')->with('success', 'Subject created successfully!');
     }
 
     /**
@@ -44,7 +61,12 @@ class SubjectController extends Controller
      */
     public function edit(Subject $subject)
     {
-        //
+        // Retrieve related data for dropdowns
+        $strands = Strand::all();
+        $gradeLevels = GradeLevel::all();
+
+        // Pass the subject and related data to the view
+        return view('Subject.edit', compact('subject', 'strands', 'gradeLevels'));
     }
 
     /**
@@ -52,7 +74,20 @@ class SubjectController extends Controller
      */
     public function update(Request $request, Subject $subject)
     {
-        //
+        // Validate the request
+        $request->validate([
+            'subjectName' => 'required|string|max:255',
+            'subjectType' => 'required|string|in:Core,Advance,Specialize',
+            'gradeLevelID' => 'required|exists:grade_levels,gradeLevelID',
+            'strandID' => 'required|exists:strands,strandID',
+        ]);
+
+        // Update the subject
+        $subject->update($request->only(['subjectName', 'subjectType', 'gradeLevelID', 'teacherID', 'strandID']));
+
+
+        // Redirect with success message
+        return redirect()->route('subjects.index')->with('success', 'Subject updated successfully!');
     }
 
     /**
@@ -60,6 +95,15 @@ class SubjectController extends Controller
      */
     public function destroy(Subject $subject)
     {
-        //
+        // Check if the subject has any associated schedules
+        if ($subject->schedules()->exists()) {
+            return redirect()->route('subjects.index')->with('error', 'Cannot delete subject with associated schedules.');
+        }
+
+        // Delete the subject
+        $subject->delete();
+
+        // Redirect with success message
+        return redirect()->route('subjects.index')->with('success', 'Subject deleted successfully!');
     }
 }

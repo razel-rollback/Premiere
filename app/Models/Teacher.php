@@ -21,10 +21,7 @@ class Teacher extends Model
         'updated_at',
     ];
 
-    public function subjects()
-    {
-        return $this->hasMany(Subject::class, 'teacherID');
-    }
+
 
     public function schedules()
     {

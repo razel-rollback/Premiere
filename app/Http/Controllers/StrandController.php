@@ -91,6 +91,12 @@ class StrandController extends Controller
         if ($strand->students()->exists()) {
             return redirect()->route('strands.index')->with('error', 'Cannot delete this strand as it has associated students.');
         }
+        if ($strand->subjects()->exists()) {
+            return redirect()->route('strands.index')->with('error', 'Cannot delete this strand as it has associated subjects.');
+        }
+        if ($strand->sections()->exists()) {
+            return redirect()->route('strands.index')->with('error', 'Cannot delete this strand as it has associated sections.');
+        }
 
         // Delete the strand if no students are associated
         $strand->delete();

@@ -67,7 +67,9 @@ class GradeController extends Controller
         ]);
 
         // Update the grade level using the validated data
-        $gradelevel->update($request->all());
+        $gradelevel->update([
+            'gradeLevelName' => $request->input('gradeName'),
+        ]);
 
         return redirect()->route('gradelevels.index')->with('success', 'Grade Level Updated successfully.');
     }
@@ -79,6 +81,9 @@ class GradeController extends Controller
     {
         if ($gradelevel->students()->exists()) {
             return redirect()->route('gradelevels.index')->with('error', 'Cannot delete this Grade level as it has associated students.');
+        }
+        if ($gradelevel->sections()->exists()) {
+            return redirect()->route('gradelevels.index')->with('error', 'Cannot delete this Grade level as it has associated sections.');
         }
 
         // Delete the grade level if no students are associated
