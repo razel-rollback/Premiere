@@ -29,13 +29,13 @@ class Subject extends Model
         return $this->belongsTo(GradeLevel::class, 'gradeLevelID');
     }
 
-    public function teacher()
-    {
-        return $this->belongsTo(Teacher::class, 'teacherID');
-    }
 
     public function strand()
     {
         return $this->belongsTo(Strand::class, 'strandID');
+    }
+    public function schedules()
+    {
+        return $this->hasMany(Schedule::class, 'scheduleID');
     }
 }

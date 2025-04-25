@@ -51,6 +51,9 @@ class TrackController extends Controller
 
     public function destroy(Track $track)
     {
+        if ($track->strands()->exists()) {
+            return redirect()->route('tracks.index')->with('error', 'Cannot delete track with associated strands.');
+        }
         $track->delete();
         return redirect()->route('tracks.index')->with('success', 'Track deleted successfully.');
     }

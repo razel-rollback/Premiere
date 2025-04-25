@@ -1,16 +1,16 @@
 @extends('layouts.app')
-@section('title', 'Teacher')
+
+@section('title', 'Subject')
 
 @section('head')
 
 @endsection
 
 @section('content')
-
-<div class="container">
+<div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
-            <h1 class="mb-3">Teacher</h1>
+            <h1>Subject </h1>
             @if(session('error'))
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
                 {{ session('error') }}
@@ -23,24 +23,28 @@
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             @endif
-            <a href="{{ route('teachers.create') }}" class="btn btn-primary mb-3">Add Teacher</a>
+            <a href="{{ route('subjects.create') }}" class="btn btn-primary mb-3">Add Subject</a>
             <table class="table table-bordered">
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Name</th>
-                        <th>Specialization</th>
+                        <th>Subject Name</th>
+                        <th>Subject Type</th>
+                        <th>Grade Level</th>
+                        <th>Strand</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($teachers as $teacher)
+                    @foreach($subjects as $subject)
                     <tr>
-                        <td>{{ $teacher->teacherID }}</td>
-                        <td>{{ $teacher->teacherName }}</td>
-                        <td>{{ $teacher->specialization }}</td>
+                        <td>{{ $subject->subjectID }}</td>
+                        <td>{{ $subject->subjectName }}</td>
+                        <td>{{ $subject->subjectType }}</td>
+                        <td>{{ $subject->gradeLevel->gradeLevelName }}</td>
+                        <td>{{ $subject->strand->strandName }}</td>
                         <td>
-                            <a href="{{ route('teachers.edit', $teacher->teacherID) }}" class="btn btn-warning">Edit</a>
-                            <form action="{{ route('teachers.destroy', $teacher->teacherID) }}" method="POST" style="display:inline;">
+                            <a href="{{ route('subjects.edit', $subject->subjectID) }}" class="btn btn-warning">Edit</a>
+                            <form action="{{ route('subjects.destroy', $subject->subjectID) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger">Delete</button>
@@ -50,7 +54,6 @@
                     @endforeach
                 </tbody>
             </table>
-
         </div>
     </div>
 </div>
