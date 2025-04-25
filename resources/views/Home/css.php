@@ -102,7 +102,7 @@
         max-height: 400px;
         animation: fadeSlideUp 1s ease-out;
         animation-fill-mode: both;
-        animation-delay: 0.5s;
+        animation-delay: 0.1s;
         /* Adjust delay to match the paragraphs */
         opacity: 0;
         /* Ensure it starts hidden */
@@ -132,7 +132,7 @@
         z-index: 2;
         animation: fadeSlideUp 1s ease-out;
         animation-fill-mode: both;
-        animation-delay: 0.5s;
+        animation-delay: 0.1s;
         opacity: 0;
     }
 
@@ -162,7 +162,7 @@
         max-height: 400px;
         animation: fadeSlideUp 1s ease-out;
         animation-fill-mode: both;
-        animation-delay: 0.5s;
+        animation-delay: 0.1s;
     }
 
     .hero-content h1 {
@@ -171,7 +171,7 @@
         max-height: 400px;
         animation: fadeSlideUp 1s ease-out;
         animation-fill-mode: both;
-        animation-delay: 0.5s;
+        animation-delay: 0.1s;
     }
 
     .hero-content p {
@@ -193,12 +193,12 @@
     .hero-content button {
         animation: fadeSlideUp 1s ease-out;
         animation-fill-mode: both;
-        animation-delay: 0.5s;
+        animation-delay: 0.1s;
         opacity: 0;
     }
 
     .hero-content button {
-        animation-delay: 1s;
+        animation-delay: 0.1s;
     }
 
 

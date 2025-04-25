@@ -11,6 +11,22 @@
 </head>
 
 <body class="register-body row">
+    <img src="/images/school-building.png" style="display:none;" alt="preload background">
+    <header>
+        <div class="navbar">
+
+            <div class="logo">
+                <img src="{{ asset('images/Premire.png') }}"
+                    alt="Logo" class="img-fluid rounded-circle"
+                    width="50">
+                <span>PREMIERE</span>
+            </div>
+            <nav>
+                <a href="{{route('home.index')}}"> Home</a>
+            </nav>
+        </div>
+    </header>
+
     <div class="d-flex justify-content-center align-items-center min-vh-100">
         <div class="card" style="width: 560px; border-radius: 20px; padding-right: 10px;">
             <div class="card-body">

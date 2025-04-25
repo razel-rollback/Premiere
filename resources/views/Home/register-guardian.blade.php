@@ -2,6 +2,7 @@
 <html lang="en">
 @include ('Home.css')
 
+
 <head>
     <title>Student Register</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -11,6 +12,22 @@
 </head>
 
 <body class="register-body row">
+    <img src="/images/school-building.png" style="display:none;" alt="preload background">
+    <header>
+        <div class="navbar">
+
+            <div class="logo">
+                <img src="{{ asset('images/Premire.png') }}"
+                    alt="Logo" class="img-fluid rounded-circle"
+                    width="50">
+                <span>PREMIERE</span>
+            </div>
+            <nav>
+                <a href="{{route('home.index')}}"> Home</a>
+            </nav>
+        </div>
+    </header>
+
     <div class="d-flex justify-content-center align-items-center min-vh-100">
         <div class="card" style="width: 560px; border-radius: 20px;">
             <div class="card-body">
@@ -44,6 +61,12 @@
 
                                     </ul>
                                 </div>
+                                <script>
+                                    function updateSuffix(value) {
+                                        const suffixButton = document.getElementById('guardiansuffix');
+                                        suffixButton.textContent = value;
+                                    }
+                                </script>
                             </div>
                         </div>
 
