@@ -24,13 +24,17 @@
                         @csrf
                         <div class=" row">
                             <div class="col-6">
-                                <label for="firstname" class="form-label">Firstname: </label>
-                                <input type="text" id="firstname" class="form-control" placeholder="ex. Juan" required>
+                                <label for="guardianfirstname" class="form-label">Firstname: </label>
+                                <input type="text" id="guardianfirstname" class="form-control" placeholder="ex. Juan" required>
+                            </div>
+                            <div class="col-3">
+                                <label for="relationship" class="form-label">Relationship:</label>
+                                <input type="text" id="relationship" class="form-control" placeholder="ex. Mother" required>
                             </div>
                             <div class="col-3">
                                 <div class="dropdown" style="display: flex; flex-direction: column;">
-                                    <label for="suffix" class="form-label">Suffix:</label>
-                                    <button class="ddown btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="suffixButton">
+                                    <label for="guardiansuffix" class="form-label">Suffix:</label>
+                                    <button class="ddown btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="guardiansuffix">
                                         Select
                                     </button>
                                     <ul class="dropdown-menu" id="suffixMenu">
@@ -41,26 +45,6 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div class="col-3" style="padding-right: 0px;">
-                                <div class="radio-btn" style="display: flex; flex-direction: column; width:75px">
-                                    <label for="sex">Sex:</label>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="sex" id="sex1" value="Male">
-                                        <label class="form-check-label" for="sex1">Male</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="sex" id="sex2" value="Female">
-                                        <label class="form-check-label" for="sex2">Female</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <script>
-                                function updateSuffix(value) {
-                                    const suffixButton = document.getElementById('suffixButton');
-                                    suffixButton.textContent = value;
-                                }
-                            </script>
-
                         </div>
 
                         <!-- second row -->
