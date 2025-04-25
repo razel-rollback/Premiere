@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+@extends ('layouts.head')
 <html lang="en">
 @include ('Home.css')
 
@@ -11,7 +11,6 @@
 </head>
 
 <body class="register-body row">
-    <img src="/images/school-building.png" style="display:none;" alt="preload background">
     <header>
         <div class="navbar">
 
