@@ -35,7 +35,7 @@ Route::get('/Subject', [SubjectController::class, 'index'])->name('route.subject
 
 Route::resource('subjects', SubjectController::class);
 Route::resource('strands', StrandController::class);
-Route::resource('teachers', TeacherController::class);
+Route::get('/teachers', [TeacherController::class, 'index'])->name('teachers.index');
 Route::resource('gradelevels', GradeController::class);
 Route::resource('sections', SectionController::class);
 Route::resource('tracks', TrackController::class);

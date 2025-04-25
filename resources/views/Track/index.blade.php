@@ -7,7 +7,7 @@
 @endsection
 
 @section('content')
-<div class="container-fluid">
+<!-- <div class="container-fluid">
     <h1>Tracks</h1>
     @if(session('error'))
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -47,5 +47,7 @@
             @endforeach
         </tbody>
     </table>
-</div>
+</div> -->
+
+
 @endsection

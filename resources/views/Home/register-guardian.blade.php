@@ -1,4 +1,3 @@
-@extends ('layouts.head')
 <html lang="en">
 @include ('Home.css')
 

@@ -12,9 +12,7 @@ class TeacherController extends Controller
      */
     public function index()
     {
-        // Fetch all teachers from the database
-        $teachers = Teacher::all(); // Uncomment this line when you have a Teacher model
-        return view('Teacher.index', compact('teachers'));
+        return view('Teacher.index'); // Ensure this view exists
     }
 
     /**
