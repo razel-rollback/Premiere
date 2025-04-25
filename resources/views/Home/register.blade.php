@@ -12,11 +12,16 @@
 
 <body class="register-body row">
     <div class="d-flex justify-content-center align-items-center min-vh-100">
-        <div class="card" style="width: 560px; border-radius: 20px;">
+        <div class="card" style="width: 560px; border-radius: 20px; padding-right: 10px;">
             <div class="card-body">
-                <h4>Student Information</h4>
+                <div class="d-flex flex-column justify-content-center align-items-center">
+                    <h4>Student Information</h4>
+                </div>
                 <div class="row align-items-start">
                     <!-- first row -->
+                    <!-- <form action="{{ route('route.register-guardian') }}" method="POST"> -->
+                    <!-- form start -->
+                    @csrf
                     <div class="row">
                         <div class="col-6">
                             <label for="firstname" class="form-label">Firstname: </label>
@@ -90,15 +95,103 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <!-- <div class="card">
-            <div class="card-body">
-                <h4>Guardian Information</h4>
 
+                <div class="row mt-3">
+                    <div class="col text-end">
+                        <button type="button" class="btn btn-danger" style="border-radius: 10px;" onclick="clearForm()">Clear</button>
+                        <a href="{{ route('route.register-guardian') }}" class="btn btn-primary" style="border-radius: 10px;">Next</a>
+                    </div>
+                </div>
+                <!-- </form> -->
             </div>
-        </div> -->
+
+
+        </div>
     </div>
+    <!-- save form, when going back data still here -->
+    <script>
+        // List of form field IDs to persist
+        const formFields = [
+            'firstname',
+            'middlename',
+            'lastname',
+            'contactnumber',
+            'address',
+            'dateofbirth',
+            'sex1',
+            'sex2'
+        ];
+
+        // Load saved data when page loads
+        window.addEventListener('load', () => {
+            formFields.forEach(id => {
+                const el = document.getElementById(id);
+                const savedValue = localStorage.getItem(id);
+
+                if (el) {
+                    if (el.type === 'radio') {
+                        el.checked = savedValue === 'true';
+                    } else {
+                        el.value = savedValue || '';
+                    }
+                }
+            });
+
+            // Restore suffix from storage
+            const suffix = localStorage.getItem('suffix');
+            if (suffix) {
+                updateSuffix(suffix);
+            }
+        });
+
+        // Save inputs on change
+        formFields.forEach(id => {
+            const el = document.getElementById(id);
+            if (el) {
+                el.addEventListener('input', (e) => {
+                    if (el.type === 'radio') {
+                        localStorage.setItem(id, el.checked);
+                    } else {
+                        localStorage.setItem(id, e.target.value);
+                    }
+                });
+            }
+        });
+
+        // Extend updateSuffix to save the value too
+        function updateSuffix(value) {
+            const suffixButton = document.getElementById('suffixButton');
+            suffixButton.textContent = value;
+            localStorage.setItem('suffix', value);
+        }
+    </script>
+
+    <!-- clear -->
+    <script>
+        function clearForm() {
+            // Reset all form fields
+            document.querySelector('form').reset();
+
+            // Remove values from localStorage
+            const fields = [
+                'firstname',
+                'middlename',
+                'lastname',
+                'contactnumber',
+                'address',
+                'dateofbirth',
+                'sex1',
+                'sex2',
+                'suffix'
+            ];
+            fields.forEach(key => localStorage.removeItem(key));
+
+            // Reset suffix dropdown text
+            document.getElementById('suffixButton').textContent = 'Select';
+        }
+    </script>
+
 </body>
+
 
 </html>

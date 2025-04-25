@@ -21,8 +21,8 @@ Route::get('/home', [HomeController::class, 'index'])->name('home.index');
 Route::get('/about', [HomeController::class, 'about'])->name('home.about');
 Route::get('/register', [RegisterController::class, 'index'])->name('route.register');
 
-
-//
+//makita sa register (next)
+Route::get('/register/guardian', [RegisterController::class, 'guardian'])->name('route.register-guardian'); //
 Route::get('/Dashboard', [DashboardController::class, 'index'])->name('route.dashboard'); //walay pulos?
 
 Route::get('/Strand', [StrandController::class, 'index'])->name('route.strand');
