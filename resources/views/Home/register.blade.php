@@ -114,6 +114,7 @@
                     <div class="col text-end">
                         <button type="button" class="btn btn-danger" style="border-radius: 10px;" onclick="clearForm()">Clear</button>
                         <a href="{{ route('route.register-guardian') }}" class="btn btn-primary" style="border-radius: 10px;">Next</a>
+                        <!-- PARA MAGAMIT UG MA SAVE ANG INFO ILISA ANG A UG BUTTON. I UNCOMMENT ANG FORM, BUTANGIG SUBMIT -->
                     </div>
                 </div>
                 <!-- </form> -->
@@ -183,11 +184,29 @@
     <!-- clear -->
     <script>
         function clearForm() {
-            // Reset all form fields
-            document.querySelector('form').reset();
-
-            // Remove values from localStorage
             const fields = [
+                'firstname',
+                'middlename',
+                'lastname',
+                'contactnumber',
+                'address',
+                'dateofbirth'
+            ];
+
+            fields.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.value = '';
+            });
+
+            // Clear radio buttons
+            document.getElementById('sex1').checked = false;
+            document.getElementById('sex2').checked = false;
+
+            // Reset suffix
+            document.getElementById('suffixButton').textContent = 'Select';
+
+            // Clear localStorage
+            const storageKeys = [
                 'firstname',
                 'middlename',
                 'lastname',
@@ -198,10 +217,7 @@
                 'sex2',
                 'suffix'
             ];
-            fields.forEach(key => localStorage.removeItem(key));
-
-            // Reset suffix dropdown text
-            document.getElementById('suffixButton').textContent = 'Select';
+            storageKeys.forEach(key => localStorage.removeItem(key));
         }
     </script>
 

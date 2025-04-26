@@ -11,9 +11,10 @@ use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\EnrolledStudentController;
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\StudentAdmissionController;
-
+use App\Models\Enrollment;
 
 // Ensure the controller exists and is correctly referenced
 
@@ -41,3 +42,4 @@ Route::resource('sections', SectionController::class);
 Route::resource('tracks', TrackController::class);
 
 Route::get('/Student_Admission', [StudentAdmissionController::class, 'index'])->name('route.student.admission');
+Route::get('/enrolled-students', [EnrolledStudentController::class, 'index'])->name('route.enrolled.student');

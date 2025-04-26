@@ -20,9 +20,10 @@
     @error('trackID')
     <div class="alert alert-danger">{{ $message }}</div>
     @enderror
-    <a href="{{ route('gradelevels.create') }}" class="btn btn-primary btn-md">Add Grade Level</a>
-    <table class="table mt-4">
-        <thead>
+    @include('GradeLevel.create')
+    <a href="#" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#gradeLevelModal">Add Grade Level</a>
+    <table class="table table-striped table-hover table-bordered mt-4 align-middle">
+        <thead class="table-dark">
             <tr>
                 <th>#</th>
                 <th>Grade Level Name</th>
@@ -46,7 +47,6 @@
                 </td>
             </tr>
             @endforeach
-
         </tbody>
     </table>
     @endsection

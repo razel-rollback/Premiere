@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'Student Admission')
+@section('title', 'Enrolled Students')
+
 
 @section('head')
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
@@ -76,7 +77,7 @@
     <div class="main-content">
 
         <div class="d-flex justify-content-center align-items-center mb-4">
-            <h2 class="text-center">Student Admission</h2>
+            <h2 class="text-center">Enrolled Students</h2>
         </div>
 
         <div class="d-flex justify-content-evenly  gap-3 ">
@@ -112,7 +113,7 @@
                     <td>12</td>
                     <td>ABM</td>
                     <td>2025-2026</td>
-                    <td><button class="btn btn-success rounded-pill"><i class="bi bi-check-circle"></i></button> <button class="btn btn-danger rounded-pill"><i class="bi bi-x-circle"></i></button></td>
+                    <td><button class="btn btn-warning rounded-pill"><i class="bi bi-arrow-counterclockwise"></i></button></td>
                 </tr>
                 <tr>
                     <td>0002</td>
@@ -120,7 +121,7 @@
                     <td>12</td>
                     <td>STEM</td>
                     <td>2025-2026</td>
-                    <td><button class="btn btn-success rounded-pill"><i class="bi bi-check-circle"></i></button> <button class="btn btn-danger rounded-pill"><i class="bi bi-x-circle"></i></button></td>
+                    <td><button class="btn btn-warning rounded-pill"><i class="bi bi-arrow-counterclockwise"></i></button></td>
                 </tr>
                 <tr>
                     <td>0003</td>
@@ -128,7 +129,7 @@
                     <td>12</td>
                     <td>HUMSS</td>
                     <td>2025-2026</td>
-                    <td><button class="btn btn-success rounded-pill"><i class="bi bi-check-circle"></i></button> <button class="btn btn-danger rounded-pill"><i class="bi bi-x-circle"></i></button></td>
+                    <td><button class="btn btn-warning rounded-pill"><i class="bi bi-arrow-counterclockwise"></i></button></td>
                 </tr>
                 <tr>
                     <td>0004</td>
@@ -136,7 +137,7 @@
                     <td>12</td>
                     <td>HUMSS</td>
                     <td>2025-2026</td>
-                    <td><button class="btn btn-success rounded-pill"><i class="bi bi-check-circle"></i></button> <button class="btn btn-danger rounded-pill"><i class="bi bi-x-circle"></i></button></td>
+                    <td><button class="btn btn-warning rounded-pill"><i class="bi bi-arrow-counterclockwise"></i></button></td>
                 </tr>
                 <tr>
                     <td>0005</td>
@@ -144,7 +145,7 @@
                     <td>12</td>
                     <td>HUMSS</td>
                     <td>2025-2026</td>
-                    <td><button class="btn btn-success rounded-pill"><i class="bi bi-check-circle"></i></button> <button class="btn btn-danger rounded-pill"><i class="bi bi-x-circle"></i></button></td>
+                    <td><button class="btn btn-warning rounded-pill"><i class="bi bi-arrow-counterclockwise"></i></button></td>
                 </tr>
             </tbody>
         </table>

@@ -15,7 +15,6 @@ class Subject extends Model
         'subjectName',
         'subjectType',
         'gradeLevelID',
-        'teacherID',
         'strandID',
     ];
 

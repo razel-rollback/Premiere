@@ -9,13 +9,16 @@ use Illuminate\Http\Request;
 
 class SubjectController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
+
     public function index()
     {
         $subjects = Subject::all();
-        return view('Subject.index', compact('subjects'));
+        $gradeLevels = GradeLevel::all();
+        $strands = Strand::all();
+
+
+        return view('Subject.index', compact('subjects', 'gradeLevels', 'strands'));
     }
 
     /**

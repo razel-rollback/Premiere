@@ -3,8 +3,9 @@
 @section('title', 'Subject')
 
 @section('head')
-
 @endsection
+
+
 
 @section('content')
 <div class="container-fluid">
@@ -23,15 +24,18 @@
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             @endif
-            <a href="{{ route('subjects.create') }}" class="btn btn-primary mb-3">Add Subject</a>
-            <table class="table table-bordered">
-                <thead>
+            @include('Subject.create', ['gradeLevels' => $gradeLevels, 'strands' => $strands])
+            <link rel="stylesheet" href="{{ asset('css/global.css') }}">
+            <a href="#" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#subjectModal">Add Subject</a>
+            <table class="table table-striped table-hover table-bordered mt-4 align-middle">
+                <thead class="table-dark">
                     <tr>
                         <th>ID</th>
                         <th>Subject Name</th>
                         <th>Subject Type</th>
                         <th>Grade Level</th>
                         <th>Strand</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -54,6 +58,7 @@
                     @endforeach
                 </tbody>
             </table>
+
         </div>
     </div>
 </div>
