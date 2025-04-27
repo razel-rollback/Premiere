@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Strand;
 use App\Models\Section;
+use App\Models\GradeLevel;
 use Illuminate\Http\Request;
 
 class SectionController extends Controller
@@ -12,8 +14,12 @@ class SectionController extends Controller
      */
     public function index()
     {
-        $sections = Section::all();
-        return view('Section.index', compact('sections'));
+
+        $Sections = Section::all();
+        $strands = Strand::all(); // Retrieve strands
+        $gradeLevels = GradeLevel::all();
+
+        return view('Section.index', compact('Sections', 'strands', 'gradeLevels'));
     }
 
     /**
@@ -21,7 +27,9 @@ class SectionController extends Controller
      */
     public function create()
     {
-        //
+        $strands = Strand::all();
+        $gradeLevels = GradeLevel::all();
+        return view('Section.create', compact('strands', 'gradeLevels'));
     }
 
     /**
@@ -29,7 +37,23 @@ class SectionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'sectionName' => 'required|string|max:255',
+            'gradeLevelID' => 'required|exists:grade_levels,gradeLevelID',
+            'strandID' => 'required|exists:strands,strandID',
+        ]);
+
+        try {
+            Section::create([
+                'sectionName' => $request->sectionName,
+                'gradeLevelID' => $request->gradeLevelID,
+                'strandID' => $request->strandID,
+            ]);
+
+            return redirect()->route('sections.index')->with('success', 'Section created successfully.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Failed to create section. Please try again.');
+        }
     }
 
     /**
@@ -43,24 +67,53 @@ class SectionController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Section $id)
+    public function edit(Section $section)
     {
-        //
+        $strands = Strand::all();
+        $gradeLevels = GradeLevel::all();
+        return view('Section.edit', compact('section', 'strands', 'gradeLevels'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Section $id)
+    public function update(Request $request, Section $section)
     {
-        //
+        $request->validate([
+            'sectionName' => 'required|string|max:255',
+            'gradeLevelID' => 'required|exists:grade_levels,gradeLevelID',
+            'strandID' => 'required|exists:strands,strandID',
+        ]);
+
+        try {
+            $section->update([
+                'sectionName' => $request->sectionName,
+                'gradeLevelID' => $request->gradeLevelID,
+                'strandID' => $request->strandID,
+            ]);
+
+            return redirect()->route('sections.index')->with('success', 'Section updated successfully.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Failed to update section. Please try again.');
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Section $id)
+    public function destroy(Section $section)
     {
-        //
+        try {
+            // Check if the section is associated with enrollments or schedules
+            if ($section->enrollments()->exists() || $section->schedules()->exists()) {
+                return redirect()->route('sections.index')->with('error', 'Cannot delete section as it is associated with enrollments or schedules.');
+            }
+
+            // Delete the section
+            $section->delete();
+            return redirect()->route('sections.index')->with('success', 'Section deleted successfully.');
+        } catch (\Exception $e) {
+            return redirect()->route('sections.index')->with('error', 'Failed to delete section. Please try again.');
+        }
     }
 }

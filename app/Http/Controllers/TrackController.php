@@ -10,8 +10,8 @@ class TrackController extends Controller
 
     public function index()
     {
-        $tracks = Track::all();
-        return view('Track.index', compact('tracks'));
+        $Tracks = Track::all();
+        return view('Track.index', compact('Tracks'));
     }
 
     public function create()

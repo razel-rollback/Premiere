@@ -12,7 +12,8 @@ class TeacherController extends Controller
      */
     public function index()
     {
-        return view('Teacher.index'); // Ensure this view exists
+        $teachers = Teacher::all();
+        return view('Teacher.index', compact('teachers'));
     }
 
     /**

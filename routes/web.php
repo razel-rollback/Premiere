@@ -34,11 +34,25 @@ Route::get('/Subject', [SubjectController::class, 'index'])->name('route.subject
 
 //admin
 
+Route::get('/Section', [SectionController::class, 'index'])->name('sections.index');
+Route::get('/Section/create', [SectionController::class, 'create'])->name('sections.create');
+Route::post('/Section', [SectionController::class, 'store'])->name('sections.store');
+Route::get('/Section/{section}/edit', [SectionController::class, 'edit'])->name('sections.edit');
+Route::put('/Section/{section}', [SectionController::class, 'update'])->name('sections.update');
+Route::delete('/Section/{section}', [SectionController::class, 'destroy'])->name('sections.destroy');
+
+Route::get('/Teachers', [TeacherController::class, 'index'])->name('teachers.index');
+Route::get('/Teachers/create', [TeacherController::class, 'create'])->name('teachers.create');
+Route::post('/Teachers', [TeacherController::class, 'store'])->name('teachers.store');
+Route::get('/Teachers/{teachers}/edit', [TeacherController::class, 'edit'])->name('teachers.edit');
+Route::put('/Teachers/{teachers}', [TeacherController::class, 'update'])->name('teachers.update');
+Route::delete('/Teachers/{teachers}', [TeacherController::class, 'destroy'])->name('teachers.destroy');
+
+
 Route::resource('subjects', SubjectController::class);
 Route::resource('strands', StrandController::class);
-Route::get('/teachers', [TeacherController::class, 'index'])->name('teachers.index');
+
 Route::resource('gradelevels', GradeController::class);
-Route::resource('sections', SectionController::class);
 Route::resource('tracks', TrackController::class);
 
 Route::get('/Student_Admission', [StudentAdmissionController::class, 'index'])->name('route.student.admission');

@@ -23,5 +23,6 @@ class DatabaseSeeder extends Seeder
         $this->call(TrackSeeder::class);
         $this->call(StrandSeeder::class);
         $this->call(GradeSeeder::class);
+        $this->call(SectionSeeder::class);
     }
 }
