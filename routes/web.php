@@ -1,6 +1,6 @@
 <?php
 
-
+use App\Http\Controllers\AdminLogInController;
 use App\Models\Strand;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -43,3 +43,4 @@ Route::resource('tracks', TrackController::class);
 
 Route::get('/Student_Admission', [StudentAdmissionController::class, 'index'])->name('route.student.admission');
 Route::get('/enrolled-students', [EnrolledStudentController::class, 'index'])->name('route.enrolled.student');
+Route::get('/admin/login', [AdminLogInController::class, 'login'])->name('route.admin.login');
