@@ -56,8 +56,12 @@
             </div>
         </div>
 
-        <div class="admin">
-            <a href="{{route('route.admin.login')}}">Admin Log-in</a>
+        <div class="admin" style="text-align: center; margin-top: 20px;">
+            <a title="Admin Log-in" href="{{ route('admin.login.form') }}" style="text-decoration: none;">
+                <button style="cursor: pointer; padding: 10px 20px; background-color: #D4AF37; color: white; border: none; border-radius: 5px;">
+                    Admin Log-in
+                </button>
+            </a>
         </div>
 
         <div class="footer-block">
@@ -67,6 +71,9 @@
             <div class="right">
                 <h3>Summer Class going on...</h3>
             </div>
+        </div>
+        <div class="footer-block">
+            <div class="left">© 2025 Premiere SHS. All Rights Reserved.</div>
         </div>
 
     </div>
