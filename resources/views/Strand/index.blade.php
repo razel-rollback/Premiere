@@ -21,14 +21,14 @@
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     @endif
-    <a href="{{ route('strands.create') }}" class="btn btn-primary btn-md">Add track</a>
-    <table class="table mt-4">
-        <thead>
+    @include('Strand.create', ['tracks' => $tracks])
+    <table class="table table-striped table-hover table-bordered mt-4 align-middle">
+        <thead class="table-dark">
             <tr>
                 <th>#</th>
                 <th>Strand Name</th>
                 <th>Track Name</th>
-                <th>Actions</th>
+                <th class="text-center">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -37,21 +37,23 @@
                 <td>{{ $strand->strandID }}</td>
                 <td>{{ $strand->strandName }}</td>
                 <td>{{ $strand->track->trackName }}</td>
-                <td>
-                    <a href="{{ route('strands.edit', $strand->strandID) }}" class="btn btn-warning btn-sm">Edit</a>
-
-                    <form method="POST" action="{{ route('strands.destroy', $strand->strandID) }}" style="display:inline;">
+                <td class="text-center">
+                    <button type="button" class="btn btn-warning btn-sm me-1" data-bs-toggle="modal" data-bs-target="#editStrandModal{{ $strand->strandID }}">
+                        Edit
+                    </button>
+                    @include('Strand.edit', ['strand' => $strand, 'tracks' => $tracks])
+                    <form method="POST" action="{{ route('strands.destroy', $strand->strandID) }}" class="d-inline">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                        <button type="submit" class="btn btn-danger btn-sm">
+                            Delete
+                        </button>
                     </form>
-
-
                 </td>
             </tr>
             @endforeach
-
         </tbody>
     </table>
+
 </div>
 @endsection

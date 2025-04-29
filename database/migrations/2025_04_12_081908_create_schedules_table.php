@@ -16,9 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('subjectID');
             $table->unsignedBigInteger('sectionID');
             $table->unsignedBigInteger('teacherID');
-            $table->string('timeStart');
-            $table->string('timeEnd');
-            $table->string('RoomNum');
+            $table->string('timeSlot');
             $table->timestamps();
             $table->foreign('subjectID')->references('subjectID')->on('subjects')->onDelete('cascade');
             $table->foreign('sectionID')->references('sectionID')->on('sections')->onDelete('cascade');

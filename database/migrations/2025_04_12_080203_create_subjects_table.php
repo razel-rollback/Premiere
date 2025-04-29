@@ -16,12 +16,9 @@ return new class extends Migration
             $table->string('subjectName');
             $table->string('subjectType');
             $table->unsignedBigInteger('gradeLevelID');
-            $table->unsignedBigInteger('teacherID');
             $table->unsignedBigInteger('strandID');
             $table->timestamps();
-
             $table->foreign('gradeLevelID')->references('gradeLevelID')->on('grade_levels')->onDelete('cascade');
-            $table->foreign('teacherID')->references('teacherID')->on('teachers')->onDelete('cascade');
             $table->foreign('strandID')->references('strandID')->on('strands')->onDelete('cascade');
         });
     }

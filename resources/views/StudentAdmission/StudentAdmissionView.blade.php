@@ -3,6 +3,8 @@
 @section('title', 'Student Admission')
 
 @section('head')
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
 {{--<style>
     body {
         background-color: #FFFBDA;
@@ -79,73 +81,74 @@
 
         <div class="d-flex justify-content-evenly  gap-3 ">
 
-            <div class="card text-black cardgrade11 " style="width: 300px; background: #FF914D;">
+            <div class="card text-black cardgrade11 justify-content-center align-items-center" style="width: 300px; background: #FF914D;">
                 <p>Grade 11 Total:</p>
+                <!-- button dapat ni -->
                 <h3>4</h3>
             </div>
-            <div class="card text-black " style="width: 300px; background: #FF3131;">
+            <div class="card text-black justify-content-center align-items-center" style="width: 300px; background: #FF3131;">
                 <p>Grade 12 Total:</p>
+                <!-- pati pud ni -->
                 <h3>5</h3>
             </div>
 
         </div>
 
-        <div class="table-container mt-4">
-            <table class="table table-bordered text-center">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Grade Level</th>
-                        <th>Strand</th>
-                        <th>Year Level</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>0001</td>
-                        <td>Castillo, Julian</td>
-                        <td>12</td>
-                        <td>ABM</td>
-                        <td>2025-2026</td>
-                        <td><span class="checkmark">&#10004;</span> <span class="cross">&#10008;</span></td>
-                    </tr>
-                    <tr>
-                        <td>0002</td>
-                        <td>Harrison, Michael Reginald</td>
-                        <td>12</td>
-                        <td>STEM</td>
-                        <td>2025-2026</td>
-                        <td><span class="checkmark">&#10004;</span> <span class="cross">&#10008;</span></td>
-                    </tr>
-                    <tr>
-                        <td>0003</td>
-                        <td>Mullner, Alex</td>
-                        <td>12</td>
-                        <td>HUMSS</td>
-                        <td>2025-2026</td>
-                        <td><span class="checkmark">&#10004;</span> <span class="cross">&#10008;</span></td>
-                    </tr>
-                    <tr>
-                        <td>0004</td>
-                        <td>Dean, James</td>
-                        <td>12</td>
-                        <td>HUMSS</td>
-                        <td>2025-2026</td>
-                        <td><span class="checkmark">&#10004;</span> <span class="cross">&#10008;</span></td>
-                    </tr>
-                    <tr>
-                        <td>0005</td>
-                        <td>Padao, Vaness Ken</td>
-                        <td>12</td>
-                        <td>HUMSS</td>
-                        <td>2025-2026</td>
-                        <td><span class="checkmark">&#10004;</span> <span class="cross">&#10008;</span></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+        <table class="table table-striped table-hover table-bordered mt-4 align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Grade Level</th>
+                    <th>Strand</th>
+                    <th>Year Level</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>0001</td>
+                    <td>Castillo, Julian</td>
+                    <td>12</td>
+                    <td>ABM</td>
+                    <td>2025-2026</td>
+                    <td><button class="btn btn-success rounded-pill"><i class="bi bi-check-circle"></i></button> <button class="btn btn-danger rounded-pill"><i class="bi bi-x-circle"></i></button></td>
+                </tr>
+                <tr>
+                    <td>0002</td>
+                    <td>Harrison, Michael Reginald</td>
+                    <td>12</td>
+                    <td>STEM</td>
+                    <td>2025-2026</td>
+                    <td><button class="btn btn-success rounded-pill"><i class="bi bi-check-circle"></i></button> <button class="btn btn-danger rounded-pill"><i class="bi bi-x-circle"></i></button></td>
+                </tr>
+                <tr>
+                    <td>0003</td>
+                    <td>Mullner, Alex</td>
+                    <td>12</td>
+                    <td>HUMSS</td>
+                    <td>2025-2026</td>
+                    <td><button class="btn btn-success rounded-pill"><i class="bi bi-check-circle"></i></button> <button class="btn btn-danger rounded-pill"><i class="bi bi-x-circle"></i></button></td>
+                </tr>
+                <tr>
+                    <td>0004</td>
+                    <td>Dean, James</td>
+                    <td>12</td>
+                    <td>HUMSS</td>
+                    <td>2025-2026</td>
+                    <td><button class="btn btn-success rounded-pill"><i class="bi bi-check-circle"></i></button> <button class="btn btn-danger rounded-pill"><i class="bi bi-x-circle"></i></button></td>
+                </tr>
+                <tr>
+                    <td>0005</td>
+                    <td>Padao, Vaness Ken</td>
+                    <td>12</td>
+                    <td>HUMSS</td>
+                    <td>2025-2026</td>
+                    <td><button class="btn btn-success rounded-pill"><i class="bi bi-check-circle"></i></button> <button class="btn btn-danger rounded-pill"><i class="bi bi-x-circle"></i></button></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
+</div>
 </div>
 @endsection

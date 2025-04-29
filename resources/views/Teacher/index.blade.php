@@ -24,12 +24,13 @@
             </div>
             @endif
             <a href="{{ route('teachers.create') }}" class="btn btn-primary mb-3">Add Teacher</a>
-            <table class="table table-bordered">
-                <thead>
+            <table class="table table-striped table-hover table-bordered mt-4 align-middle">
+                <thead class="table-dark">
                     <tr>
                         <th>ID</th>
                         <th>Name</th>
                         <th>Specialization</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -53,4 +54,6 @@
 
         </div>
     </div>
-    @endsection
+</div>
+
+@endsection

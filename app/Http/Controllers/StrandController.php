@@ -13,8 +13,10 @@ class StrandController extends Controller
      */
     public function index()
     {
-        $strands = Strand::all();
-        return view('Strand.index', compact('strands'));
+        $strands = Strand::with('track')->get(); // Get all strands with related track
+        $tracks = Track::all(); // Also get all tracks for the dropdown in the modal
+
+        return view('Strand.index', compact('strands', 'tracks'));
     }
 
     /**

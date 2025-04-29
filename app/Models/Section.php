@@ -14,21 +14,21 @@ class Section extends Model
         'sectionName',
         'gradeLevelID',
         'strandID',
+        'room'
     ];
 
     public function students()
     {
         return $this->hasMany(Student::class);
     }
-
     public function gradeLevel()
     {
-        return $this->belongsTo(GradeLevel::class, 'gradeLevelID');
+        return $this->belongsTo(GradeLevel::class, 'gradeLevelID', 'gradeLevelID');
     }
 
     public function strand()
     {
-        return $this->belongsTo(Strand::class, 'strandID');
+        return $this->belongsTo(Strand::class, 'strandID', 'strandID');
     }
 
     public function enrollments()

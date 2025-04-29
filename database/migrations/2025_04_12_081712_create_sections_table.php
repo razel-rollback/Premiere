@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('sections', function (Blueprint $table) {
             $table->id('sectionID');
             $table->string('sectionName');
+            $table->string('room')->unique();
             $table->unsignedBigInteger('gradeLevelID');
             $table->unsignedBigInteger('strandID');
             $table->timestamps();

@@ -86,7 +86,6 @@ class GradeController extends Controller
             return redirect()->route('gradelevels.index')->with('error', 'Cannot delete this Grade level as it has associated sections.');
         }
 
-
         // Delete the grade level if no students are associated
         $gradelevel->delete();
 

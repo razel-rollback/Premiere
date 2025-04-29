@@ -12,8 +12,8 @@
 
 </head>
 
-<body>
-    <nav class="navbar navbar-light">
+<body style="background-color:rgb(235, 245, 255);">
+    <!-- <nav class="navbar navbar-light">
         <div class="sidebar">
             <h2>Menu</h2>
             <div class="justify-content-center align-items-center mb-4">
@@ -26,17 +26,110 @@
             <a href="{{ route('route.subject') }}">Subjects</a>
             <a href="{{ route('strands.index') }}">Strands</a>
             <a href="{{ route('tracks.index') }}">Tracks</a>
-            <a href="{{ route('gradelevels.index') }}">Grade Level</a>
             <a href="{{ route('teachers.index') }}">Teacher</a>
+            <a href="{{ route('gradelevels.index') }}">Grade Level</a>
+            <a href="{{ route('sections.index') }}">Section </a>
         </div>
-    </nav>
+    </nav> -->
+
+    <style>
+        body {
+            margin: 0;
+        }
+
+        .sidebar {
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 250px;
+            background-color: rgb(31, 34, 38);
+            color: white;
+            padding-top: 20px;
+            box-shadow: 4px 0px 15px rgba(0, 0, 0, 0.1);
+            /* Customize the shadow */
+
+        }
+
+        .sidebar a {
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .sidebar a:hover {
+            background-color: #575757;
+        }
+
+        .content {
+            margin-left: 250px;
+            padding: 20px;
+        }
+
+        .sidebar a.active {
+            background: url('../images/school-building.png') center center / cover no-repeat;
+            /* Change this to your desired active color */
+            color: #FFFFFF;
+            text-shadow: 1px 1px 0px black, 0px 1px 0px black, -1px -1px 0px black, -1px 1px 0px black, 1px -1px 0px black;
+            font-weight: bold;
+        }
+
+        .sidebar a:hover {
+            background-color: #575757;
+            color: white;
+        }
+    </style>
+    </head>
+
+    <body>
+
+        <div class="sidebar">
+            <div class="d-flex justify-content-center align-items-center">
+                <div class="me-2">
+                    <img src="{{ asset('images/Premire.png') }}" alt="Logo" class="img-fluid rounded-circle" width="50">
+                </div>
+                <div>
+                    <h4 class="mb-0">PREMIERE</h4>
+                </div>
+            </div>
+            <a href="{{ route('route.dashboard') }}" class="{{ request()->routeIs('route.dashboard') ? 'active' : '' }}">Dashboard</a>
+            <div class="accordion" id="accordionSidebar">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button style="background-color: #343a40; color:white;" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseItems" aria-expanded="false" aria-controls="collapseItems">
+                            Manage
+                        </button>
+                    </h2>
+                    <div id="collapseItems" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionSidebar">
+                        <div class="accordion-body" style="background-color: #343a40;">
+                            <a href="{{route('route.student.admission') }}" class="{{ request()->routeIs('route.student.admission') ? 'active' : '' }}">Student Admission</a>
+                            <a href="{{route('route.enrolled.student') }}" class="{{ request()->routeIs('route.admitted.students') ? 'active' : '' }}">Admitted Students</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a href="{{ route('route.subject') }}" class="{{ request()->routeIs('route.subject') ? 'active' : '' }}">Subjects</a>
+            <a href="{{ route('strands.index') }}" class="{{ request()->routeIs('strands.index') ? 'active' : '' }}">Strands</a>
+            <a href="{{ route('tracks.index') }}" class="{{ request()->routeIs('tracks.index') ? 'active' : '' }}">Tracks</a>
+            <a href="{{ route('teachers.index') }}" class="{{ request()->routeIs('teachers.index') ? 'active' : '' }}">Teacher</a>
+            <a href="{{ route('gradelevels.index') }}" class="{{ request()->routeIs('gradelevels.index') ? 'active' : '' }}">Grade Level</a>
+            <a href="{{ route('sections.index') }}" class="{{ request()->routeIs('sections.index') ? 'active' : '' }}">Section</a>
+            <a href="{{ route('schedules.index') }}" class="{{ request()->routeIs('schedules.index') ? 'active' : '' }}">Schedule</a>
+
+            <a href="{{ route('home.index') }}" class="btn btn-primary position-absolute bottom-0 start-50 translate-middle-x mb-3 rounded-pill">
+                Log-out
+            </a>
+        </div>
 
 
-    @yield('content')
+        <div class="content">
+            @yield('content')
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    </body>
 
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-</body>
 
 </html>
