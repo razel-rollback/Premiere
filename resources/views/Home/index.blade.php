@@ -57,7 +57,7 @@
         </div>
 
         <div class="admin">
-            <a href="{{route('route.admin.login')}}">Admin Log-in</a>
+            <a href="{{route('route.admin.login.form')}}">Admin Log-in</a>
         </div>
 
         <div class="footer-block">

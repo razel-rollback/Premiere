@@ -67,4 +67,5 @@ Route::resource('tracks', TrackController::class);
 
 Route::get('/Student_Admission', [StudentAdmissionController::class, 'index'])->name('route.student.admission');
 Route::get('/enrolled-students', [EnrolledStudentController::class, 'index'])->name('route.enrolled.student');
-Route::get('/admin/login', [AdminLogInController::class, 'login'])->name('route.admin.login');
+Route::get('/admin/login', [AdminLogInController::class, 'login'])->name('route.admin.login.form');
+Route::post('/admin/login', [AdminLogInController::class, 'login'])->name('admin.login');
