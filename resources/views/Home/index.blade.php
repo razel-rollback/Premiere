@@ -22,6 +22,7 @@
                 <span>PREMIERE</span>
             </div>
             <nav>
+                <a href="{{ route('home.index') }}">Home</a>
                 <a href="{{ route('home.about') }}">About</a>
                 <a href="{{ route('home.about') }}">Programs</a>
                 <a href="{{ route('home.about') }}">Contact Us</a>

@@ -3,6 +3,57 @@
 
 @section('head')
 <style>
+    .navbar .logo {
+        align-items: center;
+    }
+
+    .navbar .logo img {
+        height: 50px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    header .logo {
+        display: flex;
+        align-items: center;
+    }
+
+    header .logo img {
+        height: 40px;
+        margin-right: 10px;
+    }
+
+    header nav a {
+        color: white;
+        text-decoration: none;
+        margin: 0 15px;
+        font-weight: bold;
+    }
+
+
+    body .navbar {
+        background-color: rgba(26, 26, 26, 0.8);
+        color: #D4AF37;
+        padding: 20px 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        backdrop-filter: blur(6px);
+        z-index: 10000;
+        display: flex;
+        align-items:
+            center;
+        justify-content:
+            space-between;
+        padding: 10px 20px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        transition: background-color 0.3s ease;
+    }
+
     body {
         margin: 0;
         padding: 0;
@@ -113,6 +164,20 @@
 @endsection
 
 @section('content')
+<header>
+    <div class="navbar">
+
+        <div class="logo">
+            <img src="{{ asset('images/Premire.png') }}"
+                alt="Logo" class="img-fluid rounded-circle"
+                width="50">
+            <span>PREMIERE</span>
+        </div>
+        <nav>
+            <a href="{{route('home.index')}}"> Home</a>
+        </nav>
+    </div>
+</header>
 <div class="admin-login-container">
     <div class="admin-logo">
         <img src="{{ asset('images/Premire.png') }}" alt="School Logo">
