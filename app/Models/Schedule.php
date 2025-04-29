@@ -7,31 +7,26 @@ use Illuminate\Database\Eloquent\Model;
 
 class Schedule extends Model
 {
-    use HasFactory;
-
     protected $primaryKey = 'scheduleID';
-
     protected $fillable = [
         'subjectID',
         'sectionID',
         'teacherID',
-        'timeStart',
-        'timeEnd',
-        'RoomNum',
+        'timeSlot',
     ];
 
     public function subject()
     {
-        return $this->belongsTo(Subject::class, 'subjectID');
+        return $this->belongsTo(Subject::class, 'subjectID', 'subjectID');
     }
 
     public function section()
     {
-        return $this->belongsTo(Section::class, 'sectionID');
+        return $this->belongsTo(Section::class, 'sectionID', 'sectionID');
     }
 
     public function teacher()
     {
-        return $this->belongsTo(Teacher::class, 'teacherID');
+        return $this->belongsTo(Teacher::class, 'teacherID', 'teacherID');
     }
 }

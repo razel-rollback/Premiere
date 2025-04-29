@@ -30,6 +30,7 @@
                 <th>Section Name</th>
                 <th>Grade Level</th>
                 <th>Strand</th>
+                <th>Room</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -41,6 +42,7 @@
                 <td>{{ $section->sectionName }}</td>
                 <td>{{ $section->gradeLevel->gradeLevelName }}</td>
                 <td>{{ $section->strand->strandName }}</td>
+                <td>{{ $section->room }}</td>
                 <td>
                     @include('Section.edit', ['section' => $section])
                     <a class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editsectionModal{{ $section->sectionID }}">Edit</a>

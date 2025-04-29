@@ -14,6 +14,7 @@ class Section extends Model
         'sectionName',
         'gradeLevelID',
         'strandID',
+        'room'
     ];
 
     public function students()

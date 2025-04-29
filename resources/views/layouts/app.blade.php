@@ -115,6 +115,7 @@
             <a href="{{ route('teachers.index') }}" class="{{ request()->routeIs('teachers.index') ? 'active' : '' }}">Teacher</a>
             <a href="{{ route('gradelevels.index') }}" class="{{ request()->routeIs('gradelevels.index') ? 'active' : '' }}">Grade Level</a>
             <a href="{{ route('sections.index') }}" class="{{ request()->routeIs('sections.index') ? 'active' : '' }}">Section</a>
+            <a href="{{ route('schedules.index') }}" class="{{ request()->routeIs('schedules.index') ? 'active' : '' }}">Schedule</a>
 
             <a href="{{ route('home.index') }}" class="btn btn-primary position-absolute bottom-0 start-50 translate-middle-x mb-3 rounded-pill">
                 Log-out
