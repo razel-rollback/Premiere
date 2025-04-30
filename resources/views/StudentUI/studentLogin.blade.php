@@ -3,29 +3,28 @@
 @section('head')
 <style>
     body {
-        margin: 0;
         padding: 0;
         min-height: 100vh;
         background: linear-gradient(rgba(34, 34, 34, 0.6), rgba(34, 34, 34, 0.6)),
             url('/images/school-building.png') center/cover no-repeat;
+
         display: flex;
         align-items: center;
         justify-content: center;
         font-family: 'Segoe UI', Arial, sans-serif;
     }
 
-    .contact-container {
+    .login-container {
         background: rgba(26, 26, 26, 0.90);
         padding: 40px;
         border-radius: 18px;
         box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
         width: 100%;
-        max-width: 500px;
-        color: white;
+        max-width: 400px;
         text-align: center;
     }
 
-    .contact-title {
+    .login-title {
         color: #D4AF37;
         font-size: 2rem;
         margin-bottom: 30px;
@@ -44,9 +43,8 @@
         font-weight: 500;
     }
 
-    .form-group input,
-    .form-group textarea {
-        width: 100%;
+    .form-group input {
+        width: 91%;
         padding: 12px 16px;
         border: 1px solid #444;
         border-radius: 8px;
@@ -54,16 +52,14 @@
         color: #fff;
         font-size: 1rem;
         outline: none;
-        resize: none;
     }
 
-    .form-group input:focus,
-    .form-group textarea:focus {
+    .form-group input:focus {
         border-color: #D4AF37;
         box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.3);
     }
 
-    .contact-btn {
+    .login-btn {
         width: 100%;
         padding: 14px;
         background: #D4AF37;
@@ -77,33 +73,42 @@
         transition: all 0.3s ease;
     }
 
-    .contact-btn:hover {
+    .login-btn:hover {
         background: #e8c352;
+    }
+
+    .forgot-password {
+        display: block;
+        margin-top: 20px;
+        color: #f7df75;
+        text-decoration: none;
+        font-size: 0.9rem;
+    }
+
+    .forgot-password:hover {
+        text-decoration: underline;
     }
 </style>
 @endsection
 
 @section('content')
-<div class="contact-container">
-    <h1 class="contact-title">Contact Us</h1>
+<div class="login-container">
+    <h1 class="login-title">Student Login</h1>
 
     <form>
         <div class="form-group">
-            <label for="name">Full Name</label>
-            <input type="text" id="name" name="name" placeholder="Your full name">
+            <label for="student-id">Student ID</label>
+            <input type="text" id="student-id" name="student_id" placeholder="Enter your student ID">
         </div>
 
         <div class="form-group">
-            <label for="email">Email Address</label>
-            <input type="email" id="email" name="email" placeholder="Your email address">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Enter your password">
         </div>
 
-        <div class="form-group">
-            <label for="message">Your Message</label>
-            <textarea id="message" name="message" rows="5" placeholder="Write your message here..."></textarea>
-        </div>
+        <button type="submit" class="login-btn">Login</button>
 
-        <button type="submit" class="contact-btn">Send Message</button>
+        <a href="#" class="forgot-password">Forgot Password?</a>
     </form>
 </div>
 @endsection

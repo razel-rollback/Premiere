@@ -16,9 +16,6 @@
                 @endforeach
             </select>
         </div>
-
-        <button type="button" id="confirmSectionButton" class="btn btn-primary mt-3">Confirm Section Schedule</button>
-
         <div class="mt-4">
             <h4>Section Schedule</h4>
             <table class="table table-bordered">
@@ -28,6 +25,7 @@
                         <th>Teacher</th>
                         <th>Room</th>
                         <th>Time Slot</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody id="scheduleTableBody">
@@ -87,44 +85,79 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
-    document.getElementById('confirmSectionButton').addEventListener('click', function() {
-        const sectionID = document.getElementById('sectionID').value;
-        const scheduleTableBody = document.getElementById('scheduleTableBody');
+    document.getElementById('sectionID').addEventListener('change', function() {
+        var sectionID = this.value;
 
-        scheduleTableBody.innerHTML = '<tr><td colspan="4" class="text-center">Loading...</td></tr>';
-
+        // Send sectionID to the server
+        fetch(`/debug-section/${sectionID}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Server response:', data); // Logs the server's response
+            })
+            .catch(error => console.error('Error fetching section data:', error));
+        // Check if a section is selected
         if (sectionID) {
-            fetch(`/api/section-schedules/${sectionID}`)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    return response.json();
-                })
+            // Fetch schedule data via AJAX (you will need to create the appropriate route and controller)
+            fetch(`/schedules/getSchedule/${sectionID}`)
+                .then(response => response.json())
                 .then(data => {
-                    if (Array.isArray(data) && data.length > 0) {
-                        scheduleTableBody.innerHTML = '';
+                    var tableBody = document.getElementById('scheduleTableBody');
+
+                    // Clear the table body first
+                    tableBody.innerHTML = '';
+
+                    if (data.length > 0) {
+                        // Iterate over the data and populate the table
                         data.forEach(schedule => {
-                            const row = `
-                        <tr>
-                            <td>${schedule.subject ? schedule.subject.subjectName : 'N/A'}</td>
-                            <td>${schedule.teacher ? schedule.teacher.teacherName : 'N/A'}</td>
-                            <td>${schedule.RoomNum || 'N/A'}</td>
-                            <td>${schedule.timeSlot || 'N/A'}</td>
-                        </tr>
-                    `;
-                            scheduleTableBody.innerHTML += row;
+                            var row = document.createElement('tr');
+
+                            var subjectCell = document.createElement('td');
+                            subjectCell.textContent = schedule.subjectName;
+                            row.appendChild(subjectCell);
+
+                            var teacherCell = document.createElement('td');
+                            teacherCell.textContent = schedule.teacherName;
+                            row.appendChild(teacherCell);
+
+                            var roomCell = document.createElement('td');
+                            roomCell.textContent = schedule.room;
+                            row.appendChild(roomCell);
+
+                            var timeSlotCell = document.createElement('td');
+                            timeSlotCell.textContent = schedule.timeSlot;
+                            row.appendChild(timeSlotCell);
+
+                            var actionCell = document.createElement('td');
+                            var actionButton = document.createElement('button');
+                            actionButton.classList.add('btn', 'btn-danger');
+                            actionButton.textContent = 'Delete';
+                            // Implement deletion logic if needed
+                            actionCell.appendChild(actionButton);
+                            row.appendChild(actionCell);
+
+                            tableBody.appendChild(row);
                         });
                     } else {
-                        scheduleTableBody.innerHTML = '<tr><td colspan="4" class="text-center">No schedules available for this section.</td></tr>';
+                        // No schedule available for the selected section
+                        var noScheduleRow = document.createElement('tr');
+                        var noScheduleCell = document.createElement('td');
+                        noScheduleCell.colSpan = 5;
+                        noScheduleCell.textContent = 'No schedule available for this section.';
+                        noScheduleRow.appendChild(noScheduleCell);
+                        tableBody.appendChild(noScheduleRow);
                     }
                 })
                 .catch(error => {
-                    console.error('Error fetching schedules:', error);
-                    scheduleTableBody.innerHTML = '<tr><td colspan="4" class="text-center">Failed to load schedules. Please try again.</td></tr>';
+                    console.error('Error fetching schedule data:', error);
                 });
         } else {
-            scheduleTableBody.innerHTML = '<tr><td colspan="4" class="text-center">Please select a section first.</td></tr>';
+            // If no section is selected, reset the table
+            document.getElementById('scheduleTableBody').innerHTML = '<tr><td colspan="4" class="text-center">Select a section and confirm to view its schedule.</td></tr>';
         }
     });
 </script>

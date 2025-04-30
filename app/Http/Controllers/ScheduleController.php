@@ -48,18 +48,10 @@ class ScheduleController extends Controller
         return redirect()->route('schedules.create')->with('success', 'Schedule created successfully.');
     }
 
-
-    public function getSubjectsByStrand($strandID)
-    {
-        $subjects = Subject::where('strandID', $strandID)->get();
-        return response()->json($subjects);
-    }
-
-
-    public function getSectionSchedules($sectionID)
+    public function getSchedule($sectionID)
     {
         $schedules = Schedule::where('sectionID', $sectionID)
-            ->with(['subject', 'teacher']) // eager load the relationships
+            ->with('subject', 'teacher') // Assuming you have relationships set up
             ->get();
 
         return response()->json($schedules);

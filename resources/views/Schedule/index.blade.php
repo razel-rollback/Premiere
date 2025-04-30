@@ -4,7 +4,7 @@
 <div class="container">
     <h1>Schedules</h1>
     <!-- Link to create a new schedule -->
-    <a href="{{ route('schedules.create') }}" class="btn btn-success">Create Schedule</a>
+    <a href="{{ route('schedules.create') }}" class="btn btn-success">Manage Schedule</a>
     <!-- Table to display schedules -->
     <table class="table table-striped table-hover table-bordered mt-4 align-middle">
         <thead class="table-dark">
@@ -15,7 +15,6 @@
                 <th>Teacher</th>
                 <th>Time Slot</th>
                 <th>Room</th>
-                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -27,15 +26,14 @@
                 <td>{{ $schedule->teacher->teacherName }}</td>
                 <td>{{ $schedule->timeSlot }}</td>
                 <td>{{ $schedule->section->room }}</td>
-                <td>
-                    <!-- Add actions like edit or delete if needed -->
+                <!-- <td>
                     <a href="{{ route('schedules.edit', $schedule->scheduleID) }}" class="btn btn-sm btn-warning">Edit</a>
                     <form action="{{ route('schedules.destroy', $schedule->scheduleID) }}" method="POST" style="display:inline;">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-sm btn-danger">Delete</button>
                     </form>
-                </td>
+                </td> -->
             </tr>
             @endforeach
         </tbody>

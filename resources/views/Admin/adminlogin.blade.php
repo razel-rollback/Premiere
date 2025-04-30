@@ -58,8 +58,8 @@
         margin: 0;
         padding: 0;
         min-height: 100vh;
-        background: linear-gradient(rgba(34, 34, 34, 0.85),
-            rgba(34, 34, 34, 0.85)),
+        background: linear-gradient(rgba(34, 34, 34, 0.80),
+            rgba(34, 34, 34, 0.80)),
         url('{{ asset("images/school-building.png") }}') center/cover no-repeat;
         display: flex;
         align-items: center;
@@ -174,7 +174,13 @@
             <span>PREMIERE</span>
         </div>
         <nav>
-            <a href="{{route('home.index')}}"> Home</a>
+            <a href="{{ route('home.index') }}">Home</a>
+            <a href="{{ route('student.login') }}">Log in</a>
+            <a href="{{ route('home.about') }}">About</a>
+            <a href="{{ route('home.about') }}">Programs</a>
+            <a href="{{ route('home.about') }}">Contact Us</a>
+            <a href="{{ route('admin.login') }}">Admin</a>
+
         </nav>
     </div>
 </header>
@@ -183,7 +189,7 @@
         <img src="{{ asset('images/Premire.png') }}" alt="School Logo">
     </div>
     <h1 class="admin-login-title">ADMIN PORTAL</h1>
-    <form class="admin-login-form" method="POST" action="{{ route('admin.login') }}">
+    <form class="admin-login-form" method="POST" action="{{ route('admin.authenticate') }}">
         @csrf
         @if(session('error'))
         <div class="error">{{ session('error') }}</div>

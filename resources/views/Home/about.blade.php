@@ -1,10 +1,9 @@
-@extends('layouts.head')
+@extends('layouts.home')
 @section('title', 'About Us')
 
 @section('head')
-@include('Home.css')
 <style>
-    /* Consistent About Page Styling */
+    /* About Page Styling */
     #about {
         position: relative;
         background: url('/images/school-building.png') center center / cover no-repeat;
@@ -113,22 +112,6 @@
 
 @section('content')
 
-<!-- Navbar (consistent with home page) -->
-<header>
-    <div class="navbar">
-        <div class="logo">
-            <img src="{{ asset('images/Premire.png') }}" alt="Logo">
-            <span>PREMIERE</span>
-        </div>
-        <nav>
-            <a href="{{ route('home.index') }}">Home</a>
-            <a href="{{ route('home.about') }}">About</a>
-            <a href="#">Programs</a>
-            <a href="#">Contact Us</a>
-        </nav>
-    </div>
-</header>
-
 <!-- About Section -->
 <section id="about">
     <div class="about-content">
@@ -159,7 +142,7 @@
     </div>
 </section>
 
-<!-- Footer (consistent with home page) -->
+<!-- Footer -->
 <div class="footer-block">
     <div class="left">© 2025 Premiere SHS. All Rights Reserved.</div>
 </div>

@@ -22,7 +22,7 @@
     </div>
     @endif
     <!-- <a href="{{ route('tracks.create') }}" class="btn btn-primary btn-md"> -->
-    <a href="#"> Add track</a>
+    <a href="#" class="btn btn-primary btn-md"> Add track</a>
     <table class="table table-striped table-hover table-bordered mt-4 align-middle">
         <thead class="table-dark">
             <tr>
