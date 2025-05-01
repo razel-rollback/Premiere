@@ -14,7 +14,10 @@ class Schedule extends Model
         'teacherID',
         'timeSlot',
     ];
-
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
     public function subject()
     {
         return $this->belongsTo(Subject::class, 'subjectID', 'subjectID');

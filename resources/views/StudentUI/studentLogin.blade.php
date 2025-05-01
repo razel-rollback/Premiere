@@ -93,7 +93,7 @@
 
 @section('content')
 <div class="login-container">
-    <h1 class="login-title">Student Login</h1>
+    <h1 class="login-title">Student Portal</h1>
 
     <form>
         <div class="form-group">

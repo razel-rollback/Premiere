@@ -14,7 +14,10 @@ class Register extends Model
         'studentID',
         'registerStatus',
     ];
-
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
     public function student()
     {
         return $this->belongsTo(Student::class, 'studentID');

@@ -28,6 +28,10 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::table('subjects', function (Blueprint $table) {
+            $table->dropForeign(['gradeLevelID']); // Drop foreign key in referencing table first
+            $table->dropForeign(['strandID']); // Drop foreign key in referencing table first
+        });
         Schema::dropIfExists('subjects');
     }
 };

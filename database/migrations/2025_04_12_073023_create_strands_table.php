@@ -26,6 +26,9 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::table('strands', function (Blueprint $table) {
+            $table->dropForeign(['trackID']); // Drop foreign key in referencing table first
+        });
         Schema::dropIfExists('strands');
     }
 };

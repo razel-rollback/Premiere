@@ -8,6 +8,14 @@ use Illuminate\Http\Request;
 
 class StrandController extends Controller
 {
+    public function getStrandsByTrack($trackID)
+    {
+        // Fetch strands based on the track ID
+        $strands = Strand::where('trackID', $trackID)->get();
+
+        // Return the strands as JSON
+        return response()->json($strands);
+    }
     /**
      * Display a listing of the resource.
      */

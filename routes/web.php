@@ -28,8 +28,9 @@ Route::get('/', [HomeController::class, 'index'])->name('home.index');
 Route::get('/About-Us', [HomeController::class, 'about'])->name('home.about');
 Route::get('/Contact-Us', [HomeController::class, 'contact'])->name('home.contact');
 Route::get('/Programs', [HomeController::class, 'program'])->name('home.program');
-Route::get('/Register', [RegisterController::class, 'index'])->name('route.register');
 
+Route::get('/Register', [RegisterController::class, 'index'])->name('route.register');
+Route::post('/Register', [RegisterController::class, 'store'])->name('register.store');
 
 Route::get('/admin/login', [AdminLogInController::class, 'login'])->name('admin.login');
 Route::post('/admin/login', [AdminLogInController::class, 'authenticate'])->name('admin.authenticate');
@@ -40,14 +41,11 @@ Route::post('/student/login', [StudentLogInController::class, 'authenticate'])->
 Route::post('/student/logout', [StudentLogInController::class, 'logout'])->name('student.logout');
 
 
-//makita sa register (next)
-Route::get('/register/guardian', [RegisterController::class, 'guardian'])->name('route.register-guardian'); //
+
+
+
+// Dashboard for summary analytics and the reports feature to be added
 Route::get('/Dashboard', [DashboardController::class, 'index'])->name('route.dashboard'); //walay pulos?
-
-
-Route::get('/Subject', [SubjectController::class, 'index'])->name('route.subject');
-
-
 
 
 
@@ -68,6 +66,7 @@ Route::put('/Schedule/{schedules}', [TeacherController::class, 'update'])->name(
 Route::delete('/Schedule/{schedules}', [TeacherController::class, 'destroy'])->name('schedules.destroy');
 Route::get('/schedules/getSchedule/{sectionID}', [ScheduleController::class, 'getSchedule']);
 
+// need to impri
 Route::get('/Teachers', [TeacherController::class, 'index'])->name('teachers.index');
 Route::get('/Teachers/create', [TeacherController::class, 'create'])->name('teachers.create');
 Route::post('/Teachers', [TeacherController::class, 'store'])->name('teachers.store');
@@ -75,15 +74,14 @@ Route::get('/Teachers/{teachers}/edit', [TeacherController::class, 'edit'])->nam
 Route::put('/Teachers/{teachers}', [TeacherController::class, 'update'])->name('teachers.update');
 Route::delete('/Teachers/{teachers}', [TeacherController::class, 'destroy'])->name('teachers.destroy');
 
-
+//to be specified route 
+Route::get('/Subject', [SubjectController::class, 'index'])->name('route.subject');
 Route::resource('subjects', SubjectController::class);
 Route::resource('strands', StrandController::class);
-
 Route::resource('gradelevels', GradeController::class);
 Route::resource('tracks', TrackController::class);
 
+
+//this  route need to be continue
 Route::get('/Student_Admission', [StudentAdmissionController::class, 'index'])->name('route.student.admission');
 Route::get('/enrolled-students', [EnrolledStudentController::class, 'index'])->name('route.enrolled.student');
-Route::get('/debug-section/{sectionID}', function ($sectionID) {
-    return response()->json(['sectionID' => $sectionID]); // Return JSON response
-});

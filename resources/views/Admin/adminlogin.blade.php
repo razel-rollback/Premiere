@@ -1,4 +1,4 @@
-@extends('layouts.head')
+@extends('layouts.home')
 @section('title', 'Admin Login')
 
 @section('head')
@@ -164,26 +164,7 @@
 @endsection
 
 @section('content')
-<header>
-    <div class="navbar">
 
-        <div class="logo">
-            <img src="{{ asset('images/Premire.png') }}"
-                alt="Logo" class="img-fluid rounded-circle"
-                width="50">
-            <span>PREMIERE</span>
-        </div>
-        <nav>
-            <a href="{{ route('home.index') }}">Home</a>
-            <a href="{{ route('student.login') }}">Log in</a>
-            <a href="{{ route('home.about') }}">About</a>
-            <a href="{{ route('home.about') }}">Programs</a>
-            <a href="{{ route('home.about') }}">Contact Us</a>
-            <a href="{{ route('admin.login') }}">Admin</a>
-
-        </nav>
-    </div>
-</header>
 <div class="admin-login-container">
     <div class="admin-logo">
         <img src="{{ asset('images/Premire.png') }}" alt="School Logo">

@@ -9,35 +9,53 @@ class Student extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'studentID';
+    protected $primaryKey = 'studentID'; // Primary key column
 
     protected $fillable = [
         'firstName',
         'middleName',
         'lastName',
-        'address',
+        'suffixName',
         'birthDate',
+        'gender',
+        'address',
+        'contactNumber',
+        'status',
+        'gradeLevelID',
+        'roleID',
+        'strandID',
+        'guardianID',
     ];
+
     protected $hidden = [
         'created_at',
         'updated_at',
     ];
 
+    // Relationships
+    public function guardian()
+    {
+        return $this->belongsTo(Guardian::class, 'guardianID', 'guardianID');
+    }
+    // A student has one register record
     public function register()
     {
         return $this->hasOne(Register::class, 'studentID');
     }
 
+    // A student has many documents
     public function documents()
     {
         return $this->hasMany(StudentDocument::class, 'studentID');
     }
 
+    // A student has many subjects
     public function subjects()
     {
         return $this->hasMany(StudentSubject::class, 'studentID');
     }
 
+    // A student has many enrollments
     public function enrollments()
     {
         return $this->hasMany(Enrollment::class, 'studentID');

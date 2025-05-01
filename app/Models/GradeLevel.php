@@ -16,6 +16,10 @@ class GradeLevel extends Model
         'gradeLevelName',
     ];
 
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
     public function students()
     {
         return $this->hasMany(Student::class, 'gradeLevelID');
