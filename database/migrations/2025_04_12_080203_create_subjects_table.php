@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('subjectName');
             $table->string('subjectType');
             $table->unsignedBigInteger('gradeLevelID');
-            $table->unsignedBigInteger('strandID');
+            $table->unsignedBigInteger('strandID')->nullable();
             $table->timestamps();
             $table->foreign('gradeLevelID')->references('gradeLevelID')->on('grade_levels')->onDelete('cascade');
             $table->foreign('strandID')->references('strandID')->on('strands')->onDelete('cascade');

@@ -51,8 +51,8 @@
         <!-- Strand -->
         <div class="mb-3">
             <label for="strandID" class="form-label">Strand</label>
-            <select class="form-select" id="strandID" name="strandID" required>
-                <option value="" disabled>Select Strand</option>
+            <select class="form-select" id="strandID" name="strandID">
+                <option value="">Select Strand</option>
                 @foreach($strands as $strand)
                 <option value="{{ $strand->strandID }}" {{ old('strandID', $subject->strandID) == $strand->strandID ? 'selected' : '' }}>
                     {{ $strand->strandName }}

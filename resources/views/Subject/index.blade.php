@@ -45,7 +45,7 @@
                         <td>{{ $subject->subjectName }}</td>
                         <td>{{ $subject->subjectType }}</td>
                         <td>{{ $subject->gradeLevel->gradeLevelName }}</td>
-                        <td>{{ $subject->strand->strandName }}</td>
+                        <td>{{ $subject->strand?->strandName ?? 'N/A' }}</td>
                         <td>
                             <a href="{{ route('subjects.edit', $subject->subjectID) }}" class="btn btn-warning">Edit</a>
                             <form action="{{ route('subjects.destroy', $subject->subjectID) }}" method="POST" style="display:inline;">

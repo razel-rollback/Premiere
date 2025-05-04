@@ -117,9 +117,12 @@
             <a href="{{ route('sections.index') }}" class="{{ request()->routeIs('sections.index') ? 'active' : '' }}">Section</a>
             <a href="{{ route('schedules.index') }}" class="{{ request()->routeIs('schedules.index') ? 'active' : '' }}">Schedule</a>
 
-            <a href="{{ route('home.index') }}" class="btn btn-primary position-absolute bottom-0 start-50 translate-middle-x mb-3 rounded-pill">
-                Log-out
-            </a>
+            <form method="POST" action="{{ route('admin.logout') }}" class="position-absolute bottom-0 start-50 translate-middle-x mb-3">
+                @csrf
+                <button type="submit" class="btn btn-primary rounded-pill">
+                    Log-out
+                </button>
+            </form>
         </div>
 
 

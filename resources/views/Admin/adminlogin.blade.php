@@ -172,11 +172,20 @@
     <h1 class="admin-login-title">ADMIN PORTAL</h1>
     <form class="admin-login-form" method="POST" action="{{ route('admin.authenticate') }}">
         @csrf
+        @error('invalid')
+        <div class="error">{{$message }}</div>
+        @enderror
         @if(session('error'))
         <div class="error">{{ session('error') }}</div>
         @endif
-        <input type="text" name="username" placeholder="Username" required autofocus>
-        <input type="password" name="password" placeholder="Password" required>
+        <input type="text" name="username" placeholder="Username" value="{{ old('username') }}" autofocus>
+        @error('username')
+        <div class="error">{{$message }}</div>
+        @enderror
+        <input type="password" name="password" placeholder="Password">
+        @error('password')
+        <div class="error">{{$message }}</div>
+        @enderror
         <button type="submit">LOGIN</button>
     </form>
 </div>

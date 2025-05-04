@@ -7,10 +7,15 @@ use Illuminate\Support\Facades\Auth;
 
 class AdminLogInController extends Controller
 {
+
+    // Show the admin login form
     public function login()
     {
         return view('Admin.adminlogin');
     }
+
+    // Handle the authentication request
+    // AdminLogInController.php
     public function authenticate(Request $request)
     {
         $request->validate([
@@ -19,20 +24,24 @@ class AdminLogInController extends Controller
         ]);
 
         $credentials = $request->only('username', 'password');
-        $credentials['userType'] = 'Admin';
+        $credentials['userType'] = 'admin';
 
         if (Auth::guard('admin')->attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->intended('/dashboard');
+            return redirect()->intended(route('route.dashboard'));
         }
 
-        return back()->withErrors(['username' => 'Invalid admin credentials.']);
+        return back()->withErrors(['invalid' => 'Invalid admin credentials.']);
     }
 
+    // Handle the logout request
     public function logout(Request $request)
     {
+        // Log the admin out
         Auth::guard('admin')->logout();
+        // Invalidate the session
         $request->session()->invalidate();
-        return redirect('/admin/login');
+        // Redirect to the login page
+        return redirect()->route('home.index');
     }
 }
