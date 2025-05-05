@@ -16,6 +16,13 @@
                         <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
+                    <div class="mb-3">
+                        <label for="RoomName" class="form-label">Room Name</label>
+                        <input type="text" class="form-control" id="RoomName" name="room">
+                        @error('room')
+                        <div class="text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
                     <!-- Grade Level -->
                     <div class="mb-3">
                         <label for="gradeLevelID" class="form-label">Grade Level</label>

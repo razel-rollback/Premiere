@@ -13,25 +13,6 @@
 </head>
 
 <body style="background-color:rgb(235, 245, 255);">
-    <!-- <nav class="navbar navbar-light">
-        <div class="sidebar">
-            <h2>Menu</h2>
-            <div class="justify-content-center align-items-center mb-4">
-                <img src="{{ asset('images/Premire.png') }}" alt="Logo" class="img-fluid rounded-circle" width="180">
-            </div>
-            <a href="{{ route('route.dashboard') }}">Dashboard</a>
-            <a href="#">Manage</a>
-            <a href="{{ route('route.student.admission') }}">Student Admission</a>
-            <a href="#">Admitted Students</a>
-            <a href="{{ route('route.subject') }}">Subjects</a>
-            <a href="{{ route('strands.index') }}">Strands</a>
-            <a href="{{ route('tracks.index') }}">Tracks</a>
-            <a href="{{ route('teachers.index') }}">Teacher</a>
-            <a href="{{ route('gradelevels.index') }}">Grade Level</a>
-            <a href="{{ route('sections.index') }}">Section </a>
-        </div>
-    </nav> -->
-
     <style>
         body {
             margin: 0;
@@ -109,7 +90,7 @@
                     </div>
                 </div>
             </div>
-            <a href="{{ route('route.subject') }}" class="{{ request()->routeIs('route.subject') ? 'active' : '' }}">Subjects</a>
+            <a href="{{ route('subjects.index') }}" class="{{ request()->routeIs('subjects.index') ? 'active' : '' }}">Subjects</a>
             <a href="{{ route('strands.index') }}" class="{{ request()->routeIs('strands.index') ? 'active' : '' }}">Strands</a>
             <a href="{{ route('tracks.index') }}" class="{{ request()->routeIs('tracks.index') ? 'active' : '' }}">Tracks</a>
             <a href="{{ route('teachers.index') }}" class="{{ request()->routeIs('teachers.index') ? 'active' : '' }}">Teacher</a>
