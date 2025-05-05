@@ -29,6 +29,13 @@ class RoleSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
+            [
+                'username' => 'student_user1',
+                'password' => Hash::make('studentpassword1'), // Hash the password
+                'userType' => 'student',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
         ]);
     }
 }

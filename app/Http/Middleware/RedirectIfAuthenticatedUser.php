@@ -15,7 +15,7 @@ class RedirectIfAuthenticatedUser
             return redirect()->route('sections.index');
         }
         if (auth()->guard('student')->check()) {
-            //return redirect()->route('sections.index');
+            return redirect()->route('student.profile');
         }
 
         return $next($request);

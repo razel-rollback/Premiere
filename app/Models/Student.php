@@ -32,6 +32,11 @@ class Student extends Model
         'updated_at',
     ];
 
+    public function role()
+    {
+        return $this->belongsTo(Role::class, 'roleID');
+    }
+
     // Relationships
     public function guardian()
     {

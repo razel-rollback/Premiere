@@ -39,10 +39,11 @@ class Role extends Authenticatable
     /**
      * Get the students associated with this role.
      */
-    public function students()
+    public function student()
     {
-        return $this->hasMany(Student::class, 'roleID');
+        return $this->hasOne(Student::class, 'roleID');
     }
+
 
     /**
      * Get the admins associated with this role.

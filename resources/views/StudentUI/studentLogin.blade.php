@@ -94,16 +94,25 @@
 @section('content')
 <div class="login-container">
     <h1 class="login-title">Student Portal</h1>
-
-    <form>
+    <form method="POST" action="{{ route('student.authenticate') }}">
+        @csrf <!-- Add this to include the CSRF token -->
+        @error('invalid')
+        <div class="error" style="color:#FF7F7F">{{$message }}</div>
+        @enderror
         <div class="form-group">
             <label for="student-id">Student ID</label>
-            <input type="text" id="student-id" name="student_id" placeholder="Enter your student ID">
+            <input type="text" id="student-id" name="username" placeholder="Enter your student ID">
+            @error('username')
+            <div class="error" style="color:#FF7F7F">{{ $message }}</div>
+            @enderror
         </div>
 
         <div class="form-group">
             <label for="password">Password</label>
             <input type="password" id="password" name="password" placeholder="Enter your password">
+            @error('password')
+            <div class="error" style="color:#FF7F7F">{{ $message }}</div>
+            @enderror
         </div>
 
         <button type="submit" class="login-btn">Login</button>

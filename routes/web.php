@@ -40,6 +40,7 @@ Route::middleware('guest.user')->group(function () {
 Route::middleware(['auth.custom:student'])->group(function () {
     //
     Route::post('/student/logout', [StudentLogInController::class, 'logout'])->name('student.logout');
+    Route::get('/student/profile', [StudentLogInController::class, 'showProfile'])->name('student.profile');
 });
 
 Route::middleware(['auth.custom:admin'])->group(function () {
