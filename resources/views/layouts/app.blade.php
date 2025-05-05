@@ -71,7 +71,7 @@
                     <img src="{{ asset('images/Premire.png') }}" alt="Logo" class="img-fluid rounded-circle" width="50">
                 </div>
                 <div>
-                    <h4 class="mb-0">PREMIERE</h4>
+                    <h4 class="mb-0 text-white">PREMIERE</h4>
                 </div>
             </div>
             <a href="{{ route('route.dashboard') }}" class="{{ request()->routeIs('route.dashboard') ? 'active' : '' }}">Dashboard</a>
