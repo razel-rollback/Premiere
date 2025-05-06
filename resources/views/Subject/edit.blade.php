@@ -25,8 +25,8 @@
                         <select class="form-select" id="subjectType{{ $subject->subjectID }}" name="subjectType" required>
                             <option value="" disabled>Select Subject Type</option>
                             <option value="Core" {{ old('subjectType', $subject->subjectType) == 'Core' ? 'selected' : '' }}>Core</option>
-                            <option value="Advance" {{ old('subjectType', $subject->subjectType) == 'Advance' ? 'selected' : '' }}>Advance</option>
-                            <option value="Specialize" {{ old('subjectType', $subject->subjectType) == 'Specialize' ? 'selected' : '' }}>Specialize</option>
+                            <option value="Advance" {{ old('subjectType', $subject->subjectType) == 'Advanced' ? 'selected' : '' }}>Advanced</option>
+                            <option value="Specialize" {{ old('subjectType', $subject->subjectType) == 'Specialized' ? 'selected' : '' }}>Specialized</option>
                         </select>
                         @error('subjectType')
                         <div class="text-danger">{{ $message }}</div>

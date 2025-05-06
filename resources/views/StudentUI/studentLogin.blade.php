@@ -148,12 +148,18 @@
         @csrf
         <div class="form-group">
             <label for="student-id">STUDENT ID</label>
-            <input type="text" id="student-id" name="student_id" placeholder="Enter your student ID" required autofocus>
+            <input type="text" id="student-id" name="username" placeholder="Enter your student ID" required autofocus>
+            @error('username')
+            <div class="error-message">{{ $message }}</div>
+            @enderror
         </div>
 
         <div class="form-group">
             <label for="password">PASSWORD</label>
             <input type="password" id="password" name="password" placeholder="Enter your password" required>
+            @error('password')
+            <div class="error-message">{{ $message }}</div>
+            @enderror
         </div>
 
         <button type="submit" class="login-btn">LOGIN</button>

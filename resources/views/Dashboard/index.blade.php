@@ -48,7 +48,6 @@
         margin: 0;
     }
 
-    /* Summary Cards */
     .summary-card {
         border-radius: 12px;
         border: none;
@@ -106,7 +105,6 @@
         background: linear-gradient(135deg, #3a0ca3 0%, #7209b7 100%);
     }
 
-    /* Strand Cards */
     .strand-card {
         border-radius: 12px;
         border: none;
@@ -140,7 +138,6 @@
         margin-bottom: 0;
     }
 
-    /* Chart Container */
     .chart-container {
         background: white;
         border-radius: 12px;
@@ -155,7 +152,6 @@
         color: var(--dark-text);
     }
 
-    /* Responsive Adjustments */
     @media (max-width: 768px) {
         .container {
             padding: 1rem;
@@ -171,10 +167,7 @@
             margin-bottom: 1rem;
         }
 
-        .summary-card .card-text {
-            font-size: 1.5rem;
-        }
-
+        .summary-card .card-text,
         .strand-card .card-text {
             font-size: 1.5rem;
         }
@@ -191,7 +184,6 @@
         <div class="text-muted">Last updated: {{ now()->format('M j, Y g:i A') }}</div>
     </div>
 
-    <!-- Summary Cards -->
     <div class="row mb-4">
         <div class="col-md-4 mb-3">
             <div class="card summary-card bg-primary">
@@ -219,7 +211,6 @@
         </div>
     </div>
 
-    <!-- Strand Breakdown Cards -->
     <h4 class="mb-3">Students by Strand</h4>
     <div class="row">
         @foreach($strandCounts as $strand => $count)
@@ -234,27 +225,30 @@
         @endforeach
     </div>
 
-    <!-- Chart.js Bar Chart -->
-    <div class="chart-container">
+    <!-- <div class="chart-container">
         <h5 class="card-title">Strand Distribution</h5>
         <canvas id="strandChart" height="120"></canvas>
-    </div>
+    </div> -->
 </div>
-
+<!-- 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const ctx = document.getElementById('strandChart').getContext('2d');
+
+        const labels = {
+            !!json_encode(array_keys($strandCounts)) !!
+        };
+        const data = {
+            !!json_encode(array_values($strandCounts)) !!
+        };
+
         const strandChart = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: {
-                    !!json_encode(array_keys($strandCounts)) !!
-                },
+                labels: labels,
                 datasets: [{
                     label: 'Number of Students',
-                    data: {
-                        !!json_encode(array_values($strandCounts)) !!
-                    },
+                    data: data,
                     backgroundColor: [
                         'rgba(67, 97, 238, 0.8)',
                         'rgba(76, 201, 240, 0.8)',
@@ -299,5 +293,5 @@
             }
         });
     });
-</script>
+</script> -->
 @endsection
