@@ -8,7 +8,7 @@
 
 @section('content')
 <div class="container-fluid">
-    <h1>Section</h1>
+    <h1>Schedule</h1>
     @if(session('error'))
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
         {{ session('error') }}
