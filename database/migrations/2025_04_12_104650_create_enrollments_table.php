@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('AcademicYear');
             $table->date('dateEnrolled');
             $table->timestamps();
+            $table->foreign('studentID')->references('studentID')->on('students')->onDelete('cascade');
+            $table->foreign('sectionID')->references('sectionID')->on('sections')->onDelete('cascade');
         });
     }
 
@@ -26,6 +28,10 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::table('enrollments', function (Blueprint $table) {
+            $table->dropForeign(['studentID']); // Drop foreign key in referencing table first
+            $table->dropForeign(['sectionID']); // Drop foreign key in referencing table first
+        });
         Schema::dropIfExists('enrollments');
     }
 };

@@ -16,9 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('subjectID');
             $table->unsignedBigInteger('sectionID');
             $table->unsignedBigInteger('teacherID');
-            $table->string('timeStart');
-            $table->string('timeEnd');
-            $table->string('RoomNum');
+            $table->string('timeSlot');
             $table->timestamps();
             $table->foreign('subjectID')->references('subjectID')->on('subjects')->onDelete('cascade');
             $table->foreign('sectionID')->references('sectionID')->on('sections')->onDelete('cascade');
@@ -31,6 +29,11 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::table('schedules', function (Blueprint $table) {
+            $table->dropForeign(['subjectID']); // Drop foreign key in referencing table first
+            $table->dropForeign(['sectionID']); // Drop foreign key in referencing table first
+            $table->dropForeign(['teacherID']); // Drop foreign key in referencing table first
+        });
         Schema::dropIfExists('schedules');
     }
 };

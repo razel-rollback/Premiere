@@ -39,22 +39,22 @@ class TrackController extends Controller
         return view('Track.edit', compact('track'));
     }
 
-    public function update(Request $request, Track $track)
+    public function update(Request $request, Track $tracks)
     {
         $request->validate([
             'trackName' => 'required|min:3',
         ]);
 
-        $track->update($request->all());
+        $tracks->update($request->all());
         return redirect()->route('tracks.index')->with('success', 'Track updated successfully.');
     }
 
-    public function destroy(Track $track)
+    public function destroy(Track $tracks)
     {
-        if ($track->strands()->exists()) {
+        if ($tracks->strands()->exists()) {
             return redirect()->route('tracks.index')->with('error', 'Cannot delete track with associated strands.');
         }
-        $track->delete();
+        $tracks->delete();
         return redirect()->route('tracks.index')->with('success', 'Track deleted successfully.');
     }
 }

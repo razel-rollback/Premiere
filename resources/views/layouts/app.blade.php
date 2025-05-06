@@ -13,25 +13,6 @@
 </head>
 
 <body style="background-color:rgb(235, 245, 255);">
-    <!-- <nav class="navbar navbar-light">
-        <div class="sidebar">
-            <h2>Menu</h2>
-            <div class="justify-content-center align-items-center mb-4">
-                <img src="{{ asset('images/Premire.png') }}" alt="Logo" class="img-fluid rounded-circle" width="180">
-            </div>
-            <a href="{{ route('route.dashboard') }}">Dashboard</a>
-            <a href="#">Manage</a>
-            <a href="{{ route('route.student.admission') }}">Student Admission</a>
-            <a href="#">Admitted Students</a>
-            <a href="{{ route('route.subject') }}">Subjects</a>
-            <a href="{{ route('strands.index') }}">Strands</a>
-            <a href="{{ route('tracks.index') }}">Tracks</a>
-            <a href="{{ route('teachers.index') }}">Teacher</a>
-            <a href="{{ route('gradelevels.index') }}">Grade Level</a>
-            <a href="{{ route('sections.index') }}">Section </a>
-        </div>
-    </nav> -->
-
     <style>
         body {
             margin: 0;
@@ -90,7 +71,7 @@
                     <img src="{{ asset('images/Premire.png') }}" alt="Logo" class="img-fluid rounded-circle" width="50">
                 </div>
                 <div>
-                    <h4 class="mb-0">PREMIERE</h4>
+                    <h4 class="mb-0 text-white">PREMIERE</h4>
                 </div>
             </div>
             <a href="{{ route('route.dashboard') }}" class="{{ request()->routeIs('route.dashboard') ? 'active' : '' }}">Dashboard</a>
@@ -109,7 +90,7 @@
                     </div>
                 </div>
             </div>
-            <a href="{{ route('route.subject') }}" class="{{ request()->routeIs('route.subject') ? 'active' : '' }}">Subjects</a>
+            <a href="{{ route('subjects.index') }}" class="{{ request()->routeIs('subjects.index') ? 'active' : '' }}">Subjects</a>
             <a href="{{ route('strands.index') }}" class="{{ request()->routeIs('strands.index') ? 'active' : '' }}">Strands</a>
             <a href="{{ route('tracks.index') }}" class="{{ request()->routeIs('tracks.index') ? 'active' : '' }}">Tracks</a>
             <a href="{{ route('teachers.index') }}" class="{{ request()->routeIs('teachers.index') ? 'active' : '' }}">Teacher</a>
@@ -117,10 +98,15 @@
             <a href="{{ route('sections.index') }}" class="{{ request()->routeIs('sections.index') ? 'active' : '' }}">Section</a>
             <a href="{{ route('schedule.index') }}" class="{{ request()->routeIs('schedule.index') ? 'active' : '' }}">Schedules</a>
 
+            <form method="POST" action="{{ route('admin.logout') }}" class="position-absolute bottom-0 start-50 translate-middle-x mb-3">
+                @csrf
+                <button type="submit" class="btn btn-primary rounded-pill">
+                    Log-out
+                </button>
+            </form>
 
-            <a href="{{ route('home.index') }}" class="btn btn-primary position-absolute bottom-0 start-50 translate-middle-x mb-3 rounded-pill">
-                Log-out
-            </a>
+
+
         </div>
 
 

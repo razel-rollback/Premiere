@@ -23,13 +23,18 @@
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             @endif
-            <a href="{{ route('teachers.create') }}" class="btn btn-primary mb-3">Add Teacher</a>
-            <table class="table table-bordered">
-                <thead>
+            @include('Teacher.create')
+            <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#TeacherModal">
+                Add Teacher
+            </button>
+
+            <table class="table table-striped table-hover table-bordered mt-4 align-middle">
+                <thead class="table-dark">
                     <tr>
                         <th>ID</th>
                         <th>Name</th>
                         <th>Specialization</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -39,7 +44,11 @@
                         <td>{{ $teacher->teacherName }}</td>
                         <td>{{ $teacher->specialization }}</td>
                         <td>
-                            <a href="{{ route('teachers.edit', $teacher->teacherID) }}" class="btn btn-warning">Edit</a>
+                            <button type="button" class="btn btn-warning  me-1" data-bs-toggle="modal" data-bs-target="#EditTeacherModal{{ $teacher->teacherID }}">
+                                Edit
+                            </button>
+                            @include('Teacher.edit', ['teacher' => $teacher])
+
                             <form action="{{ route('teachers.destroy', $teacher->teacherID) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')

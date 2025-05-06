@@ -15,7 +15,10 @@ class Strand extends Model
         'strandName',
         'trackID',
     ];
-
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
     public function track()
     {
         return $this->belongsTo(Track::class, 'trackID');

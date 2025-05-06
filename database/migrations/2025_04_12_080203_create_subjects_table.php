@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('subjectName');
             $table->string('subjectType');
             $table->unsignedBigInteger('gradeLevelID');
-            $table->unsignedBigInteger('strandID');
+            $table->unsignedBigInteger('strandID')->nullable();
             $table->timestamps();
             $table->foreign('gradeLevelID')->references('gradeLevelID')->on('grade_levels')->onDelete('cascade');
             $table->foreign('strandID')->references('strandID')->on('strands')->onDelete('cascade');
@@ -28,6 +28,10 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::table('subjects', function (Blueprint $table) {
+            $table->dropForeign(['gradeLevelID']); // Drop foreign key in referencing table first
+            $table->dropForeign(['strandID']); // Drop foreign key in referencing table first
+        });
         Schema::dropIfExists('subjects');
     }
 };

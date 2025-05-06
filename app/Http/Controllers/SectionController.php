@@ -31,10 +31,10 @@ class SectionController extends Controller
      */
     public function create()
     {
-        $gradeLevels = GradeLevel::all(); // Fetch all grade levels
-        $strands = Strand::all(); // Fetch all strands
+        // $gradeLevels = GradeLevel::all(); // Fetch all grade levels
+        // $strands = Strand::all(); // Fetch all strands
 
-        return view('Section.create', compact('gradeLevels', 'strands'));
+        // return view('Section.create', compact('gradeLevels', 'strands'));
     }
 
     /**
@@ -44,8 +44,9 @@ class SectionController extends Controller
     {
         $request->validate([
             'sectionName' => 'required|string|max:255',
-            'gradeLevelID' => 'required|exists:grade_levels,id', // Ensure it exists in the grade_levels table
-            'strandID' => 'required|exists:strands,id', // Ensure it exists in the strands table
+            'gradeLevelID' => 'required|exists:grade_levels,gradeLevelID',
+            'strandID' => 'required|exists:strands,strandID',
+            'room' => 'required|unique:sections,room',
         ]);
 
         try {
@@ -53,11 +54,12 @@ class SectionController extends Controller
                 'sectionName' => $request->sectionName,
                 'gradeLevelID' => $request->gradeLevelID,
                 'strandID' => $request->strandID,
+                'room' => $request->room,
             ]);
 
             return redirect()->route('sections.index')->with('success', 'Section created successfully.');
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Failed to create section. Please try again.');
+            return redirect()->back()->with('error', 'Failed to create section. Error: ' . $e->getMessage());
         }
     }
 
@@ -88,6 +90,7 @@ class SectionController extends Controller
             'sectionName' => 'required|string|max:255',
             'gradeLevelID' => 'required|exists:grade_levels,gradeLevelID',
             'strandID' => 'required|exists:strands,strandID',
+            'room' => 'required|unique:sections,room',
         ]);
 
         try {
@@ -95,6 +98,7 @@ class SectionController extends Controller
                 'sectionName' => $request->sectionName,
                 'gradeLevelID' => $request->gradeLevelID,
                 'strandID' => $request->strandID,
+                'room' => $request->room,
             ]);
 
             return redirect()->route('sections.index')->with('success', 'Section updated successfully.');

@@ -20,7 +20,10 @@ class Payment extends Model
         'paymentDate',
         'paymentStatus',
     ];
-
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
     public function enrollment()
     {
         return $this->belongsTo(Enrollment::class, 'enrollmentID');

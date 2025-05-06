@@ -45,9 +45,12 @@
                         <td>{{ $subject->subjectName }}</td>
                         <td>{{ $subject->subjectType }}</td>
                         <td>{{ $subject->gradeLevel->gradeLevelName }}</td>
-                        <td>{{ $subject->strand->strandName }}</td>
+                        <td>{{ $subject->strand?->strandName ?? 'N/A' }}</td>
                         <td>
-                            <a href="{{ route('subjects.edit', $subject->subjectID) }}" class="btn btn-warning">Edit</a>
+                            <button type="button" class="btn btn-warning btn-sm me-1" data-bs-toggle="modal" data-bs-target="#subjectModal{{ $subject->subjectID }}">
+                                Edit
+                            </button>
+                            @include('Subject.edit', ['subject' => $subject, 'gradeLevels' => $gradeLevels, 'strands' => $strands])
                             <form action="{{ route('subjects.destroy', $subject->subjectID) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')

@@ -1,73 +1,150 @@
-@extends('layouts.head')
+@extends('layouts.home')
 @section('title', 'About Us')
 
 @section('head')
+<style>
+    /* About Page Styling */
+    #about {
+        position: relative;
+        background: url('/images/school-building.png') center center / cover no-repeat;
+        padding: 160px 20px 100px;
+        color: white;
+        overflow: hidden;
+    }
 
-@include('Home.css')
+    #about::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.6);
+        z-index: 1;
+    }
 
+    .about-content {
+        position: relative;
+        z-index: 2;
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 30px;
+        background: rgba(26, 26, 26, 0.7);
+        border-radius: 10px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        animation: fadeSlideUp 1s ease-out;
+        animation-fill-mode: both;
+    }
+
+    .about-content h1 {
+        color: #f7df75;
+        font-size: 2.5rem;
+        margin-bottom: 25px;
+        text-align: center;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    .about-content h2 {
+        color: #f7df75;
+        font-size: 1.8rem;
+        margin: 30px 0 15px;
+        border-bottom: 2px solid #f7df75;
+        padding-bottom: 8px;
+    }
+
+    .about-content p {
+        color: #FFFFFF;
+        font-size: 1.1rem;
+        line-height: 1.8;
+        margin-bottom: 20px;
+    }
+
+    .highlight-box {
+        background: rgba(26, 26, 26, 0.8);
+        border-left: 4px solid #f7df75;
+        padding: 20px;
+        margin: 30px 0;
+        border-radius: 0 8px 8px 0;
+    }
+
+    .highlight-box ul {
+        list-style-type: none;
+        padding-left: 0;
+    }
+
+    .highlight-box li {
+        color: #FFFFFF;
+        margin-bottom: 10px;
+        padding-left: 25px;
+        position: relative;
+        line-height: 1.6;
+    }
+
+    .highlight-box li:before {
+        content: "•";
+        color: #f7df75;
+        font-size: 1.5rem;
+        position: absolute;
+        left: 5px;
+        top: -3px;
+    }
+
+    .schedule-notice {
+        background: rgba(247, 223, 117, 0.15);
+        border: 1px solid rgba(247, 223, 117, 0.3);
+        border-radius: 8px;
+        padding: 20px;
+        margin-top: 40px;
+        text-align: center;
+    }
+
+    .schedule-notice h3 {
+        color: #f7df75;
+        margin-bottom: 10px;
+    }
+
+    .schedule-notice p {
+        font-weight: 500;
+        margin-bottom: 0;
+    }
+</style>
 @endsection
-
-
 
 @section('content')
 
-<!-- Mao ni ang naa sa itaas, ang navbar -->
-<header>
-    <div class="navbar"
-        style="
-        background-color: rgba(26, 26, 26, 0.8);
-        color: #D4AF37;
-        padding: 20px 40px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        backdrop-filter: blur(6px);
-        z-index: 1000;
-        display: flex; 
-        align-items: 
-        center; 
-        justify-content: 
-        space-between; 
-        padding: 10px 20px; 
-        position: fixed;
-                top: 0;
-                left: 0;
-                right: 0;">
+<!-- About Section -->
+<section id="about">
+    <div class="about-content">
+        <h1>Welcome to Premiere SHS!</h1>
+        <h2>Top Grade School Nationwide</h2>
 
-        <div class="logo" style="align-items: center;">
-            <img src="{{ asset('images/Premire.png') }}"
-                alt="Logo" class="img-fluid rounded-circle"
-                width="50" style="height: 50px; border-radius: 50%; object-fit: cover;">
-            <span>PREMIERE</span>
+        <p>Premiere Senior High School offers a comprehensive and dynamic educational program designed to prepare students for higher education and successful careers. Our institution stands as a beacon of academic excellence with specialized programs tailored to student needs.</p>
+
+        <div class="highlight-box">
+            <h2>Our Distinguished Programs</h2>
+            <ul>
+                <li>Academic Excellence Track with 98% college admission rate</li>
+                <li>Technical-Vocational programs with industry partnerships</li>
+                <li>Specialized Arts & Sports development programs</li>
+                <li>Advanced STEM curriculum with modern laboratories</li>
+            </ul>
         </div>
-        <nav>
-            <a href="{{ route('home.about') }}">About</a>
-            <a href="#">Programs</a>
-            <a href="#">Contact Us</a>
-        </nav>
-    </div>
-</header>
 
+        <h2>Our History</h2>
+        <p>Since 2020, Premiere SHS has provided rigorous academic guidance and comprehensive student support services. Our school has grown to become a cornerstone of the community, known for its commitment to educational excellence and student development.</p>
 
-<div style="margin-top: 0px;">
+        <p>Today, Premiere SHS serves as the premier choice for quality secondary education in the region, with state-of-the-art facilities and a dedicated faculty committed to nurturing future leaders.</p>
 
-    <div class="hero">
-
-        <div class="hero-text">
-            <h1>About Us</h1>
-            <p>Welcome to Premiere Senior High School, where excellence meets opportunity. Our school is dedicated to
-                providing a nurturing environment that fosters academic growth and personal development.</p>
-            <p> Established in 2024, Premiere Senior High School was founded with a strong vision to make quality education accessible to all.
-                What started as a humble academic institution with only 60 students and a handful of passionate educators has now evolved into one of the most recognized senior high schools in the region.
-            </p>
-            <p> Premiere SHS offers a comprehensive and dynamic curriculum designed to prepare students for higher education and future careers.
-                Our institution is committed to academic excellence, character development, and holistic growth.
-                With experienced faculty, modern facilities, and a supportive learning environment, students are empowered to reach their full potential and become future leaders.
-            </p>
+        <div class="schedule-notice">
+            <h3>Premiere Schedule</h3>
+            <p>Summer Classes now in session! Enrollment open for all programs.</p>
         </div>
     </div>
+</section>
+
+<!-- Footer -->
+<div class="footer-block">
+    <div class="left">© 2025 Premiere SHS. All Rights Reserved.</div>
 </div>
-
-
 
 @endsection

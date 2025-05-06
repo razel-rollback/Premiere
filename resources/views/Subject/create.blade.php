@@ -26,8 +26,8 @@
                         <select class="form-select" id="subjectType" name="subjectType" required>
                             <option value="" disabled {{ old('subjectType') ? '' : 'selected' }}>Select Subject Type</option>
                             <option value="Core" {{ old('subjectType') == 'Core' ? 'selected' : '' }}>Core</option>
-                            <option value="Advance" {{ old('subjectType') == 'Advance' ? 'selected' : '' }}>Advance</option>
-                            <option value="Specialize" {{ old('subjectType') == 'Specialize' ? 'selected' : '' }}>Specialize</option>
+                            <option value="Advanced" {{ old('subjectType') == 'Advanced' ? 'selected' : '' }}>Advanced</option>
+                            <option value="Specialized" {{ old('subjectType') == 'Specialized' ? 'selected' : '' }}>Specialized</option>
                         </select>
                         @error('subjectType')
                         <div class="text-danger">{{ $message }}</div>
@@ -53,8 +53,8 @@
                     <!-- Strand -->
                     <div class="mb-3">
                         <label for="strandID" class="form-label">Strand</label>
-                        <select class="form-select" id="strandID" name="strandID" required>
-                            <option value="" disabled {{ old('strandID') ? '' : 'selected' }}>Select Strand</option>
+                        <select class="form-select" id="strandID" name="strandID">
+                            <option value="" {{ old('strandID') ? '' : 'selected' }}>Select Strand</option>
                             @foreach($strands as $strand)
                             <option value="{{ $strand->strandID }}" {{ old('strandID') == $strand->strandID ? 'selected' : '' }}>
                                 {{ $strand->strandName }}

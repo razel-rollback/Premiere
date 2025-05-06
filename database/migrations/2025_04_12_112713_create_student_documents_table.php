@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('documentStatus');
             $table->date('UploadDate');
             $table->timestamps();
+            $table->foreign('studentID')->references('studentID')->on('students')->onDelete('cascade');
         });
     }
 
@@ -27,6 +28,9 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::table('student_documents', function (Blueprint $table) {
+            $table->dropForeign(['studentID']); // Drop foreign key in referencing table first
+        });
         Schema::dropIfExists('student_documents');
     }
 };

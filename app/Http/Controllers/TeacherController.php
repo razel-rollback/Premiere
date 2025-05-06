@@ -78,11 +78,6 @@ class TeacherController extends Controller
     public function destroy(Teacher $teacher)
     {
 
-        // Check if the teacher has any associated subjects
-        if ($teacher->subjects()->exists()) {
-            return redirect()->route('teachers.index')->with('error', 'Cannot delete teacher with assigned subjects.');
-        }
-
         // Check if the teacher has any associated schedules
         if ($teacher->schedules()->exists()) {
             return redirect()->route('teachers.index')->with('error', 'Cannot delete teacher with assigned schedules.');

@@ -36,7 +36,12 @@
                 <td>{{ $gradeLevel->gradeLevelID }}</td>
                 <td>{{ $gradeLevel->gradeLevelName }}</td>
                 <td>
-                    <a href="{{ route('gradelevels.edit', $gradeLevel->gradeLevelID) }}" class="btn btn-warning btn-sm">Edit</a>
+                    <button type="button" class="btn btn-warning me-1" data-bs-toggle="modal" data-bs-target="#EditGradeLevelModal{{ $gradeLevel->gradeLevelID }}">
+                        Edit
+                    </button>
+
+                    <!-- Pass the correct variable name -->
+                    @include('GradeLevel.edit', ['gradeLevel' => $gradeLevel])
 
                     <form method="POST" action="{{ route('gradelevels.destroy', $gradeLevel->gradeLevelID) }}" style="display:inline;">
                         @csrf

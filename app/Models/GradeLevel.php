@@ -12,12 +12,15 @@ class GradeLevel extends Model
 
     protected $table = 'grade_levels'; // Ensure this matches your database table name
     protected $primaryKey = 'gradeLevelID'; // Ensure this matches your table's primary key
-    public $timestamps = false;
 
     protected $fillable = [
         'gradeLevelName',
     ];
 
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
     public function students()
     {
         return $this->hasMany(Student::class, 'gradeLevelID');

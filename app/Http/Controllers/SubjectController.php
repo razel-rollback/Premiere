@@ -41,7 +41,7 @@ class SubjectController extends Controller
             'subjectName' => 'required|string|max:255',
             'subjectType' => 'required|string|in:Core,Advance,Specialize',
             'gradeLevelID' => 'required|exists:grade_levels,gradeLevelID',
-            'strandID' => 'required|exists:strands,strandID',
+            'strandID' => 'nullable|exists:strands,strandID',
         ]);
 
         // Create the subject
@@ -65,11 +65,15 @@ class SubjectController extends Controller
     public function edit(Subject $subject)
     {
         // Retrieve related data for dropdowns
-        $strands = Strand::all();
-        $gradeLevels = GradeLevel::all();
+        $strands = Strand::all(); // Fetch all strands for the dropdown
+        $gradeLevels = GradeLevel::all(); // Fetch all grade levels for the dropdown
 
         // Pass the subject and related data to the view
-        return view('Subject.edit', compact('subject', 'strands', 'gradeLevels'));
+        return view('Subject.edit', [
+            'subject' => $subject,
+            'strands' => $strands,
+            'gradeLevels' => $gradeLevels,
+        ]);
     }
 
     /**
@@ -82,7 +86,7 @@ class SubjectController extends Controller
             'subjectName' => 'required|string|max:255',
             'subjectType' => 'required|string|in:Core,Advance,Specialize',
             'gradeLevelID' => 'required|exists:grade_levels,gradeLevelID',
-            'strandID' => 'required|exists:strands,strandID',
+            'strandID' => 'nullable|exists:strands,strandID',
         ]);
 
         // Update the subject

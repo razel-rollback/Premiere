@@ -14,6 +14,10 @@ class Admin extends Model
     protected $fillable = [
         'roleID',
     ];
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
 
     public function role()
     {

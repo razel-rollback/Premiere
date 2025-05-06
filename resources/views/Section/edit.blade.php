@@ -14,6 +14,13 @@
                         <input type="text" class="form-control" id="sectionName{{ $section->sectionID }}" name="sectionName" value="{{ $section->sectionName }}" required>
                     </div>
                     <div class="mb-3">
+                        <label for="RoomName{{ $section->room }}" class="form-label">Room Name</label>
+                        <input type="text" class="form-control" id="RoomName{{ $section->room }}" name="room" value="{{ $section->room }}">
+                        @error('room')
+                        <div class="text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
                         <label for="gradeLevelID{{ $section->sectionID }}" class="form-label">Grade Level</label>
                         <select class="form-select" id="gradeLevelID{{ $section->sectionID }}" name="gradeLevelID" required>
                             @foreach($gradeLevels as $gradeLevel)

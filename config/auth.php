@@ -36,9 +36,14 @@ return [
     */
 
     'guards' => [
-        'web' => [
+        'admin' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'roles', // Use the roles provider
+        ],
+
+        'student' => [
+            'driver' => 'session',
+            'provider' => 'roles', // Use the roles provider
         ],
     ],
 
@@ -60,16 +65,16 @@ return [
     */
 
     'providers' => [
-        'users' => [
+        'roles' => [
             'driver' => 'eloquent',
-            'model' => env('AUTH_MODEL', App\Models\User::class),
+            'model' => App\Models\Role::class, // Use the Role model
         ],
-
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
     ],
+
+    // 'users' => [
+    //     'driver' => 'database',
+    //     'table' => 'users',
+    // ],
 
     /*
     |--------------------------------------------------------------------------
