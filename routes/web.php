@@ -14,6 +14,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EnrolledStudentController;
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\StudentAdmissionController;
+use App\Http\Controllers\ScheduleController;
 use App\Models\Enrollment;
 
 // Ensure the controller exists and is correctly referenced
@@ -58,3 +59,8 @@ Route::resource('tracks', TrackController::class);
 Route::get('/Student_Admission', [StudentAdmissionController::class, 'index'])->name('route.student.admission');
 Route::get('/enrolled-students', [EnrolledStudentController::class, 'index'])->name('route.enrolled.student');
 Route::get('/admin/login', [AdminLogInController::class, 'login'])->name('route.admin.login');
+
+Route::get('schedule', [ScheduleController::class, 'index'])->name('schedule.index');
+Route::get('schedule/create', [ScheduleController::class, 'create'])->name('schedule.create');
+Route::post('schedule', [ScheduleController::class, 'store'])->name('schedule.store');
+Route::get('schedule/{schedule}/edit', [ScheduleController::class, 'edit'])->name('schedule.edit');

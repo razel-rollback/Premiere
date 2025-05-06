@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\GradeLevel;
+use App\Models\Strand;
 use Illuminate\Http\Request;
 
 class GradeController extends Controller
@@ -23,7 +24,10 @@ class GradeController extends Controller
      */
     public function create()
     {
-        return view('GradeLevel.create');
+        $gradeLevels = GradeLevel::all(); // Fetch all grade levels
+        $strands = Strand::all(); // Fetch all strands
+
+        return view('Section.create', compact('gradeLevels', 'strands'));
     }
 
     /**

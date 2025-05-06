@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Track')
+@section('title', 'Sections')
 
 @section('head')
 <!-- Add any additional CSS or JS here -->

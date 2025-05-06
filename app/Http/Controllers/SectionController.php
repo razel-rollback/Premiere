@@ -19,7 +19,11 @@ class SectionController extends Controller
         $strands = Strand::all(); // Retrieve strands
         $gradeLevels = GradeLevel::all();
 
-        return view('Section.index', compact('Sections', 'strands', 'gradeLevels'));
+        return view('Section.index', [
+            'Sections' => $Sections,
+            'gradeLevels' => $gradeLevels,
+            'strands' => $strands,
+        ]);
     }
 
     /**
@@ -27,9 +31,10 @@ class SectionController extends Controller
      */
     public function create()
     {
-        $strands = Strand::all();
-        $gradeLevels = GradeLevel::all();
-        return view('Section.create', compact('strands', 'gradeLevels'));
+        $gradeLevels = GradeLevel::all(); // Fetch all grade levels
+        $strands = Strand::all(); // Fetch all strands
+
+        return view('Section.create', compact('gradeLevels', 'strands'));
     }
 
     /**
@@ -39,8 +44,8 @@ class SectionController extends Controller
     {
         $request->validate([
             'sectionName' => 'required|string|max:255',
-            'gradeLevelID' => 'required|exists:grade_levels,gradeLevelID',
-            'strandID' => 'required|exists:strands,strandID',
+            'gradeLevelID' => 'required|exists:grade_levels,id', // Ensure it exists in the grade_levels table
+            'strandID' => 'required|exists:strands,id', // Ensure it exists in the strands table
         ]);
 
         try {
