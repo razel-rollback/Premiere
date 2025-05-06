@@ -36,6 +36,6 @@ class StudentLogInController extends Controller
     public function showProfile()
     {
         $role = Auth::guard('student')->user();
-        return view('aStudent_ui.studentui', compact('role'));
+        return view('StudentUI.studentui', compact('role'));
     }
 }

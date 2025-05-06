@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Enrollment;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\GradeController;
@@ -12,9 +13,9 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AdminLogInController;
+use App\Http\Controllers\StudentLogInController;
 use App\Http\Controllers\EnrolledStudentController;
 use App\Http\Controllers\StudentAdmissionController;
-use App\Http\Controllers\StudentLogInController;
 
 // Ensure the controller exists and is correctly referenced
 
@@ -29,7 +30,7 @@ Route::middleware('guest.user')->group(function () {
     Route::get('/Register', [RegisterController::class, 'index'])->name('route.register');
     Route::post('/Register', [RegisterController::class, 'store'])->name('register.store');
 
-    Route::get('/admin/login', [AdminLogInController::class, 'login'])->name('admin.login');
+    Route::get('/admin/login', [AdminLogInController::class, 'login'])->name('admin.login1');
     Route::post('/admin/login', [AdminLogInController::class, 'authenticate'])->name('admin.authenticate');
 
 
@@ -58,14 +59,6 @@ Route::post('/Section', [SectionController::class, 'store'])->name('sections.sto
 Route::get('/Section/{section}/edit', [SectionController::class, 'edit'])->name('sections.edit');
 Route::put('/Section/{section}', [SectionController::class, 'update'])->name('sections.update');
 Route::delete('/Section/{section}', [SectionController::class, 'destroy'])->name('sections.destroy');
-
-Route::get('/Schedule', [ScheduleController::class, 'index'])->name('schedules.index');
-Route::get('/Schedule/create', [ScheduleController::class, 'create'])->name('schedules.create');
-Route::post('/Schedule', [ScheduleController::class, 'store'])->name('schedules.store');
-Route::get('/Schedule/{schedules}/edit', [ScheduleController::class, 'edit'])->name('schedules.edit');
-Route::put('/Schedule/{schedules}', [ScheduleController::class, 'update'])->name('schedules.update');
-Route::delete('/Schedule/{schedules}', [ScheduleController::class, 'destroy'])->name('schedules.destroy');
-Route::get('/schedules/getSchedule/{sectionID}', [ScheduleController::class, 'getSchedule']);
 
 // need to improve data?
 Route::get('/Teachers', [TeacherController::class, 'index'])->name('teachers.index');
@@ -114,3 +107,8 @@ Route::delete('/Track/{tracks}', [TrackController::class, 'destroy'])->name('tra
 //this  route need to be continue
 Route::get('/Student_Admission', [StudentAdmissionController::class, 'index'])->name('route.student.admission');
 Route::get('/enrolled-students', [EnrolledStudentController::class, 'index'])->name('route.enrolled.student');
+
+Route::get('schedule', [ScheduleController::class, 'index'])->name('schedule.index');
+Route::get('schedule/create', [ScheduleController::class, 'create'])->name('schedule.create');
+Route::post('schedule', [ScheduleController::class, 'store'])->name('schedule.store');
+Route::get('schedule/{schedule}/edit', [ScheduleController::class, 'edit'])->name('schedule.edit');

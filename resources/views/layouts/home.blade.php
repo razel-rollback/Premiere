@@ -276,7 +276,7 @@
                 <a href="{{ route('home.about') }}">About</a>
                 <a href="{{ route('home.program') }}">Programs</a>
                 <a href="{{ route('home.contact') }}">Contact Us</a>
-                <a href="{{ route('admin.login') }}">Admin</a>
+                <a href="{{ route('admin.login1') }}">Admin</a>
 
             </nav>
         </div>

@@ -10,7 +10,8 @@ class GradeLevel extends Model
     use HasFactory;
 
 
-    protected $primaryKey = 'gradeLevelID';
+    protected $table = 'grade_levels'; // Ensure this matches your database table name
+    protected $primaryKey = 'gradeLevelID'; // Ensure this matches your table's primary key
 
     protected $fillable = [
         'gradeLevelName',

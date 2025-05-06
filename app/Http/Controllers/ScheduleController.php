@@ -2,58 +2,73 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Section;
-use App\Models\Subject;
-use App\Models\Teacher;
 use App\Models\Schedule;
 use Illuminate\Http\Request;
+use App\Models\Section;
+use App\Models\GradeLevel;
+use App\Models\Strand;
+
 
 class ScheduleController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     */
     public function index()
     {
-        $schedules = Schedule::with('section')->get();
-        $sections = Section::all();
-        return view('Schedule.index', compact('schedules', 'sections'));
+        $sections = Section::all(); // or however you're loading data
+        $gradeLevels = GradeLevel::all();
+        $strands = Strand::all();
+
+        return view('Schedule.index', compact('sections', 'gradeLevels', 'strands'));
     }
 
+
+    /**
+     * Show the form for creating a new resource.
+     */
     public function create()
     {
-        $subjects = Subject::all();
-        $sections = Section::all();
-        $teachers = Teacher::all();
-        return view('Schedule.create', compact('subjects', 'sections', 'teachers'));
+        //
     }
 
+    /**
+     * Store a newly created resource in storage.
+     */
     public function store(Request $request)
     {
-        $request->validate([
-            'subjectID' => 'required|exists:subjects,subjectID',
-            'sectionID' => 'required|exists:sections,sectionID',
-            'teacherID' => 'required|exists:teachers,teacherID',
-            'timeSlot' => 'required',
-
-        ]);
-
-        // Extract start and end times from the timeSlot
-
-        // Create the schedule
-        Schedule::create([
-            'subjectID' => $request->subjectID,
-            'sectionID' => $request->sectionID,
-            'teacherID' => $request->teacherID,
-            'timeSlot' => $request->timeSlot,
-        ]);
-
-        return redirect()->route('schedules.create')->with('success', 'Schedule created successfully.');
+        //
     }
 
-    public function getSchedule($sectionID)
+    /**
+     * Display the specified resource.
+     */
+    public function show(Schedule $schedule)
     {
-        $schedules = Schedule::where('sectionID', $sectionID)
-            ->with('subject', 'teacher') // Assuming you have relationships set up
-            ->get();
+        //
+    }
 
-        return response()->json($schedules);
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Schedule $schedule)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, Schedule $schedule)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(Schedule $schedule)
+    {
+        //
     }
 }
