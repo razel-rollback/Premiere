@@ -106,14 +106,59 @@
                 </tr>
             </thead>
             <tbody>
+                @foreach ($registers as $register)
                 <tr>
-                    <td>0001</td>
-                    <td>Castillo, Julian</td>
-                    <td>12</td>
-                    <td>ABM</td>
+                    <td>{{ $register->registerID}}</td>
+                    <td>{{ $register->student->firstName . ' ' . $register->student->lastName }}</td>
+                    <td>{{$register->student->gradeLevel->gradeLevelName}}</td>
+                    <td>{{ $register->student->strand->strandName}}</td>
                     <td>2025-2026</td>
-                    <td><button class="btn btn-success rounded-pill"><i class="bi bi-check-circle"></i></button> <button class="btn btn-danger rounded-pill"><i class="bi bi-x-circle"></i></button></td>
+                    <td>
+                        <div class="d-flex justify-content-center align-items-center gap-2">
+
+                            <button type="button" class="btn btn-primary rounded-pill" data-bs-toggle="modal" data-bs-target="#viewModal{{ $register->registerID }}">
+                                <i class="bi bi-eye-fill"></i>
+                            </button>
+
+
+                            <form action="{{ route('route.student.admission.accept') }}" method="POST">
+                                @csrf
+                                <button class="btn btn-success rounded-pill"><i class="bi bi-check-circle"></i></button>
+                            </form>
+                            <form action="{{ route ('route.student.admission.reject') }}" method="POST">
+                                @csrf
+                                <button class="btn btn-danger rounded-pill"><i class="bi bi-x-circle"></i></button>
+                            </form>
+                        </div>
+                    </td>
                 </tr>
+                <div class="modal fade" id="viewModal{{ $register->registerID }}" tabindex="-1" aria-labelledby="viewModalLabel{{ $register->registerID }}" aria-hidden="true">
+                    <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="viewModalLabel{{ $register->registerID }}">Student Details</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <!-- Student Details -->
+                                <p><strong>Name:</strong> {{ $register->student->firstName }} {{ $register->student->lastName }}</p>
+                                <p><strong>Email:</strong> {{ $register->student->email }}</p>
+                                <p><strong>Contact:</strong> {{ $register->student->contactNumber }}</p>
+                                <p><strong>Address:</strong> {{ $register->student->address }}</p>
+
+                                <!-- Documents -->
+                                <h6 class="mt-4">Uploaded Documents</h6>
+                                @foreach($register->student->documents as $document)
+                                <p><strong>{{ $document->documentType }}</strong></p>
+                                <img src="{{ asset('storage/' . $document->documentPath) }}" alt="{{ $document->documentType }}" class="img-fluid mb-3" style="max-height: 300px;">
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
 
             </tbody>
         </table>

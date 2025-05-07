@@ -124,7 +124,7 @@ class RegisterController extends Controller
         // Handle Registration Creation
         Register::create([
             'studentID' => $student->studentID,
-            'status' => 'Pending',
+            'registerStatus' => 'Pending',
         ]);
 
 

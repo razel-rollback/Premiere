@@ -114,39 +114,6 @@
                     <td>ABM</td>
                     <td>2025-2026</td>
                     <td><button class="btn btn-warning rounded-pill"><i class="bi bi-arrow-counterclockwise"></i></button></td>
-                </tr>
-                <tr>
-                    <td>0002</td>
-                    <td>Harrison, Michael Reginald</td>
-                    <td>12</td>
-                    <td>STEM</td>
-                    <td>2025-2026</td>
-                    <td><button class="btn btn-warning rounded-pill"><i class="bi bi-arrow-counterclockwise"></i></button></td>
-                </tr>
-                <tr>
-                    <td>0003</td>
-                    <td>Mullner, Alex</td>
-                    <td>12</td>
-                    <td>HUMSS</td>
-                    <td>2025-2026</td>
-                    <td><button class="btn btn-warning rounded-pill"><i class="bi bi-arrow-counterclockwise"></i></button></td>
-                </tr>
-                <tr>
-                    <td>0004</td>
-                    <td>Dean, James</td>
-                    <td>12</td>
-                    <td>HUMSS</td>
-                    <td>2025-2026</td>
-                    <td><button class="btn btn-warning rounded-pill"><i class="bi bi-arrow-counterclockwise"></i></button></td>
-                </tr>
-                <tr>
-                    <td>0005</td>
-                    <td>Padao, Vaness Ken</td>
-                    <td>12</td>
-                    <td>HUMSS</td>
-                    <td>2025-2026</td>
-                    <td><button class="btn btn-warning rounded-pill"><i class="bi bi-arrow-counterclockwise"></i></button></td>
-                </tr>
             </tbody>
         </table>
     </div>
