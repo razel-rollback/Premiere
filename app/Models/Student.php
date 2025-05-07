@@ -20,6 +20,7 @@ class Student extends Model
         'gender',
         'address',
         'contactNumber',
+        'email',
         'status',
         'gradeLevelID',
         'roleID',

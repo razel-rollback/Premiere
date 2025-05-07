@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('guardianSuffixName')->nullable();
             $table->date('guardianBirthDate');
             $table->string('guardianRelation');
+            $table->string('email')->unique();
             $table->string('guardianPhone');
             $table->string('guardianAddress');
             $table->timestamps();

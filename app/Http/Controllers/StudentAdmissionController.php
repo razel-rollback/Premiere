@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Register;
 use App\Models\StudentAdmission;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,17 @@ class StudentAdmissionController extends Controller
      */
     public function index()
     {
-        return view('StudentAdmission.StudentAdmissionView');
+        // Fetch only student admissions with status "Pending"
+        $register = Register::where('registerStatus', 'Pending')
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        // foreach ($register as $reg) {
+        //     dd($reg->student); // This will output the first student's related data
+        // }
+
+
+        return view('StudentAdmission.StudentAdmissionView', compact('register'));
     }
 
     /**
