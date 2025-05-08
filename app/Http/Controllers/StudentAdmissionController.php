@@ -82,8 +82,17 @@ class StudentAdmissionController extends Controller
             );
     }
 
-    public function reject()
+    public function reject(Request $request, $registerId)
     {
-        //
+        // Find the register entry
+        $register = Register::with('student')->findOrFail($registerId);
+
+        // Update status to 'Rejected'
+        $register->update([
+            'registerStatus' => 'Rejected',
+        ]);
+
+        return redirect()->route('route.student.admission')
+            ->with('unsuccess', "Admission for {$register->student->firstName} {$register->student->lastName} has been rejected.");
     }
 }

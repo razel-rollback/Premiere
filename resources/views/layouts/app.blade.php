@@ -85,7 +85,7 @@
                     <div id="collapseItems" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionSidebar">
                         <div class="accordion-body" style="background-color: #343a40;">
                             <a href="{{route('route.student.admission') }}" class="{{ request()->routeIs('route.student.admission') ? 'active' : '' }}">Student Admission</a>
-                            <a href="{{route('route.enrolled.student') }}" class="{{ request()->routeIs('route.admitted.students') ? 'active' : '' }}">Admitted Students</a>
+                            <a href="{{route('enrolled.students') }}" class="{{ request()->routeIs('enrolled.students') ? 'active' : '' }}">Admitted Students</a>
                         </div>
                     </div>
                 </div>

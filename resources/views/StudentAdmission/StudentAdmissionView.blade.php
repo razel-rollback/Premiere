@@ -136,12 +136,13 @@
                             </button>
                             <form action="{{ route('route.student.admission.accept', $register) }}" method="POST">
                                 @csrf
-                                <button class="btn btn-success rounded-pill"><i class="bi bi-check-circle"></i></button>
+                                <button type="submit" class=" btn btn-success rounded-pill"><i class="bi bi-check-circle"></i></button>
                             </form>
-                            <form action="{{ route ('route.student.admission.reject') }}" method="POST">
+                            <form action="{{ route('route.student.admission.reject', $register) }}" method="POST">
                                 @csrf
-                                <button class="btn btn-danger rounded-pill"><i class="bi bi-x-circle"></i></button>
+                                <button type="submit" class="btn btn-danger rounded-pill"><i class="bi bi-x-circle"></i></button>
                             </form>
+
                         </div>
                     </td>
                 </tr>

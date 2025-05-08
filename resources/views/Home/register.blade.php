@@ -556,21 +556,25 @@
                                         </div>
 
 
-                                        <div class="form-group mb-2">
-                                            <label for="birthCert">Upload Birth Certificate:</label>
-                                            <input type="file" name="birthCert" id="birthCert" class="form-control" accept="image/jpeg,image/png" required>
-                                            <small class="text-muted">Accepted formats: JPG, PNG. Max size: 2MB.</small>
-                                            @error('birthCert') <!-- Fixed to match input name -->
-                                            <div class="text-danger"><small>{{ $message }}</small></div>
+                                        <div class="form-group mb-3">
+                                            <label for="birthCert" class="form-label">Upload Birth Certificate:</label>
+                                            <input type="file" name="birthCert" id="birthCert"
+                                                class="form-control @error('birthCert') is-invalid @enderror"
+                                                accept="image/jpeg,image/png,application/pdf">
+                                            <div class="form-text">Accepted formats: JPG, PNG, PDF. Max size: 2MB.</div>
+                                            @error('birthCert')
+                                            <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
 
-                                        <div class="form-group">
-                                            <label for="form137">Upload Form 137:</label>
-                                            <input type="file" name="form137" id="form137" class="form-control" accept="image/jpeg,image/png" required>
-                                            <small class="text-muted">Accepted formats: JPG, PNG. Max size: 2MB.</small>
+                                        <div class="form-group mb-3">
+                                            <label for="form137" class="form-label">Upload Form 137:</label>
+                                            <input type="file" name="form137" id="form137"
+                                                class="form-control @error('form137') is-invalid @enderror"
+                                                accept="image/jpeg,image/png,application/pdf">
+                                            <div class="form-text">Accepted formats: JPG, PNG, PDF. Max size: 2MB.</div>
                                             @error('form137')
-                                            <div class="text-danger"><small>{{ $message }}</small></div>
+                                            <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
                                         <div class="form-group mb-2">

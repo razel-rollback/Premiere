@@ -108,11 +108,20 @@ Route::delete('/Track/{tracks}', [TrackController::class, 'destroy'])->name('tra
 Route::get('/Student_Admission', [StudentAdmissionController::class, 'index'])->name('route.student.admission');
 
 Route::post('/Student_Admission/{register}/accept', [StudentAdmissionController::class, 'accept'])->name('route.student.admission.accept');
-Route::post('/Student_Admission/reject', [StudentAdmissionController::class, 'reject'])->name('route.student.admission.reject');
+Route::post('Student_Admission/{register}/reject', [StudentAdmissionController::class, 'reject'])
+    ->name('route.student.admission.reject');
 
 
 
-Route::get('/enrolled-students', [EnrolledStudentController::class, 'index'])->name('route.enrolled.student');
+// Enrolled Students
+Route::get('/enrolled-students', [EnrolledStudentController::class, 'enrolledStudents'])
+    ->name('enrolled.students');
+
+// Unenroll Student
+Route::delete('/enrollments/{enrollment}', [EnrolledStudentController::class, 'unenroll'])
+    ->name('student.unenroll');
+
+
 
 Route::get('schedule', [ScheduleController::class, 'index'])->name('schedule.index');
 Route::get('schedule/create', [ScheduleController::class, 'create'])->name('schedule.create');
