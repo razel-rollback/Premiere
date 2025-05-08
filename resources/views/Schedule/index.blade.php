@@ -61,11 +61,8 @@
             @endforeach
         </tbody>
     </table>
-    <<<<<<< HEAD
+</div>
 
-
-        </div>
-        =======
 </div>
 
 <script>
