@@ -16,7 +16,7 @@ class ScheduleController extends Controller
      */
     public function index()
     {
-        $sections = Section::all(); // or however you're loading data
+        $sections = Section::all();
         $gradeLevels = GradeLevel::all();
         $strands = Strand::all();
 
@@ -29,7 +29,7 @@ class ScheduleController extends Controller
      */
     public function create()
     {
-        //
+        return view('Schedule.create');
     }
 
     /**
@@ -37,7 +37,14 @@ class ScheduleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
+        ]);
+
+        Schedule::create($validated);
+
+        return redirect()->route('posts.index')->with('success', 'Post created successfully!');
     }
 
     /**
