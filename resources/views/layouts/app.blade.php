@@ -101,7 +101,7 @@
             <form method="POST" action="{{ route('admin.logout') }}" class="position-absolute bottom-0 start-50 translate-middle-x mb-3">
                 @csrf
                 <button type="submit" class="btn btn-primary rounded-pill">
-                    Log-out
+                    Logout
                 </button>
             </form>
 

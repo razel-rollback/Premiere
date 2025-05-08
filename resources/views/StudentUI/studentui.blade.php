@@ -1,4 +1,6 @@
-@extends('layouts.home')
+@extends('layouts.head')
+@section('title', 'Student Portal')
+
 
 @section('head')
 <style>
@@ -17,8 +19,8 @@
         margin: 0;
         padding: 0;
         min-height: 100vh;
-        background: linear-gradient(rgba(34, 34, 34, 0.9), rgba(34, 34, 34, 0.9)),
-            url('/images/school-building.png') center/cover no-repeat fixed;
+        background: linear-gradient(rgba(34, 34, 34, 0.85), rgba(34, 34, 34, 0.85)),
+            url('/images/school-building.png') center/cover no-repeat;
         font-family: 'Segoe UI', Arial, sans-serif;
         color: var(--light-text);
         display: flex;
@@ -73,6 +75,8 @@
         align-items: center;
         transition: all 0.3s ease;
         cursor: pointer;
+        color: var(--light-text);
+        text-decoration: none;
     }
 
     .nav-item:hover,
@@ -97,6 +101,7 @@
         cursor: pointer;
         text-align: center;
         transition: all 0.3s ease;
+        width: calc(100% - 50px);
     }
 
     .logout-btn:hover {
@@ -108,8 +113,11 @@
     .main-content {
         flex-grow: 1;
         padding: 30px;
+        max-width: 1200px;
+        margin: 0 auto;
     }
 
+    /* Dashboard Styles */
     .welcome-banner {
         background-color: var(--dark-bg);
         border-radius: 10px;
@@ -164,6 +172,7 @@
         font-size: 1.5rem;
     }
 
+    /* Tuition Information */
     .tuition-info {
         display: flex;
         justify-content: space-between;
@@ -199,6 +208,7 @@
         color: var(--primary-color);
     }
 
+    /* Payment Methods */
     .payment-methods {
         display: flex;
         gap: 10px;
@@ -227,6 +237,7 @@
         font-weight: 600;
     }
 
+    /* Forms */
     .form-group {
         margin-bottom: 18px;
     }
@@ -255,6 +266,7 @@
         outline: none;
     }
 
+    /* Buttons */
     .btn {
         padding: 12px 20px;
         border-radius: 6px;
@@ -277,6 +289,7 @@
         transform: translateY(-2px);
     }
 
+    /* Tables */
     .table {
         width: 100%;
         border-collapse: collapse;
@@ -296,6 +309,7 @@
         border-bottom: 1px solid var(--border-color);
     }
 
+    /* Schedule Section */
     .section-info {
         background-color: rgba(212, 175, 55, 0.1);
         padding: 12px 15px;
@@ -349,10 +363,6 @@
             flex-grow: 1;
         }
 
-        .nav-menu {
-            display: none;
-        }
-
         .main-content {
             padding: 20px;
         }
@@ -374,31 +384,45 @@
     }
 </style>
 @endsection
-
+@php
+// Safely access student data with null checks
+$student = $role->student ?? null;
+$currentEnrollment = $student->enrollments->firstWhere('status', 'enrolled') ?? null;
+$section = $currentEnrollment->section ?? null;
+$schedule = $section ? $section->schedules ?? collect() : collect();
+@endphp
 @section('content')
 <div class="side-nav">
     <div class="nav-header">
         <img src="{{ asset('images/student-avatar.jpg') }}" alt="Student Avatar">
         <div class="student-info">
-            <div class="student-name">{{ $role->student->name }}</div>
+            <div class="student-name">
+                {{ $student->firstName ?? '' }}
+                {{ $student->middleName ? substr($student->middleName, 0, 1).'.' : '' }}
+                {{ $student->lastName ?? '' }}
+                {{ $student->suffixName ?? '' }}
+            </div>
             <div class="student-details">
-                Grade {{ $role->student->grade_level }} • {{ $role->student->strand }}
+                Grade {{ $student->gradeLevel->gradeLevel ?? '' }}
+                @if($student->strand)
+                • {{ $student->strand->strandName }}
+                @endif
+                @if($section)
+                <br>Section: {{ $section->sectionName }}
+                @endif
             </div>
         </div>
     </div>
 
     <div class="nav-menu">
-        <div class="nav-item active">
+        <div class="nav-item active" id="dashboard-nav">
             <i class="fas fa-home"></i> Dashboard
         </div>
-        <div class="nav-item">
-            <i class="fas fa-calendar-alt"></i> Schedule
-        </div>
-        <div class="nav-item">
+        <div class="nav-item" id="payments-nav">
             <i class="fas fa-money-bill-wave"></i> Payments
         </div>
-        <div class="nav-item">
-            <i class="fas fa-book"></i> Subjects
+        <div class="nav-item" id="schedule-nav">
+            <i class="fas fa-calendar-alt"></i> Schedule
         </div>
     </div>
 
@@ -411,36 +435,101 @@
 </div>
 
 <div class="main-content">
-    <div class="welcome-banner">
-        <h1 class="welcome-title">Welcome Back, {{ explode(' ', $role->student->name)[0] }}!</h1>
-        <p>You have 1 upcoming payment due on October 15, 2023</p>
+    <div id="dashboard-content">
+        <div class="welcome-banner">
+            <h1 class="welcome-title">Welcome Back, {{ $student->firstName ?? 'Student' }}!</h1>
+            <p>You have 1 upcoming payment due on May 13, 2025</p>
+        </div>
+
+        <div class="dashboard">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Tuition Information</h2>
+                    <i class="fas fa-wallet card-icon"></i>
+                </div>
+
+                <div class="tuition-info">
+                    <div class="tuition-box">
+                        <div class="tuition-label">Total Tuition</div>
+                        <div class="tuition-amount">₱15,000.00</div>
+                    </div>
+                    <div class="tuition-box">
+                        <div class="tuition-label">Current Due</div>
+                        <div class="tuition-amount">₱3,750.00</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Class Schedule</h2>
+                    <i class="fas fa-calendar card-icon"></i>
+                </div>
+
+                @if($section && $schedule->count())
+                <div class="section-info">
+                    <span class="section-label">Class Section:</span>
+                    <span class="section-value">{{ $section->sectionName }}</span>
+                </div>
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Day</th>
+                            <th>Time</th>
+                            <th>Subject</th>
+                            <th>Room</th>
+                            <th>Teacher</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($schedule as $class)
+                        <tr>
+                            <td>{{ $class->timeSlot ?? '' }}</td>
+                            <td>
+                                @if($class->timeStart && $class->timeEnd)
+                                {{ date('g:i A', strtotime($class->timeStart)) }} - {{ date('g:i A', strtotime($class->timeEnd)) }}
+                                @endif
+                            </td>
+                            <td>{{ $class->subject->subjectName ?? '' }}</td>
+                            <td>{{ $section->room ?? '' }}</td>
+                            <td>
+                                {{ $class->teacher->firstName ?? '' }}
+                                {{ $class->teacher->lastName ?? '' }}
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+                @else
+                <div class="no-schedule">
+                    <i class="fas fa-calendar-times" style="font-size: 2rem; margin-bottom: 15px;"></i>
+                    <p>No schedule available</p>
+                    <p>You may not be enrolled yet</p>
+                </div>
+                @endif
+            </div>
+        </div>
     </div>
-
-    <div class="dashboard">
-        <!-- Tuition Card -->
-        <div class="card">
+    <!-- Payments Content (Hidden by default) -->
+    <div id="payments-content" style="display: none;">
+        <div class="card" style="max-width: 800px; margin: 0 auto;">
             <div class="card-header">
-                <h2 class="card-title">Tuition Information</h2>
-                <i class="fas fa-wallet card-icon"></i>
+                <h2 class="card-title">Payment Information</h2>
+                <i class="fas fa-credit-card card-icon"></i>
             </div>
 
-            <div class="tuition-info">
-                <div class="tuition-box">
-                    <div class="tuition-label">Total Tuition</div>
-                    <div class="tuition-amount">₱15,000.00</div>
-                </div>
-                <div class="tuition-box">
-                    <div class="tuition-label">Current Due</div>
-                    <div class="tuition-amount">₱3,750.00</div>
-                </div>
+            <div class="payment-due" style="margin-bottom: 25px;">
+                <h3 style="color: var(--primary-color); margin-bottom: 10px;">Amount Due: ₱3,750.00</h3>
+                <p>Due Date: October 15, 2023</p>
             </div>
 
-            <h3>Make Payment</h3>
+            <h3 style="margin-bottom: 15px;">Payment Method</h3>
             <div class="payment-methods">
-                <div class="payment-method active">
+                <div class="payment-method active" id="credit-card-method">
                     <i class="fas fa-credit-card"></i> Credit Card
                 </div>
-                <div class="payment-method">
+                <div class="payment-method" id="gcash-method">
                     <i class="fas fa-mobile-alt"></i> GCash
                 </div>
             </div>
@@ -456,7 +545,7 @@
                     <input type="text" id="card-holder" class="form-control" placeholder="John Doe">
                 </div>
 
-                <div class="row" style="display: flex; gap: 15px;">
+                <div style="display: flex; gap: 15px;">
                     <div class="form-group" style="flex: 1;">
                         <label for="expiry-date">Expiry Date</label>
                         <input type="text" id="expiry-date" class="form-control" placeholder="MM/YY">
@@ -467,13 +556,15 @@
                     </div>
                 </div>
 
-                <button class="btn btn-primary">
+                <button class="btn btn-primary" style="margin-top: 20px;">
                     <i class="fas fa-lock"></i> Pay ₱3,750.00
                 </button>
             </div>
         </div>
+    </div>
 
-        <!-- Schedule Card -->
+    <!-- Schedule Content (Hidden by default) -->
+    <div id="schedule-content" style="display: none;">
         <div class="card">
             <div class="card-header">
                 <h2 class="card-title">Class Schedule</h2>
@@ -514,62 +605,37 @@
             </div>
             @endif
         </div>
-
-        <!-- Tuition Breakdown Card -->
-        <div class="card" style="grid-column: span 2;">
-            <div class="card-header">
-                <h2 class="card-title">Tuition Breakdown</h2>
-                <i class="fas fa-file-invoice-dollar card-icon"></i>
-            </div>
-
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Period</th>
-                        <th>Description</th>
-                        <th>Amount</th>
-                        <th>Due Date</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1st Quarter</td>
-                        <td>Tuition Fee</td>
-                        <td>₱3,750.00</td>
-                        <td>Oct 15, 2023</td>
-                        <td><span style="color: #ffc107;">Pending</span></td>
-                    </tr>
-                    <tr>
-                        <td>2nd Quarter</td>
-                        <td>Tuition Fee</td>
-                        <td>₱3,750.00</td>
-                        <td>Dec 15, 2023</td>
-                        <td><span style="color: #6c757d;">Unpaid</span></td>
-                    </tr>
-                    <tr>
-                        <td>3rd Quarter</td>
-                        <td>Tuition Fee</td>
-                        <td>₱3,750.00</td>
-                        <td>Feb 15, 2024</td>
-                        <td><span style="color: #6c757d;">Unpaid</span></td>
-                    </tr>
-                    <tr>
-                        <td>4th Quarter</td>
-                        <td>Tuition Fee</td>
-                        <td>₱3,750.00</td>
-                        <td>Apr 15, 2024</td>
-                        <td><span style="color: #6c757d;">Unpaid</span></td>
-                    </tr>
-                    <tr style="background-color: rgba(212, 175, 55, 0.1); font-weight: bold;">
-                        <td colspan="2">Total</td>
-                        <td>₱15,000.00</td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
     </div>
 </div>
+
+<script>
+    // Navigation functionality
+    document.getElementById('dashboard-nav').addEventListener('click', function() {
+        document.getElementById('dashboard-content').style.display = 'block';
+        document.getElementById('payments-content').style.display = 'none';
+        document.getElementById('schedule-content').style.display = 'none';
+        setActiveNav('dashboard-nav');
+    });
+
+    document.getElementById('payments-nav').addEventListener('click', function() {
+        document.getElementById('dashboard-content').style.display = 'none';
+        document.getElementById('payments-content').style.display = 'block';
+        document.getElementById('schedule-content').style.display = 'none';
+        setActiveNav('payments-nav');
+    });
+
+    document.getElementById('schedule-nav').addEventListener('click', function() {
+        document.getElementById('dashboard-content').style.display = 'none';
+        document.getElementById('payments-content').style.display = 'none';
+        document.getElementById('schedule-content').style.display = 'block';
+        setActiveNav('schedule-nav');
+    });
+
+    function setActiveNav(navId) {
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.classList.remove('active');
+        });
+        document.getElementById(navId).classList.add('active');
+    }
+</script>
 @endsection
