@@ -123,7 +123,7 @@ Route::delete('/enrollments/{enrollment}', [EnrolledStudentController::class, 'u
 
 
 
-Route::get('schedule', [ScheduleController::class, 'index'])->name('schedule.index');
-Route::get('schedule/create', [ScheduleController::class, 'create'])->name('schedule.create');
-Route::post('schedule', [ScheduleController::class, 'store'])->name('schedule.store');
-Route::get('schedule/{schedule}/edit', [ScheduleController::class, 'edit'])->name('schedule.edit');
+Route::get('schedule', [ScheduleController::class, 'index'])->name('schedules.index');
+Route::get('schedule/create', [ScheduleController::class, 'create'])->name('schedules.create');
+Route::post('/schedules', [ScheduleController::class, 'store'])->name('schedules.store');
+Route::get('schedule/{schedule}/edit', [ScheduleController::class, 'edit'])->name('schedules.edit');

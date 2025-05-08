@@ -16,11 +16,11 @@ class ScheduleController extends Controller
      */
     public function index()
     {
-        $sections = Section::all(); // or however you're loading data
+        $sections = Section::all();
         $gradeLevels = GradeLevel::all();
         $strands = Strand::all();
 
-        return view('Schedule.index', compact('sections', 'gradeLevels', 'strands'));
+        return view('schedule.index', compact('sections', 'gradeLevels', 'strands'));
     }
 
 
@@ -29,7 +29,7 @@ class ScheduleController extends Controller
      */
     public function create()
     {
-        //
+        return view('Schedule.create');
     }
 
     /**
@@ -37,7 +37,29 @@ class ScheduleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'scheduleID' => 'required|unique:schedules,scheduleID|max:255',
+            'subjectID' => 'required|exists:subjects,id',
+            'sectionID' => 'required|exists:sections,id',
+            'teacherID' => 'required|exists:teachers,id',
+            'timeStart' => 'required|date_format:H:i',
+            'timeEnd' => 'required|date_format:H:i|after:time_start',
+            'RoomNum' => 'required|max:255',
+        ]);
+
+        Schedule::create([
+            'scheduleID' => $request->input('scheduleID'),
+            'subjectID' => $request->input('subjectID'),
+            'sectionID' => $request->input('sectionID'),
+            'teacherID' => $request->input('teacherID'),
+            'timeStart' => $request->input('timeStart'),
+            'timeEnd' => $request->input('timeEnd'),
+            'RoomNum' => $request->input('RoomNum'),
+        ]);
+
+        Schedule::create($validated);
+
+        return redirect()->route('schdules.index')->with('success', 'schedule created successfully!');
     }
 
     /**

@@ -21,8 +21,8 @@
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     @endif
-    @include('Section.create')
-    <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#sectionModal">Add Section</button>
+    @include('Schedule.create')
+    <!-- <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#sectionModal">Add Section</button> -->
 
     <!-- Search bar -->
     <div class="mb-3">
@@ -61,11 +61,7 @@
             @endforeach
         </tbody>
     </table>
-    <<<<<<< HEAD
-
-
-        </div>
-        =======
+</div>
 </div>
 
 <script>

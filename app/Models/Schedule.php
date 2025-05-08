@@ -12,6 +12,8 @@ class Schedule extends Model
         'subjectID',
         'sectionID',
         'teacherID',
+        'timeStart',
+        'timeEnd',
         'timeSlot',
     ];
     protected $hidden = [

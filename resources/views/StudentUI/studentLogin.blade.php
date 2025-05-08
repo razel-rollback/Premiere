@@ -148,14 +148,14 @@
         @csrf
         <div class="form-group">
             <label for="student-id">Username: </label>
-            <input type="text" id="student-id" name="username" placeholder="Enter your student ID" required autofocus>
+            <input type="text" id="student-id" name="username" placeholder="Enter your username" required autofocus>
             @error('username')
             <div class="error-message">{{ $message }}</div>
             @enderror
         </div>
 
         <div class="form-group">
-            <label for="password">PASSWORD: </label>
+            <label for="password">Password: </label>
             <input type="password" id="password" name="password" placeholder="Enter your password" required>
             @error('password')
             <div class="error-message">{{ $message }}</div>
