@@ -96,7 +96,7 @@
             <a href="{{ route('teachers.index') }}" class="{{ request()->routeIs('teachers.index') ? 'active' : '' }}">Teacher</a>
             <a href="{{ route('gradelevels.index') }}" class="{{ request()->routeIs('gradelevels.index') ? 'active' : '' }}">Grade Level</a>
             <a href="{{ route('sections.index') }}" class="{{ request()->routeIs('sections.index') ? 'active' : '' }}">Section</a>
-            <a href="{{ route('schedule.index') }}" class="{{ request()->routeIs('schedule.index') ? 'active' : '' }}">Schedules</a>
+            <a href="{{ route('schedules.index') }}" class="{{ request()->routeIs('schedule.index') ? 'active' : '' }}">Schedules</a>
 
             <form method="POST" action="{{ route('admin.logout') }}" class="position-absolute bottom-0 start-50 translate-middle-x mb-3">
                 @csrf
