@@ -36,7 +36,7 @@ class RegisterController extends Controller
             // Student Information
             'student_first_name' => 'required|string|max:255',
             'student_sex' => 'required|in:Male,Female',
-            'student_middle_name' => 'nullable|string|max:255',
+            'student_middle_name' => 'required|string|max:255',
             'student_birthdate' => 'required|date',
             'student_last_name' => 'required|string|max:255',
             'student_contactNumber' => 'required|string|min:11|max:11',

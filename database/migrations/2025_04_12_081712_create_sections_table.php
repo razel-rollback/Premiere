@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id('sectionID');
             $table->string('sectionName');
             $table->string('room')->unique();
+            $table->integer('max_capacity')->default(40);
             $table->unsignedBigInteger('gradeLevelID');
             $table->unsignedBigInteger('strandID');
             $table->timestamps();

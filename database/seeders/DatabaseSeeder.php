@@ -2,9 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Models\Register;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Database\Seeders\GuardianSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -24,7 +26,10 @@ class DatabaseSeeder extends Seeder
         $this->call(StrandSeeder::class);
         $this->call(GradeSeeder::class);
         $this->call(SectionSeeder::class);
-        $this->call(RoleSeeder::class);
         $this->call(SubjectSeeder::class);
+        $this->call(RoleSeeder::class);
+        $this->call(GuardianTableSeeder::class);
+        $this->call(StudentsTableSeeder::class);
+        $this->call(RegisterSeeder::class);
     }
 }

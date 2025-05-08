@@ -107,7 +107,7 @@ Route::delete('/Track/{tracks}', [TrackController::class, 'destroy'])->name('tra
 //this  route need to be continue
 Route::get('/Student_Admission', [StudentAdmissionController::class, 'index'])->name('route.student.admission');
 
-Route::post('/Student_Admission/accept', [StudentAdmissionController::class, 'accept'])->name('route.student.admission.accept');
+Route::post('/Student_Admission/{register}/accept', [StudentAdmissionController::class, 'accept'])->name('route.student.admission.accept');
 Route::post('/Student_Admission/reject', [StudentAdmissionController::class, 'reject'])->name('route.student.admission.reject');
 
 

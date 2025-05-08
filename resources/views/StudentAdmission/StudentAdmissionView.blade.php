@@ -4,7 +4,6 @@
 
 @section('head')
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
-
 {{--<style>
     body {
         background-color: #FFFBDA;
@@ -93,6 +92,22 @@
             </div>
 
         </div>
+        @if(session('error'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{ session('error') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        @endif
+        @if(session('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        @endif
+        <div class="alert alert-info mt-3">
+            <strong>Note:</strong> Please check the student details before accepting or rejecting their admission.
+        </div>
+
 
         <table class="table table-striped table-hover table-bordered mt-4 align-middle">
             <thead class="table-dark">
@@ -119,9 +134,7 @@
                             <button type="button" class="btn btn-primary rounded-pill" data-bs-toggle="modal" data-bs-target="#viewModal{{ $register->registerID }}">
                                 <i class="bi bi-eye-fill"></i>
                             </button>
-
-
-                            <form action="{{ route('route.student.admission.accept') }}" method="POST">
+                            <form action="{{ route('route.student.admission.accept', $register) }}" method="POST">
                                 @csrf
                                 <button class="btn btn-success rounded-pill"><i class="bi bi-check-circle"></i></button>
                             </form>
@@ -140,18 +153,75 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <!-- Student Details -->
-                                <p><strong>Name:</strong> {{ $register->student->firstName }} {{ $register->student->lastName }}</p>
-                                <p><strong>Email:</strong> {{ $register->student->email }}</p>
-                                <p><strong>Contact:</strong> {{ $register->student->contactNumber }}</p>
-                                <p><strong>Address:</strong> {{ $register->student->address }}</p>
+                                <!-- Student Information Section -->
+                                <div class="student-info mb-4">
+                                    <h5 class="mb-3 border-bottom pb-2">Student Information</h5>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <p><strong>Full Name:</strong> {{ $register->student->firstName }} {{ $register->student->middleNametName  }} {{ $register->student->lastName }} {{ $register->student->suffixName }}</p>
+                                            <p><strong>Sex:</strong> {{ $register->student->gender }}</p>
+                                            <p><strong>Birthdate:</strong> {{ \Carbon\Carbon::parse($register->student->birthDate)->format('F j, Y') }}</p>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p><strong>Contact:</strong> {{ $register->student->contactNumber }}</p>
+                                            <p><strong>Email:</strong> {{ $register->student->email }}</p>
+                                            <p><strong>Address:</strong> {{ $register->student->address }}</p>
+                                        </div>
+                                    </div>
+                                </div>
 
-                                <!-- Documents -->
-                                <h6 class="mt-4">Uploaded Documents</h6>
-                                @foreach($register->student->documents as $document)
-                                <p><strong>{{ $document->documentType }}</strong></p>
-                                <img src="{{ asset('storage/' . $document->documentPath) }}" alt="{{ $document->documentType }}" class="img-fluid mb-3" style="max-height: 300px;">
-                                @endforeach
+                                <!-- Guardian Information Section -->
+                                <div class="guardian-info mb-4">
+                                    <h5 class="mb-3 border-bottom pb-2">Guardian Information</h5>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <p><strong>Full Name:</strong> {{ $register->student->guardian->guardianFirstName }} {{ $register->student->guardian->guardianMiddleName }} {{ $register->student->guardian->guardianLastName  }} {{ $register->student->guardian->guardianSuffixName ? ' '.$register->student->guardian->guardianSuffixName : '' }}</p>
+                                            <p><strong>Relationship:</strong> {{ $register->student->guardian->guardianRelation }}</p>
+                                            <p><strong>Birthdate:</strong> {{ \Carbon\Carbon::parse($register->student->guardian->guardianBirthDate)->format('F j, Y') }}</p>
+                                        </div>
+                                        <div class="col-md-6">
+
+                                            <p><strong>Contact:</strong> {{ $register->student->guardian->guardianPhone }}</p>
+                                            <p><strong>Email:</strong> {{ $register->student->guardian->email }}</p>
+                                            <p><strong>Address:</strong> {{ $register->student->guardian->guardianAddress }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Academic Information Section -->
+                                <div class="academic-info mb-4">
+                                    <h5 class="mb-3 border-bottom pb-2">Academic Information</h5>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <p><strong>Strand:</strong> {{ $register->student->strand->strandName }}</p> <!-- Assuming you have strand name -->
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p><strong>Grade Level:</strong> {{ $register->student->gradeLevel->gradeLevelName }}</p> <!-- Assuming you have grade level name -->
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Documents Section -->
+                                <div class="documents-section">
+                                    <h5 class="mb-3">Uploaded Documents</h5>
+                                    <div class="row">
+                                        @foreach($register->student->documents as $document)
+                                        <div class="col-12 mb-4"> <!-- Changed to col-12 for full width -->
+                                            <div class="card">
+                                                <div class="card-header bg-light">
+                                                    <strong>{{ $document->documentType }}</strong>
+                                                </div>
+                                                <div class="card-body text-center">
+                                                    <img src="{{ asset('storage/' . $document->documentPath) }}"
+                                                        alt="{{ $document->documentType }}"
+                                                        class="img-fluid rounded border"
+                                                        style="max-height: 500px; width: auto;"> <!-- Increased max-height -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @endforeach
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

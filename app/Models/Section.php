@@ -14,7 +14,8 @@ class Section extends Model
         'sectionName',
         'gradeLevelID',
         'strandID',
-        'room'
+        'room',
+        'max_capacity'
     ];
     protected $hidden = [
         'created_at',
