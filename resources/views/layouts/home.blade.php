@@ -108,12 +108,13 @@
         /* pic animation */
         .hero-image img {
             position: absolute;
-            top: 110px;
-            right: 800px;
-            width: 650px;
+            top: 128px;
+            right: 790px;
+            width: 600px;
             height: auto;
             max-height: 750px;
             z-index: 2;
+            left: -9px;
             animation: fadeSlideUp 1s ease-out;
             animation-fill-mode: both;
             animation-delay: 0.1s;

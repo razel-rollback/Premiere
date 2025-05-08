@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('gender');
             $table->string('address');
             $table->string('contactNumber');
+            $table->string('email')->unique();
             $table->string('status');
             $table->unsignedBigInteger('gradeLevelID');
             $table->unsignedBigInteger('roleID')->nullable();

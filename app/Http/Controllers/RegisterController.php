@@ -2,17 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use App\Models\Track;
 use App\Models\Strand;
-use App\Models\Student;
 
+use App\Models\Student;
 use App\Models\Guardian;
 use App\Models\Register;
 use App\Models\GradeLevel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
 {
+
+    // add lg in email student and guardian
+    //database
+    //form
     public function index()
     {
 
@@ -34,6 +40,7 @@ class RegisterController extends Controller
             'student_birthdate' => 'required|date',
             'student_last_name' => 'required|string|max:255',
             'student_contactNumber' => 'required|string|min:11|max:11',
+            'student_email' => 'required|string|email|max:255|unique:students,email',
             'student_address' => 'required|max:255',
             'student_suffix' => 'nullable|string|max:255',
 
@@ -44,10 +51,13 @@ class RegisterController extends Controller
             'guardian_BirthDate' => 'required|date',
             'guardian_LastName' => 'required|string|max:255',
             'guardian_Phone' => 'required|string|min:11|max:11',
+            'guardian_Email' => 'required|string|email|max:255|unique:guardians,email',
             'guardian_Address' => 'required|max:255',
             'guardian_suffix' => 'nullable|string|max:255',
 
             // Academic Information
+            'student_username' => 'required|string|max:255|unique:roles,username',
+            'student_password' => 'required|string|min:8|confirmed',
             'strand' => 'required|exists:strands,strandID',
             'gradeLevel' => 'required|exists:grade_levels,gradeLevelID',
 
@@ -57,6 +67,12 @@ class RegisterController extends Controller
         ]);
 
         // Handle Guardian Creation
+        $role = Role::create([
+            'username' => $validated['student_username'],
+            'password' => Hash::make($validated['student_password']),
+            'userType' => 'student',
+        ]);
+
         $guardian = Guardian::create([
             'guardianFirstName' => $validated['guardian_FirstName'],
             'guardianMiddleName' => $validated['guardian_MiddleName'],
@@ -66,6 +82,7 @@ class RegisterController extends Controller
             'guardianRelation' => $validated['guardian_Relation'],
             'guardianPhone' => $validated['guardian_Phone'],
             'guardianAddress' => $validated['guardian_Address'],
+            'email' => $validated['guardian_Email'],
         ]);
 
         // Handle File Uploads
@@ -85,6 +102,8 @@ class RegisterController extends Controller
             'status' => 'Pending',
             'gradeLevelID' => $validated['gradeLevel'],
             'strandID' => $validated['strand'],
+            'email' => $validated['student_email'],
+            'roleID' => $role->roleID,
             'guardianID' => $guardian->guardianID,
         ]);
 
@@ -102,6 +121,13 @@ class RegisterController extends Controller
                 'UploadDate' => now(),
             ],
         ]);
+        // Handle Registration Creation
+        Register::create([
+            'studentID' => $student->studentID,
+            'registerStatus' => 'Pending',
+        ]);
+
+
         return redirect()->route('home.index')->with('success', 'Registration successful!');
     }
 }

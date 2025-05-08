@@ -20,6 +20,7 @@ class Student extends Model
         'gender',
         'address',
         'contactNumber',
+        'email',
         'status',
         'gradeLevelID',
         'roleID',
@@ -32,6 +33,16 @@ class Student extends Model
         'updated_at',
     ];
 
+    // A student belongs to a grade level
+    public function gradeLevel()
+    {
+        return $this->belongsTo(GradeLevel::class, 'gradeLevelID');
+    }
+    // A student belongs to a strand
+    public function strand()
+    {
+        return $this->belongsTo(Strand::class, 'strandID');
+    }
     public function role()
     {
         return $this->belongsTo(Role::class, 'roleID');

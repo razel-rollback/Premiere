@@ -16,6 +16,7 @@ class Guardian extends Model
         'guardianMiddleName',
         'guardianLastName',
         'guardianSuffixName',
+        'email',
         'guardianBirthDate',
         'guardianRelation',
         'guardianPhone',
