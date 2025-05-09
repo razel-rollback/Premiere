@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\GradeController;
 use App\Http\Controllers\TrackController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\StrandController;
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\SubjectController;
@@ -98,7 +99,10 @@ Route::get('/Track/{tracks}/edit', [TrackController::class, 'edit'])->name('trac
 Route::put('/Track/{tracks}', [TrackController::class, 'update'])->name('tracks.update');
 Route::delete('/Track/{tracks}', [TrackController::class, 'destroy'])->name('tracks.destroy');
 
+// Reports Routes
 
+Route::get('/reports/generate', [ReportController::class, 'generate'])->name('reports.generate');
+Route::get('/reports', [ReportController::class, 'index'])->name('reports.index');
 
 
 

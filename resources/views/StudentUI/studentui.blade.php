@@ -388,6 +388,7 @@
 // Safely access student data with null checks
 $student = $role->student ?? null;
 $currentEnrollment = $student->enrollments->firstWhere('status', 'enrolled') ?? null;
+$enrollment = $role->student->enrollments->payments ?? null;
 $section = $currentEnrollment->section ?? null;
 $schedule = $section ? $section->schedules ?? collect() : collect();
 @endphp
@@ -403,7 +404,7 @@ $schedule = $section ? $section->schedules ?? collect() : collect();
                 {{ $student->suffixName ?? '' }}
             </div>
             <div class="student-details">
-                Grade {{ $student->gradeLevel->gradeLevel ?? '' }}
+                Grade {{ $student->gradeLevel->gradeLevelName ?? '' }}
                 @if($student->strand)
                 • {{ $student->strand->strandName }}
                 @endif
@@ -449,13 +450,28 @@ $schedule = $section ? $section->schedules ?? collect() : collect();
                 </div>
 
                 <div class="tuition-info">
-                    <div class="tuition-box">
+
+                    <div class="tuition-box ">
                         <div class="tuition-label">Total Tuition</div>
-                        <div class="tuition-amount">₱15,000.00</div>
+                        <div class="tuition-amount">₱{{ number_format($enrollment->totalFee ?? 0, 2) }}</div>
                     </div>
+
                     <div class="tuition-box">
-                        <div class="tuition-label">Current Due</div>
-                        <div class="tuition-amount">₱3,750.00</div>
+                        <div class="tuition-label">Amount Paid</div>
+                        <div class="tuition-amount">₱{{ number_format($enrollment->amountPaid ?? 0, 2) }}</div>
+                    </div>
+
+                    <div class="tuition-box">
+                        <div class="tuition-label">Payment Status</div>
+                        <div class="tuition-amount {{ strtolower($enrollment->paymentStatus ?? '') }}">
+                            {{ $enrollment->paymentStatus ?? 'N/A' }}
+                        </div>
+                    </div>
+
+                    <!-- Remaining Balance -->
+                    <div class="tuition-box">
+                        <div class="tuition-label">Remaining Balance</div>
+                        <div class="tuition-amount">₱{{ number_format(($enrollment->totalFee ?? 0) - ($enrollment->amountPaid ?? 0), 2) }}</div>
                     </div>
                 </div>
             </div>
