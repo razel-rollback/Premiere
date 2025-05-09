@@ -16,7 +16,6 @@ return new class extends Migration
             $table->unsignedBigInteger('subjectID');
             $table->unsignedBigInteger('sectionID');
             $table->unsignedBigInteger('teacherID');
-            $table->string('timeSlot');
             $table->time('timeStart'); // Added timeStart column
             $table->time('timeEnd');   // Added timeEnd column
             $table->timestamps();

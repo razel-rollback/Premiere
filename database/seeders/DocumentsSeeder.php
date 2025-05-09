@@ -15,21 +15,18 @@ class DocumentsSeeder extends Seeder
      */
     public function run(): void
     {
-        // Ensure storage directories exist
+        // Ensure storage directory exists
         Storage::disk('public')->makeDirectory('documents/samples');
-        Storage::disk('public')->makeDirectory('documents/students');
 
-        // Only these two document types
+        // Sample documents (shared by all students)
         $sampleDocuments = [
             [
                 'type' => 'Birth Certificate',
                 'path' => 'documents/samples/sample_birth_cert.jpg',
-                'fake_file' => 'Samplebirth_certificate.jpg'
             ],
             [
                 'type' => 'Form 137',
                 'path' => 'documents/samples/sample_form_137.jpg',
-                'fake_file' => 'Sampleform_137.jpg'
             ]
         ];
 
@@ -40,21 +37,16 @@ class DocumentsSeeder extends Seeder
             }
         }
 
-        // Create documents for students 1-5
+        // Assign the SAME documents to students 1-5
         for ($studentId = 1; $studentId <= 5; $studentId++) {
             $documentsToInsert = [];
 
             foreach ($sampleDocuments as $doc) {
-                $studentDocPath = "documents/students/{$studentId}/" . $doc['fake_file'];
-
-                // Copy sample to student's directory
-                Storage::disk('public')->copy($doc['path'], $studentDocPath);
-
                 $documentsToInsert[] = [
                     'studentID' => $studentId,
                     'documentType' => $doc['type'],
-                    'documentPath' => $studentDocPath,
-                    'documentStatus' => 'Pending', // or 'Pending'
+                    'documentPath' => $doc['path'], // Same path for all students
+                    'documentStatus' => 'Pending',
                     'UploadDate' => Carbon::now()->subDays(rand(1, 30)),
                     'created_at' => Carbon::now(),
                     'updated_at' => Carbon::now()

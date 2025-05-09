@@ -78,20 +78,17 @@
             <h2 class="text-center">Student Admission</h2>
         </div>
 
-        <div class="d-flex justify-content-evenly  gap-3 ">
-
+        <div class="d-flex justify-content-evenly gap-3">
             <div class="card text-black cardgrade11 justify-content-center align-items-center" style="width: 300px; background: #FF914D;">
                 <p>Grade 11 Total:</p>
-                <!-- button dapat ni -->
-                <h3>4</h3>
+                <h3>{{ $grade11PendingTotal }}</h3>
             </div>
             <div class="card text-black justify-content-center align-items-center" style="width: 300px; background: #FF3131;">
                 <p>Grade 12 Total:</p>
-                <!-- pati pud ni -->
-                <h3>5</h3>
+                <h3>{{ $grade12PendingTotal }}</h3>
             </div>
-
         </div>
+
         @if(session('error'))
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
             {{ session('error') }}

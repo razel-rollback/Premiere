@@ -20,10 +20,32 @@ class StudentAdmissionController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
 
+        $grade11PendingTotal = Register::where('registerStatus', 'Pending')
+            ->whereHas('student', function ($query) {
+                $query->whereHas('gradeLevel', function ($q) {
+                    $q->where('gradeLevelName', '11');
+                });
+            })
+            ->count();
+
+        // Calculate pending enrollments for Grade 12
+        $grade12PendingTotal = Register::where('registerStatus', 'Pending')
+            ->whereHas('student', function ($query) {
+                $query->whereHas('gradeLevel', function ($q) {
+                    $q->where('gradeLevelName', '12');
+                });
+            })
+            ->count();
+
+
         // foreach ($register as $reg) {
         //     dd($reg->student); // This will output the first student's related data
         // }
-        return view('StudentAdmission.StudentAdmissionView', compact('registers'));
+        return view('StudentAdmission.StudentAdmissionView', compact(
+            'registers',
+            'grade11PendingTotal',
+            'grade12PendingTotal'
+        ));
     }
 
     /**
@@ -63,12 +85,13 @@ class StudentAdmissionController extends Controller
         ]);
 
         // 7. Create official enrollment record
-        Enrollment::create([
+        $enrollment = Enrollment::create([
             'studentID' => $register->student->studentID,
             'sectionID' => $section->sectionID,
             'AcademicYear' => $academicYear,
             'dateEnrolled' => now()
         ]);
+
         //8. Update registration status
         $register->update([
             'registerStatus' => 'Approved',

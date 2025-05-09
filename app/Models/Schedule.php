@@ -14,7 +14,6 @@ class Schedule extends Model
         'teacherID',
         'timeStart',
         'timeEnd',
-        'timeSlot',
     ];
     protected $hidden = [
         'created_at',

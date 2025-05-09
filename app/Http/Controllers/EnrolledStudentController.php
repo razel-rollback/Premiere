@@ -48,9 +48,6 @@ class EnrolledStudentController extends Controller
             // Get the student before deleting enrollment
             $student = $enrollment->student;
 
-            // Delete the enrollment record
-            $enrollment->delete();
-
             // Update student status
             $student->update(['status' => 'Unenrolled']);
             $student->student->register->update(['registerStatus' => 'Unenrolled']);

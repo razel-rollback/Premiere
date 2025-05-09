@@ -140,15 +140,15 @@
     </div>
     <h1 class="login-title">STUDENT PORTAL</h1>
 
-    @if(session('error'))
-    <div class="error-message">{{ session('error') }}</div>
+    @if ($errors->has('invalid'))
+    <div class="error-message">{{ $errors->first('invalid') }}</div>
     @endif
 
     <form method="POST" action="{{ route('student.login') }}">
         @csrf
         <div class="form-group">
             <label for="student-id">Username: </label>
-            <input type="text" id="student-id" name="username" placeholder="Enter your username" required autofocus>
+            <input type="text" id="student-id" name="username" placeholder="Enter your username" autofocus>
             @error('username')
             <div class="error-message">{{ $message }}</div>
             @enderror
@@ -156,7 +156,7 @@
 
         <div class="form-group">
             <label for="password">Password: </label>
-            <input type="password" id="password" name="password" placeholder="Enter your password" required>
+            <input type="password" id="password" name="password" placeholder="Enter your password">
             @error('password')
             <div class="error-message">{{ $message }}</div>
             @enderror
