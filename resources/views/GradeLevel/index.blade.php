@@ -1,57 +1,179 @@
 @extends('layouts.app')
+
 @section('title', 'Grade Levels')
+
 @section('head')
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+<style>
+    :root {
+        --primary: #4361ee;
+        --primary-light: #ebf1ff;
+        --secondary: #3f37c9;
+        --success: #4cc9f0;
+        --danger: #f72585;
+        --warning: #f8961e;
+        --info: #3a0ca3;
+        --light: #f8f9fa;
+        --dark: #212529;
+        --border-radius: 0.5rem;
+        --transition: all 0.3s ease;
+    }
+
+    .page-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .page-title {
+        font-size: 1.75rem;
+        font-weight: 600;
+        color: var(--dark);
+        margin: 0;
+    }
+
+    .btn-add {
+        background-color: var(--primary);
+        color: white;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .btn-add:hover {
+        background-color: var(--secondary);
+        color: white;
+    }
+
+    .grade-levels-table {
+        background: white;
+        border-radius: var(--border-radius);
+        overflow: hidden;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+
+    .grade-levels-table th {
+        background-color: var(--primary);
+        color: white;
+        font-weight: 500;
+        padding: 1rem;
+    }
+
+    .grade-levels-table td {
+        vertical-align: middle;
+        padding: 1rem;
+    }
+
+    .action-buttons {
+        display: flex;
+        gap: 0.5rem;
+    }
+
+    .btn-edit {
+        background-color: var(--warning);
+        color: white;
+    }
+
+    .btn-delete {
+        background-color: var(--danger);
+        color: white;
+    }
+
+    .badge-id {
+        background-color: var(--primary-light);
+        color: var(--primary);
+        padding: 0.25rem 0.5rem;
+        border-radius: 0.25rem;
+        font-weight: 600;
+    }
+
+    @media (max-width: 768px) {
+        .page-header {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .action-buttons {
+            flex-direction: column;
+        }
+    }
+</style>
 @endsection
+
 @section('content')
 <div class="container-fluid">
-    <h1>Grade Levels</h1>
+    <div class="page-header">
+        <h1 class="page-title">Grade Levels</h1>
+        <button href="#" class="btn btn-add" data-bs-toggle="modal" data-bs-target="#gradeLevelModal">
+            <i class="bi bi-plus-lg"></i>
+            Add Grade Level
+        </button>
+    </div>
+
     @if(session('error'))
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <i class="bi bi-exclamation-triangle-fill me-2"></i>
         {{ session('error') }}
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     @endif
+
     @if(session('success'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <i class="bi bi-check-circle-fill me-2"></i>
         {{ session('success') }}
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     @endif
+
     @error('trackID')
-    <div class="alert alert-danger">{{ $message }}</div>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <i class="bi bi-exclamation-triangle-fill me-2"></i>
+        {{ $message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
     @enderror
+
     @include('GradeLevel.create')
-    <a href="#" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#gradeLevelModal">Add Grade Level</a>
-    <table class="table table-striped table-hover table-bordered mt-4 align-middle">
-        <thead class="table-dark">
-            <tr>
-                <th>#</th>
-                <th>Grade Level Name</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($gradeLevels as $gradeLevel)
-            <tr>
-                <td>{{ $gradeLevel->gradeLevelID }}</td>
-                <td>{{ $gradeLevel->gradeLevelName }}</td>
-                <td>
-                    <button type="button" class="btn btn-warning me-1" data-bs-toggle="modal" data-bs-target="#EditGradeLevelModal{{ $gradeLevel->gradeLevelID }}">
-                        Edit
-                    </button>
 
-                    <!-- Pass the correct variable name -->
-                    @include('GradeLevel.edit', ['gradeLevel' => $gradeLevel])
+    <div class="grade-levels-table">
+        <table class="table table-hover align-middle">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Grade Level Name</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($gradeLevels as $gradeLevel)
+                <tr>
+                    <td><span class="badge-id">{{ $gradeLevel->gradeLevelID }}</span></td>
+                    <td>{{ $gradeLevel->gradeLevelName }}</td>
+                    <td>
+                        <div class="action-buttons">
+                            <button type="button" class="btn btn-edit" data-bs-toggle="modal" data-bs-target="#EditGradeLevelModal{{ $gradeLevel->gradeLevelID }}">
+                                <i class="bi bi-pencil-square"></i> Edit
+                            </button>
 
-                    <form method="POST" action="{{ route('gradelevels.destroy', $gradeLevel->gradeLevelID) }}" style="display:inline;">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                    </form>
+                            @include('GradeLevel.edit', ['gradeLevel' => $gradeLevel])
 
-                </td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
-    @endsection
+                            <form method="POST" action="{{ route('gradelevels.destroy', $gradeLevel->gradeLevelID) }}" style="display:inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this grade level?')">
+                                    <i class="bi bi-trash"></i> Delete
+                                </button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+</div>
+@endsection
