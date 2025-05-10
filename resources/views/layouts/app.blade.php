@@ -226,7 +226,7 @@
 
     <div class="sidebar" id="sidebar">
         <div class="sidebar-brand">
-            <img src="{{ asset('images/Premire.png') }}" alt="Premiere Logo">
+            <img src="{{ asset('images/Premire.png') }}" alt="Premiere Logo" style="border-radius: 50%;">
             <h4>PREMIERE</h4>
         </div>
 
@@ -257,10 +257,12 @@
             </div>
 
 
+
+
             <div class="sidebar-item">
-                <a href="{{ route('subjects.index') }}" class="sidebar-link {{ request()->routeIs('subjects.index') ? 'active' : '' }}">
-                    <i class="bi bi-book"></i>
-                    <span>Subjects</span>
+                <a href="{{ route('tracks.index') }}" class="sidebar-link {{ request()->routeIs('tracks.index') ? 'active' : '' }}">
+                    <i class="bi bi-signpost-split"></i>
+                    <span>Tracks</span>
                 </a>
             </div>
 
@@ -272,11 +274,13 @@
             </div>
 
             <div class="sidebar-item">
-                <a href="{{ route('tracks.index') }}" class="sidebar-link {{ request()->routeIs('tracks.index') ? 'active' : '' }}">
-                    <i class="bi bi-signpost-split"></i>
-                    <span>Tracks</span>
+                <a href="{{ route('subjects.index') }}" class="sidebar-link {{ request()->routeIs('subjects.index') ? 'active' : '' }}">
+                    <i class="bi bi-book"></i>
+                    <span>Subjects</span>
                 </a>
             </div>
+
+
 
             <div class="sidebar-item">
                 <a href="{{ route('teachers.index') }}" class="sidebar-link {{ request()->routeIs('teachers.index') ? 'active' : '' }}">
@@ -285,7 +289,7 @@
                 </a>
             </div>
 
-            <div class="sidebar-item">
+            <div class="sidebar-item" hidden>
                 <a href="{{ route('gradelevels.index') }}" class="sidebar-link {{ request()->routeIs('gradelevels.index') ? 'active' : '' }}">
                     <i class="bi bi-123"></i>
                     <span>Grade Levels</span>
