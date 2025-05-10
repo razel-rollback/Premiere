@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Register;
 use App\Models\Enrollment;
+use App\Models\Payment;
 use Illuminate\Http\Request;
 use App\Models\StudentAdmission;
 use App\Services\SectionAssignmentService;
@@ -90,6 +91,16 @@ class StudentAdmissionController extends Controller
             'sectionID' => $section->sectionID,
             'AcademicYear' => $academicYear,
             'dateEnrolled' => now()
+        ]);
+
+        $enrollment = Payment::create([
+            'enrollmentID' => $enrollment->enrollmentID,
+            'amountPaid' => '0',
+            'totalFee' => '20000',
+            'paymentMethod' => 'Unset',
+            'paymentType' => 'Tuition Fee',
+            'paymentDate' => now(),
+            'paymentStatus' => 'Pending',
         ]);
 
         //8. Update registration status

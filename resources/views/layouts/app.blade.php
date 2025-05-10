@@ -8,11 +8,31 @@
         integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+    <!-- DataTables Buttons CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.bootstrap5.min.css">
 
     <title>@yield('title', 'Premiere Admin')</title>
     @yield('head')
 
     <style>
+        /* Customize DataTables search input */
+        .dataTables_filter input {
+            width: 300px !important;
+            /* Set your desired width */
+            padding: 0.5rem;
+            border: 1px solid #e2e8f0;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+        }
+
+        .dataTables_filter input:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+        }
+
         :root {
             --sidebar-width: 280px;
             --sidebar-bg: #1a2035;
@@ -236,6 +256,7 @@
                 </div>
             </div>
 
+
             <div class="sidebar-item">
                 <a href="{{ route('subjects.index') }}" class="sidebar-link {{ request()->routeIs('subjects.index') ? 'active' : '' }}">
                     <i class="bi bi-book"></i>
@@ -284,6 +305,9 @@
                     <span>Schedules</span>
                 </a>
             </div>
+            <div class="sidebar-item">
+                <a href="{{ route('reports.index') }}" class="sidebar-link  {{ request()->routeIs('reports.index') ? 'active' : '' }}"> <i class="bi bi-clipboard-data-fill"></i>Reports </a>
+            </div>
         </div>
 
         <form method="POST" action="{{ route('admin.logout') }}" class="logout-btn" id="logout-form">
@@ -300,6 +324,21 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- jQuery (required for DataTables) -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <!-- DataTables JS -->
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <!-- DataTables Bootstrap 5 JS -->
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+    <!-- DataTables Buttons JS -->
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.bootstrap5.min.js"></script>
+    <!-- Buttons HTML5 export -->
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+    <!-- PDF export -->
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
+    <!-- JSZip for Excel export -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const sidebar = document.getElementById('sidebar');
@@ -319,6 +358,27 @@
         });
     </script>
     @yield('scripts')
+    <script>
+        $(document).ready(function() {
+            $('#linktable').DataTable({
+                dom: 'Bfrtip',
+                buttons: [],
+                responsive: true,
+                language: {
+                    search: "_INPUT_",
+                    searchPlaceholder: "Search...",
+                },
+                pageLength: 10,
+                lengthMenu: [
+                    [10, 25, 50, 100, -1],
+                    [10, 25, 50, 100, "All"]
+                ],
+                initComplete: function() {
+                    $('.dataTables_filter input').css('width', '300px');
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

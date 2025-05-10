@@ -186,6 +186,7 @@
         background-color: rgba(40, 40, 40, 0.8);
         flex: 1;
         margin: 0 10px;
+        margin-bottom: 20px;
     }
 
     .tuition-box:first-child {
@@ -384,13 +385,15 @@
     }
 </style>
 @endsection
+
 @php
-// Safely access student data with null checks
 $student = $role->student ?? null;
-$currentEnrollment = $student->enrollments->firstWhere('status', 'enrolled') ?? null;
-$section = $currentEnrollment->section ?? null;
-$schedule = $section ? $section->schedules ?? collect() : collect();
+$currentEnrollment = $student?->enrollments?->sortByDesc('dateEnrolled')->first();
+$enrollmentPayments = $currentEnrollment?->payments?->first() ?? null;
+$section = $currentEnrollment?->section;
+$schedule = $section?->schedules ?? collect();
 @endphp
+
 @section('content')
 <div class="side-nav">
     <div class="nav-header">
@@ -403,7 +406,7 @@ $schedule = $section ? $section->schedules ?? collect() : collect();
                 {{ $student->suffixName ?? '' }}
             </div>
             <div class="student-details">
-                Grade {{ $student->gradeLevel->gradeLevel ?? '' }}
+                Grade {{ $student->gradeLevel->gradeLevelName ?? '' }}
                 @if($student->strand)
                 • {{ $student->strand->strandName }}
                 @endif
@@ -438,7 +441,7 @@ $schedule = $section ? $section->schedules ?? collect() : collect();
     <div id="dashboard-content">
         <div class="welcome-banner">
             <h1 class="welcome-title">Welcome Back, {{ $student->firstName ?? 'Student' }}!</h1>
-            <p>You have 1 upcoming payment due on May 13, 2025</p>
+            <p>Here are your current enrollment details:</p>
         </div>
 
         <div class="dashboard">
@@ -448,15 +451,27 @@ $schedule = $section ? $section->schedules ?? collect() : collect();
                     <i class="fas fa-wallet card-icon"></i>
                 </div>
 
-                <div class="tuition-info">
-                    <div class="tuition-box">
-                        <div class="tuition-label">Total Tuition</div>
-                        <div class="tuition-amount">₱15,000.00</div>
+                <div class="tuition-box ">
+                    <div class="tuition-label">Total Tuition</div>
+                    <div class="tuition-amount">₱{{ number_format($enrollmentPayments->totalFee ?? 0, 2) }}</div>
+                </div>
+
+                <div class="tuition-box">
+                    <div class="tuition-label">Amount Paid</div>
+                    <div class="tuition-amount">₱{{ number_format($enrollmentPayments->amountPaid ?? 0, 2) }}</div>
+                </div>
+
+                <div class="tuition-box">
+                    <div class="tuition-label">Payment Status</div>
+                    <div class="tuition-amount {{ strtolower($enrollmentPayments->paymentStatus ?? '') }}">
+                        {{ $enrollmentPayments->paymentStatus ?? 'N/A' }}
                     </div>
-                    <div class="tuition-box">
-                        <div class="tuition-label">Current Due</div>
-                        <div class="tuition-amount">₱3,750.00</div>
-                    </div>
+                </div>
+
+                <!-- Remaining Balance -->
+                <div class="tuition-box">
+                    <div class="tuition-label">Remaining Balance</div>
+                    <div class="tuition-amount">₱{{ number_format(($enrollmentPayments->totalFee ?? 0) - ($enrollmentPayments->amountPaid ?? 0), 2) }}</div>
                 </div>
             </div>
 
@@ -519,49 +534,44 @@ $schedule = $section ? $section->schedules ?? collect() : collect();
                 <i class="fas fa-credit-card card-icon"></i>
             </div>
 
+            @if(isset($enrollmentPayments) && $enrollmentPayments->paymentID)
             <div class="payment-due" style="margin-bottom: 25px;">
-                <h3 style="color: var(--primary-color); margin-bottom: 10px;">Amount Due: ₱3,750.00</h3>
-                <p>Due Date: October 15, 2023</p>
+                <h3 style="color: var(--primary-color); margin-bottom: 10px;">
+                    Remaining Balance ₱{{ number_format(($enrollmentPayments->totalFee ?? 0) - ($enrollmentPayments->amountPaid ?? 0), 2) }}
+                </h3>
             </div>
 
-            <h3 style="margin-bottom: 15px;">Payment Method</h3>
+            <h3 style="margin-bottom: 15px; color:white;">Payment Method</h3>
             <div class="payment-methods">
                 <div class="payment-method active" id="credit-card-method">
-                    <i class="fas fa-credit-card"></i> Credit Card
-                </div>
-                <div class="payment-method" id="gcash-method">
-                    <i class="fas fa-mobile-alt"></i> GCash
+                    <i class="fas fa-credit-card"></i> Online Payment
                 </div>
             </div>
 
             <div class="payment-form">
-                <div class="form-group">
-                    <label for="card-number">Card Number</label>
-                    <input type="text" id="card-number" class="form-control" placeholder="1234 5678 9012 3456">
-                </div>
+                <form action="{{ route('payment.payment', $enrollmentPayments->paymentID) }}" method="POST">
+                    @csrf
+                    @method('PUT')
 
-                <div class="form-group">
-                    <label for="card-holder">Card Holder Name</label>
-                    <input type="text" id="card-holder" class="form-control" placeholder="John Doe">
-                </div>
-
-                <div style="display: flex; gap: 15px;">
-                    <div class="form-group" style="flex: 1;">
-                        <label for="expiry-date">Expiry Date</label>
-                        <input type="text" id="expiry-date" class="form-control" placeholder="MM/YY">
+                    <div class="form-group">
+                        <label for="amount">Enter Amount</label>
+                        <small class="form-text" style="color:whitesmoke;">Minimum of 1000 pesos</small>
+                        <input name="amount" type="number" id="amount" class="form-control" placeholder="Enter amount in pesos" min="1000" required>
                     </div>
-                    <div class="form-group" style="flex: 1;">
-                        <label for="cvv">CVV</label>
-                        <input type="text" id="cvv" class="form-control" placeholder="123">
-                    </div>
-                </div>
 
-                <button class="btn btn-primary" style="margin-top: 20px;">
-                    <i class="fas fa-lock"></i> Pay ₱3,750.00
-                </button>
+                    <button type="submit" class="btn btn-primary mt-3">
+                        <i class="fas fa-lock"></i> Submit
+                    </button>
+                </form>
             </div>
+            @else
+            <div class="alert alert-warning mt-3" role="alert">
+                You cannot make a payment yet. Your enrollment is still pending approval by the administrator.
+            </div>
+            @endif
         </div>
     </div>
+
 
     <!-- Schedule Content (Hidden by default) -->
     <div id="schedule-content" style="display: none;">

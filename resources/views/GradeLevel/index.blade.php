@@ -49,10 +49,13 @@
     }
 
     .grade-levels-table {
+        width: 100%;
         background: white;
         border-radius: var(--border-radius);
         overflow: hidden;
         box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        border-collapse: collapse;
+        padding: 1rem;
     }
 
     .grade-levels-table th {
@@ -60,11 +63,13 @@
         color: white;
         font-weight: 500;
         padding: 1rem;
+        text-align: left;
     }
 
     .grade-levels-table td {
         vertical-align: middle;
         padding: 1rem;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
     }
 
     .action-buttons {
@@ -139,41 +144,43 @@
 
     @include('GradeLevel.create')
 
-    <div class="grade-levels-table">
-        <table class="table table-hover align-middle">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Grade Level Name</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($gradeLevels as $gradeLevel)
-                <tr>
-                    <td><span class="badge-id">{{ $gradeLevel->gradeLevelID }}</span></td>
-                    <td>{{ $gradeLevel->gradeLevelName }}</td>
-                    <td>
-                        <div class="action-buttons">
-                            <button type="button" class="btn btn-edit" data-bs-toggle="modal" data-bs-target="#EditGradeLevelModal{{ $gradeLevel->gradeLevelID }}">
-                                <i class="bi bi-pencil-square"></i> Edit
-                            </button>
-
-                            @include('GradeLevel.edit', ['gradeLevel' => $gradeLevel])
-
-                            <form method="POST" action="{{ route('gradelevels.destroy', $gradeLevel->gradeLevelID) }}" style="display:inline;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this grade level?')">
-                                    <i class="bi bi-trash"></i> Delete
+    <div class="grade-levels-table ">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle" id="linktable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Grade Level Name</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($gradeLevels as $gradeLevel)
+                    <tr>
+                        <td><span class=" badge-id">{{ $gradeLevel->gradeLevelID }}</span></td>
+                        <td>{{ $gradeLevel->gradeLevelName }}</td>
+                        <td>
+                            <div class="action-buttons">
+                                <button type="button" class="btn btn-edit" data-bs-toggle="modal" data-bs-target="#EditGradeLevelModal{{ $gradeLevel->gradeLevelID }}">
+                                    <i class="bi bi-pencil-square"></i> Edit
                                 </button>
-                            </form>
-                        </div>
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
+
+                                @include('GradeLevel.edit', ['gradeLevel' => $gradeLevel])
+
+                                <form method="POST" action="{{ route('gradelevels.destroy', $gradeLevel->gradeLevelID) }}" style="display:inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this grade level?')">
+                                        <i class="bi bi-trash"></i> Delete
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 @endsection

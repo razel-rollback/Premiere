@@ -39,7 +39,7 @@ class SubjectController extends Controller
         // Validate the request
         $request->validate([
             'subjectName' => 'required|string|max:255',
-            'subjectType' => 'required|string|in:Core,Advance,Specialize',
+            'subjectType' => 'required|string|in:Core,Advanced,Specialized',
             'gradeLevelID' => 'required|exists:grade_levels,gradeLevelID',
             'strandID' => 'nullable|exists:strands,strandID',
         ]);
@@ -84,7 +84,7 @@ class SubjectController extends Controller
         // Validate the request
         $request->validate([
             'subjectName' => 'required|string|max:255',
-            'subjectType' => 'required|string|in:Core,Advance,Specialize',
+            'subjectType' => 'required|string|in:Core,Advanced,Specialized',
             'gradeLevelID' => 'required|exists:grade_levels,gradeLevelID',
             'strandID' => 'nullable|exists:strands,strandID',
         ]);

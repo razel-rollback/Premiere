@@ -78,6 +78,7 @@
         border-radius: var(--border-radius);
         overflow: hidden;
         box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        padding: 1rem;
     }
 
     .students-table th {
@@ -194,123 +195,126 @@
     @endif
 
     <div class="students-table">
-        <table class="table table-hover align-middle">
-            <thead>
-                <tr>
-                    <th>Student ID</th>
-                    <th>Name</th>
-                    <th>Grade Level</th>
-                    <th>Strand</th>
-                    <th>Section</th>
-                    <th>Academic Year</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($enrollments as $enrollment)
-                <tr>
-                    <td>{{ $enrollment->student->studentID }}</td>
-                    <td>{{ $enrollment->student->lastName }}, {{ $enrollment->student->firstName }}</td>
-                    <td>
-                        <span class="badge-section">
-                            {{ $enrollment->student->gradeLevel->gradeLevelName }}
-                        </span>
-                    </td>
-                    <td>{{ $enrollment->student->strand->strandName ?? 'N/A' }}</td>
-                    <td>{{ $enrollment->section->sectionName ?? 'N/A' }}</td>
-                    <td>{{ $enrollment->AcademicYear }}</td>
-                    <td>
-                        <div class="action-buttons">
-                            <button class="btn-view btn-rounded" data-bs-toggle="modal" data-bs-target="#viewModal{{ $enrollment->enrollmentID }}" title="View Details">
-                                <i class="bi bi-eye-fill"></i>
-                            </button>
+        <div class="table-responsive">
 
-                            <form action="{{ route('student.unenroll', $enrollment) }}" method="POST" onsubmit="return confirm('Are you sure you want to unenroll this student?')">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn-unenroll btn-rounded" title="Unenroll">
-                                    <i class="bi bi-person-dash"></i>
+            <table class="table table-hover align-middle" id="linktable">
+                <thead>
+                    <tr>
+                        <th>Student ID</th>
+                        <th>Name</th>
+                        <th>Grade Level</th>
+                        <th>Strand</th>
+                        <th>Section</th>
+                        <th>Academic Year</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($enrollments as $enrollment)
+                    <tr>
+                        <td>{{ $enrollment->student->studentID }}</td>
+                        <td>{{ $enrollment->student->lastName }}, {{ $enrollment->student->firstName }}</td>
+                        <td>
+                            <span class="badge-section">
+                                {{ $enrollment->student->gradeLevel->gradeLevelName }}
+                            </span>
+                        </td>
+                        <td>{{ $enrollment->student->strand->strandName ?? 'N/A' }}</td>
+                        <td>{{ $enrollment->section->sectionName ?? 'N/A' }}</td>
+                        <td>{{ $enrollment->AcademicYear }}</td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="btn-view btn-rounded" data-bs-toggle="modal" data-bs-target="#viewModal{{ $enrollment->enrollmentID }}" title="View Details">
+                                    <i class="bi bi-eye-fill"></i>
                                 </button>
-                            </form>
-                        </div>
-                    </td>
-                </tr>
 
-                <!-- Student Details Modal -->
-                <div class="modal fade" id="viewModal{{ $enrollment->enrollmentID }}" tabindex="-1" aria-labelledby="viewModalLabel{{ $enrollment->enrollmentID }}" aria-hidden="true">
-                    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="viewModalLabel{{ $enrollment->enrollmentID }}">
-                                    <i class="bi bi-person-badge me-2"></i>
-                                    Student Details
-                                </h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                <form action="{{ route('student.unenroll', $enrollment) }}" method="POST" onsubmit="return confirm('Are you sure you want to unenroll this student?')">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn-unenroll btn-rounded" title="Unenroll">
+                                        <i class="bi bi-person-dash"></i>
+                                    </button>
+                                </form>
                             </div>
-                            <div class="modal-body">
-                                <!-- Student Information -->
-                                <div class="modal-section">
-                                    <h6 class="modal-section-title">
-                                        <i class="bi bi-person-circle"></i>
-                                        Student Information
-                                    </h6>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <p><strong>Name:</strong> {{ $enrollment->student->firstName }} {{ $enrollment->student->lastName }}</p>
-                                            <p><strong>Gender:</strong> {{ $enrollment->student->gender }}</p>
-                                            <p><strong>Birthdate:</strong> {{ \Carbon\Carbon::parse($enrollment->student->birthDate)->format('F j, Y') }}</p>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <p><strong>Email:</strong> {{ $enrollment->student->email }}</p>
-                                            <p><strong>Phone:</strong> {{ $enrollment->student->contactNumber }}</p>
-                                            <p><strong>Address:</strong> {{ $enrollment->student->address }}</p>
-                                        </div>
-                                    </div>
-                                </div>
+                        </td>
+                    </tr>
 
-                                <!-- Academic Information -->
-                                <div class="modal-section">
-                                    <h6 class="modal-section-title">
-                                        <i class="bi bi-book"></i>
-                                        Academic Information
-                                    </h6>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <p><strong>Grade Level:</strong> {{ $enrollment->student->gradeLevel->gradeLevelName }}</p>
-                                            <p><strong>Strand:</strong> {{ $enrollment->student->strand->strandName ?? 'N/A' }}</p>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <p><strong>Section:</strong> {{ $enrollment->section->sectionName ?? 'N/A' }}</p>
-                                            <p><strong>Academic Year:</strong> {{ $enrollment->AcademicYear }}</p>
-                                            <p><strong>Date Enrolled:</strong> {{ \Carbon\Carbon::parse($enrollment->dateEnrolled)->format('F j, Y') }}</p>
+                    <!-- Student Details Modal -->
+                    <div class="modal fade" id="viewModal{{ $enrollment->enrollmentID }}" tabindex="-1" aria-labelledby="viewModalLabel{{ $enrollment->enrollmentID }}" aria-hidden="true">
+                        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="viewModalLabel{{ $enrollment->enrollmentID }}">
+                                        <i class="bi bi-person-badge me-2"></i>
+                                        Student Details
+                                    </h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <!-- Student Information -->
+                                    <div class="modal-section">
+                                        <h6 class="modal-section-title">
+                                            <i class="bi bi-person-circle"></i>
+                                            Student Information
+                                        </h6>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <p><strong>Name:</strong> {{ $enrollment->student->firstName }} {{ $enrollment->student->lastName }}</p>
+                                                <p><strong>Gender:</strong> {{ $enrollment->student->gender }}</p>
+                                                <p><strong>Birthdate:</strong> {{ \Carbon\Carbon::parse($enrollment->student->birthDate)->format('F j, Y') }}</p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><strong>Email:</strong> {{ $enrollment->student->email }}</p>
+                                                <p><strong>Phone:</strong> {{ $enrollment->student->contactNumber }}</p>
+                                                <p><strong>Address:</strong> {{ $enrollment->student->address }}</p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <!-- Guardian Information -->
-                                <div class="modal-section">
-                                    <h6 class="modal-section-title">
-                                        <i class="bi bi-shield-check"></i>
-                                        Guardian Information
-                                    </h6>
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <p><strong>Name:</strong> {{ $enrollment->student->guardian->guardianFirstName }} {{ $enrollment->student->guardian->guardianLastName }}</p>
-                                            <p><strong>Relationship:</strong> {{ $enrollment->student->guardian->guardianRelation }}</p>
-                                            <p><strong>Contact:</strong> {{ $enrollment->student->guardian->guardianPhone }}</p>
+                                    <!-- Academic Information -->
+                                    <div class="modal-section">
+                                        <h6 class="modal-section-title">
+                                            <i class="bi bi-book"></i>
+                                            Academic Information
+                                        </h6>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <p><strong>Grade Level:</strong> {{ $enrollment->student->gradeLevel->gradeLevelName }}</p>
+                                                <p><strong>Strand:</strong> {{ $enrollment->student->strand->strandName ?? 'N/A' }}</p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><strong>Section:</strong> {{ $enrollment->section->sectionName ?? 'N/A' }}</p>
+                                                <p><strong>Academic Year:</strong> {{ $enrollment->AcademicYear }}</p>
+                                                <p><strong>Date Enrolled:</strong> {{ \Carbon\Carbon::parse($enrollment->dateEnrolled)->format('F j, Y') }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Guardian Information -->
+                                    <div class="modal-section">
+                                        <h6 class="modal-section-title">
+                                            <i class="bi bi-shield-check"></i>
+                                            Guardian Information
+                                        </h6>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <p><strong>Name:</strong> {{ $enrollment->student->guardian->guardianFirstName }} {{ $enrollment->student->guardian->guardianLastName }}</p>
+                                                <p><strong>Relationship:</strong> {{ $enrollment->student->guardian->guardianRelation }}</p>
+                                                <p><strong>Contact:</strong> {{ $enrollment->student->guardian->guardianPhone }}</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                @endforeach
-            </tbody>
-        </table>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 @endsection

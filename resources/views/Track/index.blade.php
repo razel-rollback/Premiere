@@ -1,64 +1,301 @@
 @extends('layouts.app')
 
-<!-- @section('title', 'Tracks') -->
+@section('title', 'Tracks')
 
 @section('head')
-<!-- Add any additional CSS or JS here -->
+<!-- Bootstrap Icons CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+
+<style>
+    /* Reuse the root variables from parent */
+    :root {
+        --sidebar-width: 280px;
+        --sidebar-bg: #1a2035;
+        --sidebar-active: #2d3748;
+        --sidebar-hover: #2a3347;
+        --primary: #4361ee;
+        --primary-light: #ebf1ff;
+        --secondary: #3f37c9;
+        --accent: #4895ef;
+        --success: #4cc9f0;
+        --danger: #f72585;
+        --warning: #f8961e;
+        --info: #3a0ca3;
+        --light: #f8f9fa;
+        --dark: #212529;
+        --border-radius: 0.5rem;
+        --transition: all 0.3s ease;
+    }
+
+    /* Page header styles */
+    .page-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .page-title {
+        font-size: 1.75rem;
+        font-weight: 600;
+        color: var(--dark);
+        margin: 0;
+    }
+
+    /* Button styles */
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 1rem;
+        border-radius: var(--border-radius);
+        border: none;
+        cursor: pointer;
+        transition: var(--transition);
+        font-weight: 500;
+    }
+
+    .btn-sm {
+        padding: 0.375rem 0.75rem;
+        font-size: 0.875rem;
+    }
+
+    .btn-primary {
+        background-color: var(--primary);
+        color: white;
+    }
+
+    .btn-primary:hover {
+        background-color: var(--secondary);
+        color: white;
+        transform: translateY(-2px);
+    }
+
+    .btn-warning {
+        background-color: var(--warning);
+        color: white;
+    }
+
+    .btn-warning:hover {
+        background-color: #e07e0c;
+        color: white;
+    }
+
+    .btn-danger {
+        background-color: var(--danger);
+        color: white;
+    }
+
+    .btn-danger:hover {
+        background-color: #e0115f;
+        color: white;
+    }
+
+    /* Table styles */
+    .table {
+        width: 100%;
+        background: white;
+        border-radius: var(--border-radius);
+        overflow: hidden;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        border-collapse: collapse;
+        padding: 1rem;
+    }
+
+    .table th {
+        background-color: var(--primary);
+        color: white;
+        font-weight: 500;
+        padding: 1rem;
+        text-align: left;
+    }
+
+    .table td {
+        vertical-align: middle;
+        padding: 1rem;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .table-striped tbody tr:nth-of-type(odd) {
+        background-color: rgba(0, 0, 0, 0.02);
+    }
+
+    .table-hover tbody tr:hover {
+        background-color: rgba(0, 0, 0, 0.03);
+    }
+
+    /* Alert styles */
+    .alert {
+        padding: 1rem;
+        border-radius: var(--border-radius);
+        margin-bottom: 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .alert-danger {
+        background-color: rgba(247, 37, 133, 0.1);
+        color: var(--danger);
+        border: 1px solid rgba(247, 37, 133, 0.2);
+    }
+
+    .alert-success {
+        background-color: rgba(76, 201, 240, 0.1);
+        color: #0d6efd;
+        border: 1px solid rgba(76, 201, 240, 0.2);
+    }
+
+    .btn-close {
+        background: none;
+        border: none;
+        font-size: 1.25rem;
+        opacity: 0.5;
+        cursor: pointer;
+    }
+
+    .btn-close:hover {
+        opacity: 0.75;
+    }
+
+    /* Form and modal styles */
+    .modal-content {
+        border-radius: var(--border-radius);
+        border: none;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    }
+
+    .modal-title {
+        font-weight: 600;
+        margin: 0;
+    }
+
+    .modal-body {
+        padding: 1.5rem;
+    }
+
+    .form-label {
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+        color: var(--dark);
+    }
+
+    .form-control {
+        border-radius: var(--border-radius);
+        border: 1px solid #ced4da;
+        padding: 0.5rem 0.75rem;
+        transition: var(--transition);
+    }
+
+    .form-control:focus {
+        border-color: var(--primary);
+        box-shadow: 0 0 0 0.25rem rgba(67, 97, 238, 0.25);
+    }
+
+    /* Badge styles */
+    .badge-pill {
+        background-color: var(--primary-light);
+        color: var(--primary);
+        padding: 0.25rem 0.75rem;
+        border-radius: 50rem;
+        font-weight: 600;
+        font-size: 0.8rem;
+    }
+
+    .badge-type {
+        background-color: #e2f3fb;
+        color: #0d6efd;
+        padding: 0.25rem 0.75rem;
+        border-radius: 50rem;
+        font-size: 0.8rem;
+    }
+
+    /* Action buttons */
+    .action-buttons {
+        display: flex;
+        gap: 0.5rem;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .page-header {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .action-buttons {
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .btn {
+            width: 100%;
+            justify-content: center;
+        }
+    }
+</style>
 @endsection
 
 @section('content')
 <div class="container-fluid">
-    <h1>Track</h1>
+    <div class="page-header">
+        <h1 class="page-title">Tracks</h1>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#AddTrackModal">
+            <i class="bi bi-plus-lg"></i> Add Track
+        </button>
+    </div>
+
     @if(session('error'))
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <i class="bi bi-exclamation-triangle-fill me-2"></i>
         {{ session('error') }}
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     @endif
+
     @if(session('success'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <i class="bi bi-check-circle-fill me-2"></i>
         {{ session('success') }}
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     @endif
-    <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#AddTrackModal">
-        Add Track
-    </button>
-    @include('Track.create') <!-- Include the modal for adding a new track -->
-    <table class="table table-striped table-hover table-bordered mt-4">
-        <thead class="table-dark">
-            <tr>
-                <th>#</th>
-                <th>Track Name</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($Tracks as $Track)
-            <tr>
-                <td>
-                    {{ $Track->trackID }}
-                </td>
-                <td>
-                    {{ $Track->trackName }}
-                </td>
-                <td>
-                    <button type="button" class="btn btn-warning me-1" data-bs-toggle="modal" data-bs-target="#EditTrackModal{{ $Track->trackID }}">
-                        Edit
-                    </button>
-                    <form method="POST" action="{{ route('tracks.destroy', $Track->trackID) }}" style="display:inline;" class="mb-3">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger">Delete</button>
-                    </form>
-                    <!-- Include the Modal -->
-                    @include('Track.edit', ['Track' => $Track])
 
+    @include('Track.create')
 
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
-
+    <div class="table-responsive">
+        <table class="table table-striped table-hover" id="linktable">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Track Name</th>
+                    <th class="text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($Tracks as $Track)
+                <tr>
+                    <td><span class="badge-pill">{{ $Track->trackID }}</span></td>
+                    <td>{{ $Track->trackName }}</td>
+                    <td class="text-center action-buttons">
+                        <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#EditTrackModal{{ $Track->trackID }}">
+                            <i class="bi bi-pencil"></i> Edit
+                        </button>
+                        <form method="POST" action="{{ route('tracks.destroy', $Track->trackID) }}" class="d-inline">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger btn-sm">
+                                <i class="bi bi-trash"></i> Delete
+                            </button>
+                        </form>
+                        @include('Track.edit', ['Track' => $Track])
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
 </div>
 @endsection

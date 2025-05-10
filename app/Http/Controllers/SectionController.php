@@ -6,6 +6,7 @@ use App\Models\Strand;
 use App\Models\Section;
 use App\Models\GradeLevel;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class SectionController extends Controller
 {
@@ -90,7 +91,10 @@ class SectionController extends Controller
             'sectionName' => 'required|string|max:255',
             'gradeLevelID' => 'required|exists:grade_levels,gradeLevelID',
             'strandID' => 'required|exists:strands,strandID',
-            'room' => 'required|unique:sections,room',
+            'room' => [
+                'required',
+                Rule::unique('sections', 'room')->ignore($section->sectionID, 'sectionID')
+            ],
         ]);
 
         try {

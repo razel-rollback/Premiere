@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\GradeController;
 use App\Http\Controllers\TrackController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\StrandController;
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\SubjectController;
@@ -49,6 +50,7 @@ Route::middleware(['auth.custom:student'])->group(function () {
     //
     Route::post('/student/logout', [StudentLogInController::class, 'logout'])->name('student.logout');
     Route::get('/student/profile', [StudentLogInController::class, 'showProfile'])->name('student.profile');
+    Route::put('/student/profile/{payment}', [StudentLogInController::class, 'payment'])->name('payment.payment');
 });
 
 Route::middleware(['auth.custom:admin'])->group(function () {
@@ -105,6 +107,13 @@ Route::get('/Track/{tracks}/edit', [TrackController::class, 'edit'])->name('trac
 Route::put('/Track/{tracks}', [TrackController::class, 'update'])->name('tracks.update');
 Route::delete('/Track/{tracks}', [TrackController::class, 'destroy'])->name('tracks.destroy');
 
+// Reports Routes
+
+// routes/web.php
+Route::prefix('reports')->group(function () {
+    Route::get('/', [ReportController::class, 'index'])->name('reports.index');
+    Route::post('/generate', [ReportController::class, 'generate'])->name('reports.generate');
+});
 
 
 
