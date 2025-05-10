@@ -144,41 +144,43 @@
 
     @include('GradeLevel.create')
 
-    <div class="grade-levels-table table-responsive">
-        <table class="table table-hover align-middle" id="linktable">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Grade Level Name</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($gradeLevels as $gradeLevel)
-                <tr>
-                    <td><span class=" badge-id">{{ $gradeLevel->gradeLevelID }}</span></td>
-                    <td>{{ $gradeLevel->gradeLevelName }}</td>
-                    <td>
-                        <div class="action-buttons">
-                            <button type="button" class="btn btn-edit" data-bs-toggle="modal" data-bs-target="#EditGradeLevelModal{{ $gradeLevel->gradeLevelID }}">
-                                <i class="bi bi-pencil-square"></i> Edit
-                            </button>
-
-                            @include('GradeLevel.edit', ['gradeLevel' => $gradeLevel])
-
-                            <form method="POST" action="{{ route('gradelevels.destroy', $gradeLevel->gradeLevelID) }}" style="display:inline;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this grade level?')">
-                                    <i class="bi bi-trash"></i> Delete
+    <div class="grade-levels-table ">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle" id="linktable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Grade Level Name</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($gradeLevels as $gradeLevel)
+                    <tr>
+                        <td><span class=" badge-id">{{ $gradeLevel->gradeLevelID }}</span></td>
+                        <td>{{ $gradeLevel->gradeLevelName }}</td>
+                        <td>
+                            <div class="action-buttons">
+                                <button type="button" class="btn btn-edit" data-bs-toggle="modal" data-bs-target="#EditGradeLevelModal{{ $gradeLevel->gradeLevelID }}">
+                                    <i class="bi bi-pencil-square"></i> Edit
                                 </button>
-                            </form>
-                        </div>
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
+
+                                @include('GradeLevel.edit', ['gradeLevel' => $gradeLevel])
+
+                                <form method="POST" action="{{ route('gradelevels.destroy', $gradeLevel->gradeLevelID) }}" style="display:inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this grade level?')">
+                                        <i class="bi bi-trash"></i> Delete
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 @endsection
