@@ -21,9 +21,21 @@ class Section extends Model
         'created_at',
         'updated_at',
     ];
+
+    public function schedules()
+    {
+        return $this->hasMany(Schedule::class, 'sectionID');
+    }
     public function students()
     {
-        return $this->hasMany(Student::class);
+        return $this->hasManyThrough(
+            Student::class,
+            Enrollment::class,
+            'sectionID', // Foreign key on enrollments table
+            'studentID', // Foreign key on students table
+            'sectionID', // Local key on sections table
+            'studentID'  // Local key on enrollments table
+        );
     }
     public function gradeLevel()
     {

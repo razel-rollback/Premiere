@@ -43,6 +43,7 @@ Route::middleware(['auth.custom:student'])->group(function () {
     //
     Route::post('/student/logout', [StudentLogInController::class, 'logout'])->name('student.logout');
     Route::get('/student/profile', [StudentLogInController::class, 'showProfile'])->name('student.profile');
+    Route::put('/student/profile/{payment}', [StudentLogInController::class, 'payment'])->name('payment.payment');
 });
 
 Route::middleware(['auth.custom:admin'])->group(function () {
@@ -101,8 +102,12 @@ Route::delete('/Track/{tracks}', [TrackController::class, 'destroy'])->name('tra
 
 // Reports Routes
 
-Route::get('/reports/generate', [ReportController::class, 'generate'])->name('reports.generate');
-Route::get('/reports', [ReportController::class, 'index'])->name('reports.index');
+// routes/web.php
+Route::prefix('reports')->group(function () {
+    Route::get('/', [ReportController::class, 'index'])->name('reports.index');
+    Route::post('/generate', [ReportController::class, 'generate'])->name('reports.generate');
+});
+
 
 
 
