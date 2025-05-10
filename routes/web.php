@@ -1,6 +1,10 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
 use App\Models\Enrollment;
+use App\Models\Subject;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\GradeController;
@@ -16,10 +20,13 @@ use App\Http\Controllers\AdminLogInController;
 use App\Http\Controllers\StudentLogInController;
 use App\Http\Controllers\EnrolledStudentController;
 use App\Http\Controllers\StudentAdmissionController;
+use Illuminate\Http\Request;
 
 // Ensure the controller exists and is correctly referenced
 
-
+Route::get('/get-subjects', function (Request $request) {
+    return Subject::where('strandID', $request->strand_id)->get();
+});
 Route::middleware('guest.user')->group(function () {
 
     Route::get('/', [HomeController::class, 'index'])->name('home.index');
@@ -123,7 +130,7 @@ Route::delete('/enrollments/{enrollment}', [EnrolledStudentController::class, 'u
 
 
 
-Route::get('schedule', [ScheduleController::class, 'index'])->name('schedules.index');
+Route::get('/schedules', [ScheduleController::class, 'index'])->name('schedules.index');
 Route::get('schedule/create', [ScheduleController::class, 'create'])->name('schedules.create');
 Route::post('/schedules', [ScheduleController::class, 'store'])->name('schedules.store');
 Route::get('schedule/{schedule}/edit', [ScheduleController::class, 'edit'])->name('schedules.edit');

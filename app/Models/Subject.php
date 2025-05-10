@@ -33,6 +33,7 @@ class Subject extends Model
     {
         return $this->belongsTo(Strand::class, 'strandID');
     }
+
     public function schedules()
     {
         return $this->hasMany(Schedule::class, 'scheduleID');

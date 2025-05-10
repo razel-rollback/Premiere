@@ -48,14 +48,13 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($sections as $section)
+            @foreach($schedules as $schedule)
             <tr>
-                <td>{{ $section->sectionName }}</td>
-                <td>{{ $section->subject }}</td>
-                <td>{{ $section->teacher }}</td>
-                <td>{{ $section->time }}</td>
+                <td>{{ $schedule->sectionName }}</td>
+                <td>{{ $schedule->subjectName }}</td>
+                <td>{{ $schedule->teacherName }}</td>
+                <td>{{ $schedule->time }}</td>
                 <td>
-                    <a class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editsectionModal{{ $section->sectionID }}">Edit</a>
                 </td>
             </tr>
             @endforeach

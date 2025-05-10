@@ -32,7 +32,7 @@ class Section extends Model
 
     public function strand()
     {
-        return $this->belongsTo(Strand::class, 'strandID', 'strandID');
+        return $this->belongsTo(Strand::class, 'strandID');
     }
 
     public function enrollments()

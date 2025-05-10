@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Models\Section;
 use App\Models\GradeLevel;
 use App\Models\Strand;
+use App\Models\Subject;
+use App\Models\Teacher;
+use Illuminate\Support\Facades\Log;
 
 
 class ScheduleController extends Controller
@@ -16,12 +19,41 @@ class ScheduleController extends Controller
      */
     public function index()
     {
-        $sections = Section::all();
-        $gradeLevels = GradeLevel::all();
-        $strands = Strand::all();
 
-        return view('schedule.index', compact('sections', 'gradeLevels', 'strands'));
+        $schedules = Schedule::select(
+            'schedules.*',
+            'sections.sectionName as sectionName',
+            'subjects.subjectName as subjectName',
+            'teachers.teacherName as teacherName'
+        )
+            ->join('sections', 'schedules.sectionID', '=', 'sections.sectionID')
+            ->join('subjects', 'schedules.subjectID', '=', 'subjects.subjectID')
+            ->join('teachers', 'schedules.teacherID', '=', 'teachers.teacherID')
+            ->get();
+
+        $sections = Section::all(); // Add this line
+        $subjects = Subject::all(); // Add this line
+        $teachers = Teacher::all(); // Add this line
+
+        return view('schedule.index', compact('schedules', 'sections', 'subjects', 'teachers'));
     }
+
+    public function getSubjectsByStrand($strandId)
+    {
+        // Verify the strand exists
+        if (!\App\Models\Strand::find($strandId)) {
+            return response()->json(['error' => 'Strand not found'], 404);
+        }
+
+        // Get subjects with their full data
+        $subjects = Subject::where('strandID', $strandId)
+            ->select('subjectID', 'subjectName')
+            ->get();
+
+        return response()->json($subjects);
+    }
+
+
 
 
     /**
@@ -29,6 +61,10 @@ class ScheduleController extends Controller
      */
     public function create()
     {
+        $sections = Section::all(); // Fetch all sections
+        $subjects = Subject::all(); // Fetch all subjects
+        $teachers = Teacher::all(); // Fetch all teachers
+
         return view('Schedule.create');
     }
 
@@ -37,29 +73,34 @@ class ScheduleController extends Controller
      */
     public function store(Request $request)
     {
+        Log::debug('Schedule Store Request:', $request->all());
+
         $validated = $request->validate([
-            'scheduleID' => 'required|unique:schedules,scheduleID|max:255',
-            'subjectID' => 'required|exists:subjects,id',
-            'sectionID' => 'required|exists:sections,id',
-            'teacherID' => 'required|exists:teachers,id',
+            'sectionID' => 'required|exists:sections,sectionID',
+            'subjectID' => 'required|exists:subjects,subjectID',
+            'teacherID' => 'required|exists:teachers,teacherID',
             'timeStart' => 'required|date_format:H:i',
-            'timeEnd' => 'required|date_format:H:i|after:time_start',
-            'RoomNum' => 'required|max:255',
+            'timeEnd' => 'required|date_format:H:i|after:timeStart',
         ]);
 
-        Schedule::create([
-            'scheduleID' => $request->input('scheduleID'),
-            'subjectID' => $request->input('subjectID'),
-            'sectionID' => $request->input('sectionID'),
-            'teacherID' => $request->input('teacherID'),
-            'timeStart' => $request->input('timeStart'),
-            'timeEnd' => $request->input('timeEnd'),
-            'RoomNum' => $request->input('RoomNum'),
-        ]);
+        Log::debug('Validated Data:', $validated);
 
-        Schedule::create($validated);
+        try {
+            $schedule = Schedule::create([
+                'sectionID' => $validated['sectionID'],
+                'subjectID' => $validated['subjectID'],
+                'teacherID' => $validated['teacherID'],
+                'timeStart' => $validated['timeStart'],
+                'timeEnd' => $validated['timeEnd']
+            ]);
 
-        return redirect()->route('schdules.index')->with('success', 'schedule created successfully!');
+            Log::debug('Created Schedule:', $schedule->toArray());
+
+            return redirect()->route('schedules.index')->with('success', 'Schedule created successfully!');
+        } catch (\Exception $e) {
+            Log::error('Schedule Creation Error:', ['error' => $e->getMessage()]);
+            return back()->withInput()->with('error', 'Error creating schedule: ' . $e->getMessage());
+        }
     }
 
     /**

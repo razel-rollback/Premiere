@@ -10,43 +10,48 @@
             <form method="POST" action="{{ route('schedules.store') }}">
                 @csrf
                 <div class="modal-body">
-
                     <h3>Add Schedule</h3>
+                    @yield('scripts')
+
+                    <!-- Section Dropdown -->
                     <div class="mb-3">
-                        <label for="selectsection" class="form-label">Section</label>
-                        <select class="form-select" id="selectsection" name="sectionID">
-                            <option value="0" disabled selected>Select Section</option>
-                            <option value="">Section 1</option>
-                            <option value="">Section 2</option>
-                            <option value="">Section 3</option>
+                        <label for="selectSection" class="form-label">Section</label>
+                        <select id="sectionDropdown" name="sectionID" class="form-select" required>
+                            <option value="" disabled selected>Select Section</option>
+                            @foreach($sections as $section)
+                            <option value="{{ $section->sectionID }}" data-strand="{{ $section->strandID }}">
+                                {{ $section->sectionName }}
+                            </option>
+                            @endforeach
                         </select>
                     </div>
 
+                    <!-- Subject Dropdown -->
                     <div class="mb-3">
-                        <label for="selectsubject" class="form-label">Subject</label>
-                        <select name="subjectID" id="selectsubject" class="form-select">
+                        <label for="selectSubject" class="form-label">Subject</label>
+                        <select id="subjectDropdown" name="subjectID" class="form-select" required>
                             <option value="" disabled selected>Select Subject</option>
-                            <option value="">Subject 1</option>
-                            <option value="">Subject 2</option>
-                            <option value="">Subject 3</option>
                         </select>
                     </div>
 
+                    <!-- Teacher Dropdown -->
                     <div class="mb-3">
-                        <label for="selectteacher" class="form-label">Teacher</label>
-                        <select name="teacherID" id="selectteacher" class="form-select">
+                        <label for="selectTeacher" class="form-label">Teacher</label>
+                        <select name="teacherID" id="selectTeacher" class="form-select" required>
                             <option value="" disabled selected>Select Teacher</option>
-                            <option value="">Teacher 1</option>
-                            <option value="">Teacher 2</option>
-                            <option value="">Teacher 3</option>
+                            @foreach($teachers as $teacher)
+                            <option value="{{ $teacher->teacherID }}">{{ $teacher->teacherName }}</option>
+                            @endforeach
                         </select>
                     </div>
-                    <div class="mb-3">
-                        <label for="str" class="form-label">Start:</label>
-                        <input type="time" id="str" name="str" class="form-control" min="08:00" max="16:00">
 
-                        <label for="end" class="form-label">End:</label>
-                        <input type="time" id="end" name="end" class="form-control" min="09:00" max="17:00">
+                    <!-- Time Inputs -->
+                    <div class="mb-3">
+                        <label for="timeStart" class="form-label">Start Time:</label>
+                        <input type="time" id="timeStart" name="timeStart" class="form-control" required>
+
+                        <label for="timeEnd" class="form-label">End Time:</label>
+                        <input type="time" id="timeEnd" name="timeEnd" class="form-control" required>
                     </div>
                 </div>
 
@@ -59,3 +64,29 @@
         </div>
     </div>
 </div>
+
+@section('scripts')
+<script>
+    document.getElementById('sectionDropdown').addEventListener('change', function() {
+        const strandId = this.options[this.selectedIndex].dataset.strand;
+        const subjectDropdown = document.getElementById('subjectDropdown');
+
+        subjectDropdown.innerHTML = '<option value="" disabled selected>Loading...</option>';
+        subjectDropdown.disabled = true;
+
+        fetch(`/get-subjects?strand_id=${strandId}`)
+            .then(response => response.json())
+            .then(subjects => {
+                subjectDropdown.innerHTML = '<option value="" disabled selected>Select Subject</option>';
+                subjects.forEach(subject => {
+                    const option = new Option(subject.subjectName, subject.subjectID);
+                    subjectDropdown.add(option);
+                });
+                subjectDropdown.disabled = false;
+            })
+            .catch(error => {
+                subjectDropdown.innerHTML = '<option value="" disabled selected>Error loading subjects</option>';
+            });
+    });
+</script>
+@endsection
