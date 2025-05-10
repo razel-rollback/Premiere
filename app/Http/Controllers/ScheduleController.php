@@ -83,25 +83,57 @@ class ScheduleController extends Controller
             'timeEnd' => 'required|date_format:H:i|after:timeStart',
         ]);
 
-        Log::debug('Validated Data:', $validated);
+        // Check for overlapping schedules for the same section
+        $sectionConflict = Schedule::where('sectionID', $validated['sectionID'])
+            ->where(function ($query) use ($validated) {
+                $query->whereBetween('timeStart', [$validated['timeStart'], $validated['timeEnd']])
+                    ->orWhereBetween('timeEnd', [$validated['timeStart'], $validated['timeEnd']])
+                    ->orWhere(function ($q) use ($validated) {
+                        $q->where('timeStart', '<', $validated['timeStart'])
+                            ->where('timeEnd', '>', $validated['timeEnd']);
+                    });
+            })
+            ->exists();
+
+        if ($sectionConflict) {
+            return back()->withInput()->with('error', 'Schedule conflict: This section already has a subject during this timeslot.');
+        }
+
+        // Check for overlapping schedules for the same teacher
+        $teacherConflict = Schedule::where('teacherID', $validated['teacherID'])
+            ->where(function ($query) use ($validated) {
+                $query->whereBetween('timeStart', [$validated['timeStart'], $validated['timeEnd']])
+                    ->orWhereBetween('timeEnd', [$validated['timeStart'], $validated['timeEnd']])
+                    ->orWhere(function ($q) use ($validated) {
+                        $q->where('timeStart', '<', $validated['timeStart'])
+                            ->where('timeEnd', '>', $validated['timeEnd']);
+                    });
+            })
+            ->exists();
+
+        if ($teacherConflict) {
+            return back()->withInput()->with('error', 'Schedule conflict: This teacher is already assigned during this timeslot.');
+        }
+
+        // Check for duplicate subject in the same section
+        $duplicateSubject = Schedule::where('sectionID', $validated['sectionID'])
+            ->where('subjectID', $validated['subjectID'])
+            ->exists();
+
+        if ($duplicateSubject) {
+            return back()->withInput()->with('error', 'This subject is already assigned to this section.');
+        }
 
         try {
-            $schedule = Schedule::create([
-                'sectionID' => $validated['sectionID'],
-                'subjectID' => $validated['subjectID'],
-                'teacherID' => $validated['teacherID'],
-                'timeStart' => $validated['timeStart'],
-                'timeEnd' => $validated['timeEnd']
-            ]);
-
+            $schedule = Schedule::create($validated);
             Log::debug('Created Schedule:', $schedule->toArray());
-
             return redirect()->route('schedules.index')->with('success', 'Schedule created successfully!');
         } catch (\Exception $e) {
             Log::error('Schedule Creation Error:', ['error' => $e->getMessage()]);
             return back()->withInput()->with('error', 'Error creating schedule: ' . $e->getMessage());
         }
     }
+
 
     /**
      * Display the specified resource.

@@ -237,7 +237,7 @@
                         <form action="{{ route('sections.destroy', $section->sectionID) }}" method="POST" class="d-inline">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">
+                            <button type="submit" class="btn  btn-danger btn-sm" onclick="return confirm('Are you sure?')">
                                 <i class="bi bi-trash"></i> Delete
                             </button>
                         </form>
