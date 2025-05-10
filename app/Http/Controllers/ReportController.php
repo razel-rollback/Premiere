@@ -94,6 +94,8 @@ class ReportController extends Controller
     {
         $sections = Section::withCount('enrollments')
             ->with(['gradeLevel', 'strand'])
+            ->orderBy('gradeLevelID') // Order by grade level first
+            ->orderBy('sectionName')  // Then by section name
             ->get();
 
         return view('reports.results', [
@@ -129,6 +131,10 @@ class ReportController extends Controller
     {
         $students = Student::where('status', 'Enrolled')
             ->with(['gradeLevel', 'strand', 'enrollments.section'])
+            ->orderBy('gradeLevelID')    // First by grade level
+            ->orderBy('strandID')       // Then by strand
+            ->orderBy('lastName')      // Then by last name
+            ->orderBy('firstName')     // Then by first name
             ->get();
 
         return view('reports.results', [
@@ -148,7 +154,14 @@ class ReportController extends Controller
 
     protected function studentsByStrandSection()
     {
-        $sections = Section::with(['students', 'strand', 'gradeLevel'])
+        $sections = Section::with(['students' => function ($query) {
+            $query->orderBy('lastName')
+                ->orderBy('firstName');
+        }])
+            ->with(['strand', 'gradeLevel'])
+            ->orderBy('gradeLevelID')    // First by grade level
+            ->orderBy('strandID')       // Then by strand
+            ->orderBy('sectionName')   // Then by section name
             ->get();
 
         $data = [];

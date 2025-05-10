@@ -56,6 +56,7 @@
         border-radius: var(--border-radius);
         overflow: hidden;
         box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        padding: 1rem;
     }
 
     .subjects-table th {
@@ -95,6 +96,40 @@
         display: flex;
         align-items: center;
         gap: 0.5rem;
+    }
+
+    /* Form and modal styles */
+    .modal-content {
+        border-radius: var(--border-radius);
+        border: none;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    }
+
+    .modal-title {
+        font-weight: 600;
+        margin: 0;
+    }
+
+    .modal-body {
+        padding: 1.5rem;
+    }
+
+    .form-label {
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+        color: var(--dark);
+    }
+
+    .form-control {
+        border-radius: var(--border-radius);
+        border: 1px solid #ced4da;
+        padding: 0.5rem 0.75rem;
+        transition: var(--transition);
+    }
+
+    .form-control:focus {
+        border-color: var(--primary);
+        box-shadow: 0 0 0 0.25rem rgba(67, 97, 238, 0.25);
     }
 
     .badge-pill {
@@ -154,11 +189,10 @@
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             @endif
-
             @include('Subject.create', ['gradeLevels' => $gradeLevels, 'strands' => $strands])
 
-            <div class="subjects-table">
-                <table class="table table-hover align-middle">
+            <div class="subjects-table table-responsive">
+                <table class="table table-hover align-middle" id="linktable">
                     <thead>
                         <tr>
                             <th>ID</th>

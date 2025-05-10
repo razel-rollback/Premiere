@@ -49,10 +49,13 @@
     }
 
     .grade-levels-table {
+        width: 100%;
         background: white;
         border-radius: var(--border-radius);
         overflow: hidden;
         box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        border-collapse: collapse;
+        padding: 1rem;
     }
 
     .grade-levels-table th {
@@ -60,11 +63,13 @@
         color: white;
         font-weight: 500;
         padding: 1rem;
+        text-align: left;
     }
 
     .grade-levels-table td {
         vertical-align: middle;
         padding: 1rem;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
     }
 
     .action-buttons {
@@ -139,8 +144,8 @@
 
     @include('GradeLevel.create')
 
-    <div class="grade-levels-table">
-        <table class="table table-hover align-middle">
+    <div class="grade-levels-table table-responsive">
+        <table class="table table-hover align-middle" id="linktable">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -151,7 +156,7 @@
             <tbody>
                 @foreach($gradeLevels as $gradeLevel)
                 <tr>
-                    <td><span class="badge-id">{{ $gradeLevel->gradeLevelID }}</span></td>
+                    <td><span class=" badge-id">{{ $gradeLevel->gradeLevelID }}</span></td>
                     <td>{{ $gradeLevel->gradeLevelName }}</td>
                     <td>
                         <div class="action-buttons">
