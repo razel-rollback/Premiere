@@ -12,6 +12,7 @@ use App\Models\Teacher;
 use Illuminate\Support\Facades\Log;
 
 
+
 class ScheduleController extends Controller
 {
     /**
@@ -148,7 +149,11 @@ class ScheduleController extends Controller
      */
     public function edit(Schedule $schedule)
     {
-        //
+        $sections = Section::all(); // Fetch all sections
+        $subjects = Subject::all(); // Fetch all subjects
+        $teachers = Teacher::all(); // Fetch all teachers
+
+        return view('Schedule.edit', compact('schedule', 'sections', 'subjects', 'teachers'));
     }
 
     /**
@@ -156,14 +161,33 @@ class ScheduleController extends Controller
      */
     public function update(Request $request, Schedule $schedule)
     {
-        //
+        $request->validate([
+            'sectionName' => 'required|string|max:255',
+            'subjectName' => 'required|string|max:255',
+            'teacherName' => 'required|string|max:255',
+            'time' => 'required|string|max:255',
+        ]);
+
+        $schedule = Schedule::findOrFail($id);
+
+        $schedule->update([
+            'sectionName' => $request->sectionName,
+            'subjectName' => $request->subjectName,
+            'teacherName' => $request->teacherName,
+            'time' => $request->time,
+        ]);
+
+        return redirect()->back()->with('success', 'Schedule updated successfully.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
+
     public function destroy(Schedule $schedule)
     {
-        //
+        $schedule->delete();
+
+        return redirect()->back()->with('success', 'Schedule deleted successfully.');
     }
 }

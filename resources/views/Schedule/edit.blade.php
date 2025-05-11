@@ -1,41 +1,59 @@
-<div class="modal fade" id="editsectionModal{{ $section->sectionID }}" tabindex="-1" aria-labelledby="editSectionModalLabel{{ $section->sectionID }}" aria-hidden="true">
+<!-- Edit Modal -->
+<div class="modal fade" id="editScheduleModal{{ $schedule->scheduleID }}" tabindex="-1" aria-labelledby="editScheduleModalLabel{{ $schedule->scheduleID }}" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editSectionModalLabel{{ $section->sectionID }}">Edit Section</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form action="{{ route('sections.update', $section->sectionID) }}" method="POST">
-                    @csrf
-                    @method('PUT')
+            <form method="POST" action="{{ route('schedules.update', $schedule->scheduleID) }}">
+                @csrf
+                @method('PUT')
+
+                <div class="modal-body">
+                    <h3>Edit Schedule</h3>
+
+                    <!-- Section (readonly or not) -->
                     <div class="mb-3">
-                        <label for="sectionName{{ $section->sectionID }}" class="form-label">Section Name</label>
-                        <input type="text" class="form-control" id="sectionName{{ $section->sectionID }}" name="sectionName" value="{{ $section->sectionName }}" required>
+                        <label for="editSection{{ $schedule->scheduleID }}" class="form-label">Section</label>
+                        <input type="text" class="form-control" value="{{ $schedule->sectionName }}" readonly>
                     </div>
+
+                    <!-- Subject -->
                     <div class="mb-3">
-                        <label for="gradeLevelID{{ $section->sectionID }}" class="form-label">Grade Level</label>
-                        <select class="form-select" id="gradeLevelID{{ $section->sectionID }}" name="gradeLevelID" required>
-                            @foreach($gradeLevels as $gradeLevel)
-                            <option value="{{ $gradeLevel->gradeLevelID }}" {{ $section->gradeLevelID == $gradeLevel->gradeLevelID ? 'selected' : '' }}>
-                                {{ $gradeLevel->gradeLevelName }}
+                        <label for="editSubject{{ $schedule->scheduleID }}" class="form-label">Subject</label>
+                        <select name="subjectID" class="form-select" required>
+                            @foreach($subjects as $subject)
+                            <option value="{{ $subject->subjectID }}" {{ $subject->subjectID == $schedule->subjectID ? 'selected' : '' }}>
+                                {{ $subject->subjectName }}
                             </option>
                             @endforeach
                         </select>
                     </div>
+
+                    <!-- Teacher -->
                     <div class="mb-3">
-                        <label for="strandID{{ $section->sectionID }}" class="form-label">Strand</label>
-                        <select class="form-select" id="strandID{{ $section->sectionID }}" name="strandID" required>
-                            @foreach($strands as $strand)
-                            <option value="{{ $strand->strandID }}" {{ $section->strandID == $strand->strandID ? 'selected' : '' }}>
-                                {{ $strand->strandName }}
+                        <label for="editTeacher{{ $schedule->scheduleID }}" class="form-label">Teacher</label>
+                        <select name="teacherID" class="form-select" required>
+                            @foreach($teachers as $teacher)
+                            <option value="{{ $teacher->teacherID }}" {{ $teacher->teacherID == $schedule->teacherID ? 'selected' : '' }}>
+                                {{ $teacher->teacherName }}
                             </option>
                             @endforeach
                         </select>
                     </div>
+
+                    <!-- Time -->
+                    <div class="mb-3">
+                        <label for="editTimeStart{{ $schedule->scheduleID }}" class="form-label">Start Time</label>
+                        <input type="time" class="form-control" name="timeStart" value="{{ \Carbon\Carbon::parse($schedule->timeStart)->format('H:i') }}" required>
+
+                        <label for="editTimeEnd{{ $schedule->scheduleID }}" class="form-label mt-2">End Time</label>
+                        <input type="time" class="form-control" name="timeEnd" value="{{ \Carbon\Carbon::parse($schedule->timeEnd)->format('H:i') }}" required>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                     <button type="submit" class="btn btn-primary">Update</button>
-                </form>
-            </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>

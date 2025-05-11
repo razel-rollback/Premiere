@@ -143,3 +143,5 @@ Route::get('/schedules', [ScheduleController::class, 'index'])->name('schedules.
 Route::get('schedule/create', [ScheduleController::class, 'create'])->name('schedules.create');
 Route::post('/schedules', [ScheduleController::class, 'store'])->name('schedules.store');
 Route::get('schedule/{schedule}/edit', [ScheduleController::class, 'edit'])->name('schedules.edit');
+Route::delete('/schedules/{schedule}', [ScheduleController::class, 'destroy'])->name('schedules.destroy');
+Route::put('/schedules/{schedule}', [ScheduleController::class, 'update'])->name('schedules.update');
