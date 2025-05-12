@@ -87,12 +87,10 @@ class ScheduleController extends Controller
         // Check for overlapping schedules for the same section
         $sectionConflict = Schedule::where('sectionID', $validated['sectionID'])
             ->where(function ($query) use ($validated) {
-                $query->whereBetween('timeStart', [$validated['timeStart'], $validated['timeEnd']])
-                    ->orWhereBetween('timeEnd', [$validated['timeStart'], $validated['timeEnd']])
-                    ->orWhere(function ($q) use ($validated) {
-                        $q->where('timeStart', '<', $validated['timeStart'])
-                            ->where('timeEnd', '>', $validated['timeEnd']);
-                    });
+                $query->where(function ($q) use ($validated) {
+                    $q->where('timeStart', '<', $validated['timeEnd'])
+                        ->where('timeEnd', '>', $validated['timeStart']);
+                });
             })
             ->exists();
 
@@ -103,12 +101,10 @@ class ScheduleController extends Controller
         // Check for overlapping schedules for the same teacher
         $teacherConflict = Schedule::where('teacherID', $validated['teacherID'])
             ->where(function ($query) use ($validated) {
-                $query->whereBetween('timeStart', [$validated['timeStart'], $validated['timeEnd']])
-                    ->orWhereBetween('timeEnd', [$validated['timeStart'], $validated['timeEnd']])
-                    ->orWhere(function ($q) use ($validated) {
-                        $q->where('timeStart', '<', $validated['timeStart'])
-                            ->where('timeEnd', '>', $validated['timeEnd']);
-                    });
+                $query->where(function ($q) use ($validated) {
+                    $q->where('timeStart', '<', $validated['timeEnd'])
+                        ->where('timeEnd', '>', $validated['timeStart']);
+                });
             })
             ->exists();
 
@@ -134,6 +130,7 @@ class ScheduleController extends Controller
             return back()->withInput()->with('error', 'Error creating schedule: ' . $e->getMessage());
         }
     }
+
 
 
     /**

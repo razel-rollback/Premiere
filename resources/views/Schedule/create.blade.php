@@ -1,7 +1,5 @@
 <!-- Button to Open Modal -->
-<button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addStrandModal">
-    Add Schedule
-</button>
+
 
 <!-- Modal -->
 <div class="modal fade" id="addStrandModal" tabindex="-1" aria-labelledby="addStrandModalLabel" aria-hidden="true">
