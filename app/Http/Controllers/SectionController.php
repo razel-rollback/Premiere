@@ -63,28 +63,6 @@ class SectionController extends Controller
             return redirect()->back()->with('error', 'Failed to create section. Error: ' . $e->getMessage());
         }
     }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Section $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Section $section)
-    {
-        $strands = Strand::all();
-        $gradeLevels = GradeLevel::all();
-        return view('Section.edit', compact('section', 'strands', 'gradeLevels'));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Section $section)
     {
         $request->validate([
@@ -96,7 +74,6 @@ class SectionController extends Controller
                 Rule::unique('sections', 'room')->ignore($section->sectionID, 'sectionID')
             ],
         ]);
-
         try {
             $section->update([
                 'sectionName' => $request->sectionName,
@@ -111,9 +88,6 @@ class SectionController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Section $section)
     {
         try {

@@ -140,8 +140,10 @@
     </div>
     <h1 class="login-title">STUDENT PORTAL</h1>
 
-    @if ($errors->has('invalid'))
-    <div class="error-message">{{ $errors->first('invalid') }}</div>
+    @if($errors->has('invalid'))
+    <div class="alert alert-danger" role="alert">
+        {{ $errors->first('invalid') }}
+    </div>
     @endif
 
     <form method="POST" action="{{ route('student.login') }}">

@@ -18,15 +18,22 @@ class StudentLogInController extends Controller
             'username' => 'required',
             'password' => 'required',
         ]);
-        $credentials = $request->only('username', 'password');
 
-        if (Auth::guard('student')->attempt($credentials)) {
-            return redirect()->route('student.profile');
+        $credentials = $request->only('username', 'password');
+        $guard = $request->userType === 'admin' ? 'admin' : 'student';
+
+        if (Auth::guard($guard)->attempt($credentials)) {
+            // Verify the user has the correct type
+            $user = Auth::guard($guard)->user();
+            if ($user->userType !== $request->userType) {
+                Auth::guard($guard)->logout();
+                return back()->withErrors(['invalid' => 'Invalid credentials for this portal.']);
+            }
+
+            return redirect()->intended($guard . '.dashboard');
         }
 
-        return redirect()->back()->withErrors([
-            'invalid' => 'The provided credentials do not match our records.',
-        ]);
+        return back()->withErrors(['invalid' => 'Invalid credentials.']);
     }
     public function logout()
     {

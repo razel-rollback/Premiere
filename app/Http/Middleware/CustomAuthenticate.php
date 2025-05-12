@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 class CustomAuthenticate
 {
-    public function handle(Request $request, Closure $next, string $guard = null)
+    public function handle(Request $request, Closure $next, string $guard = "")
     {
         if (!Auth::guard($guard)->check()) {
             // Redirect based on guard or URL path
