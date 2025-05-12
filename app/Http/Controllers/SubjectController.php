@@ -34,22 +34,7 @@ class SubjectController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
-        // Validate the request
-        $request->validate([
-            'subjectName' => 'required|string|max:255',
-            'subjectType' => 'required|string|in:Core,Advanced,Specialized',
-            'gradeLevelID' => 'required|exists:grade_levels,gradeLevelID',
-            'strandID' => 'nullable|exists:strands,strandID',
-        ]);
 
-        // Create the subject
-        Subject::create($request->only(['subjectName', 'subjectType', 'gradeLevelID', 'teacherID', 'strandID']));
-
-        // Redirect with success message
-        return redirect()->route('subjects.index')->with('success', 'Subject created successfully!');
-    }
 
     /**
      * Display the specified resource.
@@ -79,7 +64,9 @@ class SubjectController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Subject $subject)
+
+
+    public function store(Request $request)
     {
         // Validate the request
         $request->validate([
@@ -89,28 +76,31 @@ class SubjectController extends Controller
             'strandID' => 'nullable|exists:strands,strandID',
         ]);
 
-        // Update the subject
-        $subject->update($request->only(['subjectName', 'subjectType', 'gradeLevelID', 'teacherID', 'strandID']));
-
+        // Create the subject
+        Subject::create($request->only(['subjectName', 'subjectType', 'gradeLevelID', 'teacherID', 'strandID']));
 
         // Redirect with success message
+        return redirect()->route('subjects.index')->with('success', 'Subject created successfully!');
+    }
+    public function update(Request $request, Subject $subject)
+    {
+        $request->validate([
+            'subjectName' => 'required|string|max:255',
+            'subjectType' => 'required|string|in:Core,Advanced,Specialized',
+            'gradeLevelID' => 'required|exists:grade_levels,gradeLevelID',
+            'strandID' => 'nullable|exists:strands,strandID',
+        ]);
+
+        $subject->update($request->only(['subjectName', 'subjectType', 'gradeLevelID', 'teacherID', 'strandID']));
+
         return redirect()->route('subjects.index')->with('success', 'Subject updated successfully!');
     }
-
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Subject $subject)
     {
-        // Check if the subject has any associated schedules
         if ($subject->schedules()->exists()) {
             return redirect()->route('subjects.index')->with('error', 'Cannot delete subject with associated schedules.');
         }
-
-        // Delete the subject
         $subject->delete();
-
-        // Redirect with success message
         return redirect()->route('subjects.index')->with('success', 'Subject deleted successfully!');
     }
 }

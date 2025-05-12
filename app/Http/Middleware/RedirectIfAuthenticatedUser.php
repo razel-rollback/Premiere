@@ -13,8 +13,7 @@ class RedirectIfAuthenticatedUser
     {
         if (auth()->guard('admin')->check()) {
             return redirect()->route('sections.index');
-        }
-        if (auth()->guard('student')->check()) {
+        } else if (auth()->guard('student')->check()) {
             return redirect()->route('student.profile');
         }
 

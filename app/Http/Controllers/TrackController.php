@@ -28,17 +28,6 @@ class TrackController extends Controller
         Track::create($request->all()); // Save trackName
         return redirect()->route('tracks.index')->with('success', 'Track created successfully.');
     }
-
-    public function show(Track $tracks)
-    {
-        return view('Track.show', compact('tracks'));
-    }
-
-    public function edit(Track $track)
-    {
-        return view('Track.edit', compact('track'));
-    }
-
     public function update(Request $request, Track $tracks)
     {
         $request->validate([
