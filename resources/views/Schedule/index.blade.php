@@ -228,12 +228,22 @@
                 <td>{{ $schedule->teacherName }}</td>
                 <td>{{ $schedule->time }}</td>
                 <td>
-                    <button class="btn btn-warning btn-sm">
-                        <i class=" bi bi-pencil"></i> Edit
+                    <!-- Edit Button -->
+                    <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editScheduleModal{{ $schedule->scheduleID }}">
+                        <i class="bi bi-pencil"></i>Edit
                     </button>
-                    <button class="btn  btn-danger btn-sm">
-                        <i class="bi bi-trash"></i> Delete
-                    </button>
+                    @include('Schedule.edit')
+
+
+
+                    <form action="{{ route('schedules.destroy', $schedule->scheduleID) }}" method="POST" style="display:inline;">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">
+                            <i class="bi bi-trash"></i> Delete
+                        </button>
+                    </form>
+
                 </td>
                 </td>
             </tr>

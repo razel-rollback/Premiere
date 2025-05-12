@@ -1,7 +1,3 @@
-@extends('layouts.home')
-@section('title', 'Admin Login')
-
-@section('head')
 <style>
     .navbar .logo {
         align-items: center;
@@ -160,32 +156,3 @@
         }
     }
 </style>
-@endsection
-
-@section('content')
-
-<div class="admin-login-container">
-    <div class="admin-logo">
-        <img src="{{ asset('images/Premire.png') }}" alt="School Logo">
-    </div>
-    <h1 class="admin-login-title">ADMIN PORTAL</h1>
-    <form class="admin-login-form" method="POST" action="{{ route('admin.authenticate') }}">
-        @csrf
-        @error('invalid')
-        <div class="error">{{$message }}</div>
-        @enderror
-        @if(session('error'))
-        <div class="error">{{ session('error') }}</div>
-        @endif
-        <input type="text" name="username" placeholder="Username" value="{{ old('username') }}" autofocus>
-        @error('username')
-        <div class="error">{{$message }}</div>
-        @enderror
-        <input type="password" name="password" placeholder="Password">
-        @error('password')
-        <div class="error">{{$message }}</div>
-        @enderror
-        <button type="submit">LOGIN</button>
-    </form>
-</div>
-@endsection

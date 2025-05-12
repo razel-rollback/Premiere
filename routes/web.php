@@ -107,17 +107,12 @@ Route::middleware(['auth.custom:admin'])->group(function () {
     Route::put('/Track/{tracks}', [TrackController::class, 'update'])->name('tracks.update');
     Route::delete('/Track/{tracks}', [TrackController::class, 'destroy'])->name('tracks.destroy');
 
-    // Reports Routes
 
     // routes/web.php
     Route::prefix('reports')->group(function () {
         Route::get('/', [ReportController::class, 'index'])->name('reports.index');
         Route::post('/generate', [ReportController::class, 'generate'])->name('reports.generate');
     });
-
-
-
-
 
 
     //this  route need to be continue
@@ -137,10 +132,10 @@ Route::middleware(['auth.custom:admin'])->group(function () {
     Route::delete('/enrollments/{enrollment}', [EnrolledStudentController::class, 'unenroll'])
         ->name('student.unenroll');
 
-
-
     Route::get('/schedules', [ScheduleController::class, 'index'])->name('schedules.index');
     Route::get('schedule/create', [ScheduleController::class, 'create'])->name('schedules.create');
     Route::post('/schedules', [ScheduleController::class, 'store'])->name('schedules.store');
     Route::get('schedule/{schedule}/edit', [ScheduleController::class, 'edit'])->name('schedules.edit');
+    Route::delete('/schedules/{schedule}', [ScheduleController::class, 'destroy'])->name('schedules.destroy');
+    Route::put('/schedules/{schedule}', [ScheduleController::class, 'update'])->name('schedules.update');
 });
